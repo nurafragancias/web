@@ -109,16 +109,43 @@
   margin-top: 0.2rem;
 }
 
-.product-card__desc {
-  font-size: 0.8rem;
-  color: var(--text-secondary);
-  line-height: 1.5;
+.product-card__desc-wrap {
   margin-bottom: 1rem;
-  flex: 1;
+}
+
+.product-card__desc {
+  font-size: 0.78rem;
+  color: var(--text-secondary);
+  line-height: 1.6;
+  margin: 0;
   display: -webkit-box;
-  -webkit-line-clamp: 2;
+  -webkit-line-clamp: 3;
   -webkit-box-orient: vertical;
   overflow: hidden;
+  transition: all 0.3s ease;
+}
+
+.product-card__desc--expanded {
+  display: block;
+  -webkit-line-clamp: unset;
+  overflow: visible;
+}
+
+.product-card__desc-toggle {
+  background: none;
+  border: none;
+  color: var(--gold-primary);
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  cursor: pointer;
+  padding: 0.3rem 0 0;
+  transition: opacity 0.2s ease;
+}
+
+.product-card__desc-toggle:hover {
+  opacity: 0.8;
+  text-decoration: underline;
 }
 
 /* Variants */

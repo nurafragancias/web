@@ -9,6 +9,7 @@ const ProductCard = ({ product, index = 0 }) => {
   const [isAdding, setIsAdding] = useState(false);
   const [imageError, setImageError] = useState(false);
   const [currentImage, setCurrentImage] = useState(0);
+  const [showFullDesc, setShowFullDesc] = useState(false);
 
   const hasMultipleImages = product.images && product.images.length > 1;
 
@@ -84,7 +85,21 @@ const ProductCard = ({ product, index = 0 }) => {
           <h3 className="product-card__name">{product.name}</h3>
         </div>
 
-        <p className="product-card__desc">{product.description}</p>
+        {product.description && (
+          <div className="product-card__desc-wrap">
+            <p className={`product-card__desc${showFullDesc ? ' product-card__desc--expanded' : ''}`}>
+              {product.description}
+            </p>
+            {product.description.length > 120 && (
+              <button
+                className="product-card__desc-toggle"
+                onClick={() => setShowFullDesc(!showFullDesc)}
+              >
+                {showFullDesc ? 'Ver menos' : 'Ver más'}
+              </button>
+            )}
+          </div>
+        )}
 
         <div className="product-card__variants">
           {product.variants.map((v, i) => (
