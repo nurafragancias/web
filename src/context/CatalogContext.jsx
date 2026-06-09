@@ -7,7 +7,7 @@ const initialProducts = [
     "id": "1",
     "name": " 9 AM DIVE EDP 100ML",
     "brand": "AFNAN",
-    "description": "",
+    "description": "9am Dive de Afnan es una fragancia de la familia olfativa Aromática Acuática para Hombres y Mujeres. 9am Dive se lanzó en 2022. La Nariz detrás de esta fragrancia es Imran Fazlani. Las Notas de Salida son limón (lima ácida), menta, grosellas negras y pimienta rosa; las Notas de Corazón son manzana, cedro y incienso; las Notas de Fondo son jengibre, sándalo, pachulí y jazmín.",
     "category": "unisex",
     "variants": [
       {
@@ -29,7 +29,7 @@ const initialProducts = [
     "id": "2",
     "name": " 9 PM MASC EDP 100ML",
     "brand": "AFNAN",
-    "description": "",
+    "description": "9pm de Afnan es una fragancia de la familia olfativa Oriental Vainilla para Hombres. 9pm se lanzó en 2020. Las Notas de Salida son manzana, canela, lavanda silvestre y bergamota; las Notas de Corazón son flor de azahar del naranjo y lirio de los valles (muguete); las Notas de Fondo son vainilla, haba tonka, ámbar y pachulí.",
     "category": "masculino",
     "variants": [
       {
@@ -51,7 +51,7 @@ const initialProducts = [
     "id": "3",
     "name": " 9 PM REBEL EDP 100ML",
     "brand": "AFNAN",
-    "description": "",
+    "description": "9 PM Rebel de Afnan es una fragancia de la familia olfativa Aromática Frutal para Hombres y Mujeres. Esta fragrancia es nueva. 9 PM Rebel se lanzó en 2024. La Nariz detrás de esta fragrancia es Gaël Montero. Las Notas de Salida son piña, manzana Granny Smith y mandarina; las Notas de Corazón son musgo de roble, cedro y vainilla; las Notas de Fondo son Madera seca, ámbar gris, caramelo y almizcle.",
     "category": "unisex",
     "variants": [
       {
@@ -73,7 +73,7 @@ const initialProducts = [
     "id": "4",
     "name": "AMBER OUD DUBAI NIGHT EDP 100ML",
     "brand": "AL HARAMAIN",
-    "description": "",
+    "description": "Amber Oud Dubai Night de Al Haramain es una fragancia de la familia olfativa Oriental Amaderada para Hombres. Esta fragrancia es nueva. Amber Oud Dubai Night se lanzó en 2024. Las Notas de Salida son azafrán, bergamota y elemí; las Notas de Corazón son madera de oud, rosa de Bulgaria (rosa Damascena de Bulgaria) y lirio de los valles (muguete); las Notas de Fondo son haba tonka, ámbar, almizcle blanco y musgo de roble.",
     "category": "masculino",
     "variants": [
       {
@@ -91,7 +91,7 @@ const initialProducts = [
     "id": "5",
     "name": "AMBER OUD GOLD EDITION EDP 120ML",
     "brand": "AL HARAMAIN",
-    "description": "",
+    "description": "Amber Oud Gold Edition de Al Haramain Perfumes es una fragancia de la familia olfativa Oriental Vainilla para Hombres y Mujeres. Amber Oud Gold Edition se lanzó en 2024. Las Notas de Salida son bergamota y notas verdes; las Notas de Corazón son melón, piña, ámbar y Acorde goloso; las Notas de Fondo son vainilla, almizcle y notas amaderadas.",
     "category": "unisex",
     "variants": [
       {
@@ -113,7 +113,7 @@ const initialProducts = [
     "id": "6",
     "name": "SABAH AL WARD 100ML",
     "brand": "AL WATANIAH",
-    "description": "",
+    "description": "Sabah Al Ward de Al Wataniah es una fragancia de la familia olfativa Oriental Floral para Mujeres. Las Notas de Salida son pimienta rosa y mandarina; las Notas de Corazón son vaina de cacao, flor de azahar del naranjo y jazmín sambac (sampaguita); las Notas de Fondo son vainilla, haba tonka y pachulí.",
     "category": "femenino",
     "variants": [
       {
@@ -135,7 +135,7 @@ const initialProducts = [
     "id": "7",
     "name": "CLUB DE NUIT ICONIC EDP 105ML",
     "brand": "ARMAF",
-    "description": "",
+    "description": "Club de Nuit Blue Iconic de Armaf es una fragancia de la familia olfativa para Hombres. Club de Nuit Blue Iconic se lanzó en 2022. Las Notas de Salida son toronja (pomelo), limón (lima ácida), menta, pimienta rosa y cilantro; las Notas de Corazón son jengibre, melón, jazmín y nuez moscada; las Notas de Fondo son notas amaderadas, incienso, sándalo, ámbar, cedro, pachulí y ládano.",
     "category": "masculino",
     "variants": [
       {
@@ -157,7 +157,7 @@ const initialProducts = [
     "id": "8",
     "name": "CLUB DE NUIT INTENSE MAN EDT 105ML",
     "brand": "ARMAF",
-    "description": "",
+    "description": "Club de Nuit Intense Man de Armaf es una fragancia de la familia olfativa Amaderada Especiada para Hombres. Club de Nuit Intense Man se lanzó en 2015. Las Notas de Salida son limón (lima ácida), piña, bergamota, grosellas negras y manzana; las Notas de Corazón son abedul, jazmín y rosa; las Notas de Fondo son almizcle, ámbar gris, pachulí y vainilla.",
     "category": "masculino",
     "variants": [
       {
@@ -178,7 +178,7 @@ const initialProducts = [
     "id": "9",
     "name": "CLUB DE NUIT MILESTONE EDP 105ML",
     "brand": "ARMAF",
-    "description": "",
+    "description": "Club de Nuit Milestone de Armaf es una fragancia de la familia olfativa Almizcle Amaderado Floral para Hombres y Mujeres. Club de Nuit Milestone se lanzó en 2019. Las Notas de Salida son notas marinas, Frutas rojas y bergamota; las Notas de Corazón son violeta, maderas blancas y sándalo; las Notas de Fondo son almizcle, ambroxan y vetiver.",
     "category": "unisex",
     "variants": [
       {
@@ -199,7 +199,7 @@ const initialProducts = [
     "id": "10",
     "name": "CLUB DE NUIT SILLAGE EDP 105ML",
     "brand": "ARMAF",
-    "description": "",
+    "description": "Club de Nuit Sillage de Armaf es una fragancia de la familia olfativa Almizcle Floral Amaderado para Hombres y Mujeres. Club de Nuit Sillage se lanzó en 2020. Las Notas de Salida son bergamota, limón (lima ácida), lima (limón verde), grosellas negras, hojas de violeta y jengibre; las Notas de Corazón son rosa, iris y jazmín; las Notas de Fondo son ambroxan, almizcle, sándalo y cedro.",
     "category": "unisex",
     "variants": [
       {
@@ -221,7 +221,7 @@ const initialProducts = [
     "id": "11",
     "name": "CLUB DE NUIT UNTOLD EDP 105ML",
     "brand": "ARMAF",
-    "description": "",
+    "description": "Club de Nuit Untold de Armaf es una fragancia de la familia olfativa para Hombres y Mujeres. Club de Nuit Untold se lanzó en 2022. Las Notas de Salida son azafrán y jazmín; las Notas de Corazón son Amberwood y ámbar gris; las Notas de Fondo son resina de abeto y cedro.",
     "category": "unisex",
     "variants": [
       {
@@ -239,7 +239,7 @@ const initialProducts = [
     "id": "12",
     "name": "CLUB DE NUIT URBAN MAN ELIXIR EDP 105ML",
     "brand": "ARMAF",
-    "description": "",
+    "description": "Club De Nuit Urban Elixir de Armaf es una fragancia de la familia olfativa para Hombres. Club De Nuit Urban Elixir se lanzó en 2022. Las Notas de Salida son bergamota, pimienta rosa, flor de azahar del naranjo y jazmín; las Notas de Corazón son lavanda, elemí, geranio, vetiver, azafrán y cempasúchil (tagete, clavelón); las Notas de Fondo son ambroxan, ámbar, cedro, pachulí y ládano.",
     "category": "masculino",
     "variants": [
       {
@@ -261,7 +261,7 @@ const initialProducts = [
     "id": "13",
     "name": "CLUB DE NUIT WOMAN EDP 105ML",
     "brand": "ARMAF",
-    "description": "",
+    "description": "Club de Nuit Woman de Armaf es una fragancia de la familia olfativa Floral Frutal para Mujeres. Las Notas de Salida son naranja, bergamota, toronja (pomelo) y durazno (melocotón); las Notas de Corazón son rosa, jazmín, lichi y geranio; las Notas de Fondo son pachulí, almizcle, vainilla y vetiver.",
     "category": "femenino",
     "variants": [
       {
@@ -283,7 +283,7 @@ const initialProducts = [
     "id": "14",
     "name": "ODYSSEY CANDEE EDP 100ML",
     "brand": "ARMAF",
-    "description": "",
+    "description": "Odyssey Candee de Armaf es una fragancia de la familia olfativa para Mujeres. Esta fragrancia es nueva. Odyssey Candee se lanzó en 2024. Las Notas de Salida son fresa, frambuesa, geranio, durazno (melocotón) y bergamota; las Notas de Corazón son caramelo, jazmín y maracuyá (fruta de la pasión); las Notas de Fondo son pachulí, almizcle y ámbar.",
     "category": "femenino",
     "variants": [
       {
@@ -305,7 +305,7 @@ const initialProducts = [
     "id": "15",
     "name": "ODYSSEY HOMME WHITE EDP 100ML ",
     "brand": "ARMAF",
-    "description": "",
+    "description": "Odyssey Homme White Edition de Armaf es una fragancia de la familia olfativa Oriental Fougère para Hombres. Las Notas de Salida son pimienta rosa, cardamomo y menta; las Notas de Corazón son salvia, Notas acuáticas y piña; las Notas de Fondo son Amberwood, vainilla y cedro.",
     "category": "masculino",
     "variants": [
       {
@@ -323,7 +323,7 @@ const initialProducts = [
     "id": "16",
     "name": "ODYSSEY LIMONI EDP 100ML",
     "brand": "ARMAF",
-    "description": "",
+    "description": "Odyssey Limoni Fresh de Armaf es una fragancia de la familia olfativa para Hombres y Mujeres. Esta fragrancia es nueva. Odyssey Limoni Fresh se lanzó en 2024. Las Notas de Salida son limón (lima ácida), naranja dulce, mandarina y bergamota; las Notas de Corazón son flor de azahar del naranjo, Notas marinas y jengibre; las Notas de Fondo son té, almizcle y ámbar.",
     "category": "unisex",
     "variants": [
       {
@@ -345,7 +345,7 @@ const initialProducts = [
     "id": "17",
     "name": "ODYSSEY MANDARIN SKY EDP 100ML",
     "brand": "ARMAF",
-    "description": "",
+    "description": "Odyssey Mandarin Sky de Armaf es una fragancia de la familia olfativa para Hombres. Odyssey Mandarin Sky se lanzó en 2023. Las Notas de Salida son mandarina, naranja, azafrán y salvia; las Notas de Corazón son caramelo, haba tonka y cempasúchil (tagete, clavelón); las Notas de Fondo son ambroxan, cedro y vetiver.",
     "category": "masculino",
     "variants": [
       {
@@ -366,7 +366,7 @@ const initialProducts = [
     "id": "18",
     "name": "VENTANA MARINE EDP 100ML",
     "brand": "ARMAF",
-    "description": "",
+    "description": "Ventana Marine de Armaf es una fragancia de la familia olfativa Amaderada Acuática para Hombres y Mujeres. Las Notas de Salida son naranja siciliana, cidra, bergamota de Calabria, petit grain y cardamomo; las Notas de Corazón son jengibre, neroli de Túnez, romero, jazmín, canela y lirio de los valles (muguete); las Notas de Fondo son té chino, sándalo, palisandro y madera de gaiac.",
     "category": "unisex",
     "variants": [
       {
@@ -388,7 +388,7 @@ const initialProducts = [
     "id": "19",
     "name": "STRONGER WITH YOU INTENSELY EDP 100ML",
     "brand": "ARMANI",
-    "description": "",
+    "description": "Emporio Armani Stronger With You Intensely de Giorgio Armani es una fragancia de la familia olfativa Oriental Fougère para Hombres. Emporio Armani Stronger With You Intensely se lanzó en 2019. Las Notas de Salida son pimienta rosa, enebro y violeta; las Notas de Corazón son tófe, canela, lavanda y salvia; las Notas de Fondo son vainilla, ámbar, haba tonka y gamuza.",
     "category": "masculino",
     "variants": [
       {
@@ -406,7 +406,7 @@ const initialProducts = [
     "id": "20",
     "name": "ANDALEEB EDP 100ML",
     "brand": "ASDAAF",
-    "description": "",
+    "description": "Al Andaleeb de Asdaaf es una fragancia de la familia olfativa Chipre Floral para Hombres y Mujeres. Las Notas de Salida son naranja, bergamota y mandarina; las Notas de Corazón son jazmín y rosa; las Notas de Fondo son pachulí, sándalo y vetiver.",
     "category": "femenino",
     "variants": [
       {
@@ -428,7 +428,7 @@ const initialProducts = [
     "id": "21",
     "name": "LIQUID BRUN 100ML",
     "brand": "FRENCH AVENUE",
-    "description": "",
+    "description": "Liquid Brun de French Avenue es una fragancia de la familia olfativa Amaderada para Hombres. Liquid Brun se lanzó en 2024. Las Notas de Salida son canela, flor de azahar del naranjo, cardamomo y bergamota; las Notas de Corazón son vainilla Bourbon y elemí; las Notas de Fondo son praliné, ambroxan, almizcle y madera de gaiac.",
     "category": "masculino",
     "variants": [
       {
@@ -446,7 +446,7 @@ const initialProducts = [
     "id": "22",
     "name": "KING EDP 100ML",
     "brand": "BHARARA",
-    "description": "",
+    "description": "King de Bharara es una fragancia de la familia olfativa Aromática para Hombres. King se lanzó en 2021. Las Notas de Salida son naranja, bergamota y limón (lima ácida); la Nota de Corazón es notas afrutadas; las Notas de Fondo son vainilla, almizcle blanco y ámbar.",
     "category": "masculino",
     "variants": [
       {
@@ -464,7 +464,7 @@ const initialProducts = [
     "id": "23",
     "name": "VIKING BEIRUT EDP 100ML",
     "brand": "BHARARA",
-    "description": "",
+    "description": "Viking Beirut de Bharara es una fragancia de la familia olfativa Aromática para Hombres y Mujeres. Esta fragrancia es nueva. Viking Beirut se lanzó en 2024. Las Notas de Salida son bergamota, limón (lima ácida) y gálbano; las Notas de Corazón son notas ozónicas, salvia y geranio; las Notas de Fondo son pachulí, vetiver, musgo de roble y haba tonka.",
     "category": "masculino",
     "variants": [
       {
@@ -504,7 +504,7 @@ const initialProducts = [
     "id": "25",
     "name": "HAWAS FOR HIM EDP 100ML",
     "brand": "RASASI",
-    "description": "",
+    "description": "Hawas for Him de Rasasi es una fragancia de la familia olfativa Aromática Acuática para Hombres. Hawas for Him se lanzó en 2015. Las Notas de Salida son manzana, bergamota, limón (lima ácida) y canela; las Notas de Corazón son notas acuosas, ciruela, flor de azahar del naranjo y cardamomo; las Notas de Fondo son ámbar gris, almizcle, pachulí y trozos de madera a la deriva.",
     "category": "masculino",
     "variants": [
       {
@@ -526,7 +526,7 @@ const initialProducts = [
     "id": "26",
     "name": "LE BEAU EDT 125ml",
     "brand": "JEAN PAUL GAULTIER",
-    "description": "",
+    "description": "Le Beau de Jean Paul Gaultier es una fragancia de la familia olfativa Amaderada Aromática para Hombres. Le Beau se lanzó en 2019. Le Beau fue creada por Quentin Bisch y Sonia Constant. La Nota de Salida es bergamota; la Nota de Corazón es coco; la Nota de Fondo es haba tonka.",
     "category": "masculino",
     "variants": [
       {
@@ -540,7 +540,7 @@ const initialProducts = [
     "id": "27",
     "name": "LE MALE ELIXIR PARFUM 125ML",
     "brand": "JEAN PAUL GAULTIER",
-    "description": "",
+    "description": "Le Male Elixir de Jean Paul Gaultier es una fragancia de la familia olfativa Oriental Fougère para Hombres. Le Male Elixir se lanzó en 2023. La Nariz detrás de esta fragrancia es Quentin Bisch. Las Notas de Salida son lavanda y menta; las Notas de Corazón son vainilla y benjuí; las Notas de Fondo son miel, haba tonka y tabaco.",
     "category": "masculino",
     "variants": [
       {
@@ -557,7 +557,7 @@ const initialProducts = [
     "id": "28",
     "name": "LE MALE LE PARFUM 125ML",
     "brand": "JEAN PAUL GAULTIER",
-    "description": "",
+    "description": "Le Male Le Parfum de Jean Paul Gaultier es una fragancia de la familia olfativa Oriental para Hombres. Le Male Le Parfum se lanzó en 2020. Le Male Le Parfum fue creada por Quentin Bisch y Natalie Gracia-Cetto. La Nota de Salida es cardamomo; las Notas de Corazón son lavanda y iris; las Notas de Fondo son vainilla, notas orientales y notas amaderadas.",
     "category": "masculino",
     "variants": [
       {
@@ -574,7 +574,7 @@ const initialProducts = [
     "id": "29",
     "name": "INVICTUS VICTORY ELIXIR PARFUM 100ML",
     "brand": "RABANNE",
-    "description": "",
+    "description": "Invictus Victory Elixir de Rabanne es una fragancia de la familia olfativa Oriental Amaderada para Hombres. Invictus Victory Elixir se lanzó en 2023. Invictus Victory Elixir fue creada por Domitille Michalon Bertier, Anne Flipo y Nicolas Beaulieu. Las Notas de Salida son lavanda, cardamomo y pimienta negra; las Notas de Corazón son incienso y pachulí; las Notas de Fondo son vaina de vainilla y haba tonka.",
     "category": "masculino",
     "variants": [
       {
@@ -588,7 +588,7 @@ const initialProducts = [
     "id": "30",
     "name": "AL NOBLE SAFEER EDP 100ML",
     "brand": "LATTAFA",
-    "description": "",
+    "description": "Safeer de Lattafa Perfumes es una fragancia de la familia olfativa para Hombres y Mujeres. Las Notas de Salida son toronja (pomelo), bergamota, jengibre y pimienta negra; las Notas de Corazón son caramelo, jazmín y heliotropo; las Notas de Fondo son madera de gaiac, almizcle, cipriol (nagarmota), ámbar gris y cachemira.",
     "category": "unisex",
     "variants": [
       {
@@ -610,7 +610,7 @@ const initialProducts = [
     "id": "31",
     "name": "QAED AL FURSAN EDP 90ml",
     "brand": "LATTAFA",
-    "description": "",
+    "description": "Qaed Al Fursan de Lattafa Perfumes es una fragancia de la familia olfativa Oriental Amaderada para Hombres y Mujeres. Qaed Al Fursan se lanzó en 2016. Las Notas de Salida son piña y azafrán; las Notas de Corazón son abeto balsámico y jazmín; las Notas de Fondo son cedro, ámbar y madera de oud.",
     "category": "unisex",
     "variants": [
       {
@@ -628,7 +628,7 @@ const initialProducts = [
     "id": "32",
     "name": "QAED AL FURSAN UNLIMITED EDP 90ml",
     "brand": "LATTAFA",
-    "description": "",
+    "description": "Qaed Al Fursan Unlimited de Lattafa Perfumes es una fragancia de la familia olfativa Floral Frutal Gourmand para Hombres y Mujeres. Qaed Al Fursan Unlimited se lanzó en 2022. Las Notas de Salida son coco, piña y cítricos; las Notas de Corazón son ylang-ylang, frangipani (plumeria, plumaria, atapaima) y jazmín; las Notas de Fondo son vainilla, almizcle, sándalo y notas dulces.",
     "category": "unisex",
     "variants": [
       {
@@ -646,7 +646,7 @@ const initialProducts = [
     "id": "33",
     "name": "BADE’E AL OUD AMETHYST EDP 100ML",
     "brand": "LATTAFA",
-    "description": "",
+    "description": "Bade’e Al Oud Amethyst de Lattafa Perfumes es una fragancia de la familia olfativa Oriental Vainilla para Hombres y Mujeres. Bade’e Al Oud Amethyst se lanzó en 2021. Las Notas de Salida son pimienta rosa y bergamota; las Notas de Corazón son rosa turca, rosa de Bulgaria (rosa Damascena de Bulgaria) y jazmín; las Notas de Fondo son madera de oud, ámbar y vainilla.",
     "category": "unisex",
     "variants": [
       {
@@ -668,7 +668,7 @@ const initialProducts = [
     "id": "34",
     "name": "BADE’E AL OUD FOR GLORY EDP 100ML",
     "brand": "LATTAFA",
-    "description": "",
+    "description": "Bade’e Al Oud Oud for Glory de Lattafa Perfumes es una fragancia de la familia olfativa Oriental Amaderada para Hombres y Mujeres. Bade’e Al Oud Oud for Glory se lanzó en 2020. Las Notas de Salida son azafrán, nuez moscada y lavanda; las Notas de Corazón son madera de oud y pachulí; las Notas de Fondo son madera de oud, pachulí y almizcle.",
     "category": "masculino",
     "variants": [
       {
@@ -690,7 +690,7 @@ const initialProducts = [
     "id": "35",
     "name": "BADE’E AL OUD HONOR & GLORY EDP 100ML",
     "brand": "LATTAFA",
-    "description": "",
+    "description": "Bade’e Al Oud Honor & Glory de Lattafa Perfumes es una fragancia de la familia olfativa para Hombres y Mujeres. Bade’e Al Oud Honor & Glory se lanzó en 2023. Las Notas de Salida son piña y créme brulée; las Notas de Corazón son canela, cúrcuma (azafrán de la India), pimienta negra y benjuí; las Notas de Fondo son vainilla, sándalo, cachemira y musgo.",
     "category": "unisex",
     "variants": [
       {
@@ -712,7 +712,7 @@ const initialProducts = [
     "id": "36",
     "name": "BADE’E AL OUD NOBLE BLUSH EDP 100ML",
     "brand": "LATTAFA",
-    "description": "",
+    "description": "Badee Al Oud Noble Blush de Lattafa Perfumes es una fragancia de la familia olfativa Floral Frutal Gourmand para Mujeres. Badee Al Oud Noble Blush se lanzó en 2024. La Nota de Salida es Leche de rosas; las Notas de Corazón son merengue y almendra; las Notas de Fondo son vainilla, sándalo y almizcle.",
     "category": "femenino",
     "variants": [
       {
@@ -734,7 +734,7 @@ const initialProducts = [
     "id": "37",
     "name": "BADE’E AL OUD SUBLIME EDP 100ML",
     "brand": "LATTAFA",
-    "description": "",
+    "description": "Bade’e Al Oud Sublime de Lattafa Perfumes es una fragancia de la familia olfativa Amaderada Aromática para Hombres y Mujeres. Bade’e Al Oud Sublime se lanzó en 2023. Las Notas de Salida son manzana, lichi y rosa; las Notas de Corazón son ciruela y jazmín; las Notas de Fondo son musgo, vainilla y pachulí.",
     "category": "unisex",
     "variants": [
       {
@@ -756,7 +756,7 @@ const initialProducts = [
     "id": "38",
     "name": "ECLAIRE EDP 100ML",
     "brand": "LATTAFA",
-    "description": "",
+    "description": "Eclaire de Lattafa Perfumes es una fragancia de la familia olfativa Floral Frutal Gourmand para Mujeres. Eclaire se lanzó en 2024. Las Notas de Salida son caramelo, leche y azúcar; las Notas de Corazón son miel y flores blancas; las Notas de Fondo son vainilla, praliné y almizcle.",
     "category": "femenino",
     "variants": [
       {
@@ -778,7 +778,7 @@ const initialProducts = [
     "id": "39",
     "name": "EMEER EDP 100ML",
     "brand": "LATTAFA",
-    "description": "",
+    "description": "Emeer de Lattafa Perfumes es una fragancia de la familia olfativa Amaderada Aromática para Hombres y Mujeres. Emeer se lanzó en 2024. Las Notas de Salida son limón (lima ácida), bergamota, esclarea y bayas de enebro; las Notas de Corazón son té Blanco, sándalo, cardamomo y incienso de olíbano (franquincienso); las Notas de Fondo son ámbar gris, cedro, cachemira y pachulí.",
     "category": "unisex",
     "variants": [
       {
@@ -800,7 +800,7 @@ const initialProducts = [
     "id": "40",
     "name": "FAKHAR BLACK EDP 100ML",
     "brand": "LATTAFA",
-    "description": "",
+    "description": "Fakhar Black de Lattafa Perfumes es una fragancia de la familia olfativa Oriental para Hombres. Fakhar Black se lanzó en 2022. Las Notas de Salida son manzana, bergamota y jengibre; las Notas de Corazón son lavanda, salvia, bayas de enebro y geranio; las Notas de Fondo son haba tonka, cedro, Amberwood y vetiver.",
     "category": "masculino",
     "variants": [
       {
@@ -822,7 +822,7 @@ const initialProducts = [
     "id": "41",
     "name": "FAKHAR EXTRAIT EDP 100ML",
     "brand": "LATTAFA",
-    "description": "",
+    "description": "Fakhar Extrait de Lattafa Perfumes es una fragancia de la familia olfativa para Hombres. Fakhar Extrait se lanzó en 2023. Las Notas de Salida son toronja (pomelo), cardamomo y pimienta rosa; las Notas de Corazón son nardos, notas solares y abrótano; las Notas de Fondo son ámbar, cachemira, cuero y ládano.",
     "category": "masculino",
     "variants": [
       {
@@ -844,7 +844,7 @@ const initialProducts = [
     "id": "42",
     "name": "FAKHAR WOMAN EDP 100ML",
     "brand": "LATTAFA",
-    "description": "",
+    "description": "Fakhar Rose de Lattafa Perfumes es una fragancia de la familia olfativa Floral para Mujeres. Fakhar Rose se lanzó en 2022. Las Notas de Salida son frutas, azucena, granada y aldehídos; las Notas de Corazón son nardos, jazmín, gardenia, ylang-ylang, rosa, madreselva y peonía; las Notas de Fondo son vainilla, almizcle blanco, sándalo y ambroxan.",
     "category": "femenino",
     "variants": [
       {
@@ -866,7 +866,7 @@ const initialProducts = [
     "id": "43",
     "name": "HAYA EDP 100ML",
     "brand": "LATTAFA",
-    "description": "",
+    "description": "Haya de Lattafa Perfumes es una fragancia de la familia olfativa para Mujeres. Haya se lanzó en 2022. Las Notas de Salida son fresa, champaña, naranja tangerina, naranja sanguina y rosa; las Notas de Corazón son gardenia, jazmín y orquídea de vainilla; las Notas de Fondo son ámbar, sándalo y castaña.",
     "category": "femenino",
     "variants": [
       {
@@ -888,7 +888,7 @@ const initialProducts = [
     "id": "44",
     "name": "HAYAATI GOLD ELIXIR EDP 100ML",
     "brand": "LATTAFA",
-    "description": "",
+    "description": "Hayaati Gold Elixir de Lattafa Perfumes es una fragancia de la familia olfativa para Hombres y Mujeres. Las Notas de Salida son bergamota, toronja (pomelo) y casis (grosellero negro); las Notas de Corazón son cuero, durazno (melocotón) y azafrán; las Notas de Fondo son vainilla, ámbar, almizcle y vetiver.",
     "category": "unisex",
     "variants": [
       {
@@ -910,7 +910,7 @@ const initialProducts = [
     "id": "45",
     "name": "KHAMRAH EDP 100ML",
     "brand": "LATTAFA",
-    "description": "",
+    "description": "Khamrah de Lattafa Perfumes es una fragancia de la familia olfativa Oriental Especiada para Hombres y Mujeres. Khamrah se lanzó en 2022. Las Notas de Salida son canela, nuez moscada y bergamota; las Notas de Corazón son dátiles, praliné, nardos y Mahonial; las Notas de Fondo son vainilla, haba tonka, Amberwood, mirra, benjuí y Akigalawood.",
     "category": "unisex",
     "variants": [
       {
@@ -932,7 +932,7 @@ const initialProducts = [
     "id": "46",
     "name": "MAAHIR BLACK EDP 100ML",
     "brand": "LATTAFA",
-    "description": "",
+    "description": "Maahir Black Edition de Lattafa Perfumes es una fragancia de la familia olfativa Oriental Especiada para Hombres y Mujeres. Maahir Black Edition se lanzó en 2020. Las Notas de Salida son pimienta negra, pimienta rosa y azafrán; las Notas de Corazón son Aceite de cade, ládano, bálsamo de Gurjum y ruibarbo; las Notas de Fondo son cuero, cedro, madera de gaiac, pachulí, musgo y almizcle.",
     "category": "masculino",
     "variants": [
       {
@@ -953,7 +953,7 @@ const initialProducts = [
     "id": "47",
     "name": "MAAHIR GOLD EDP 100ML",
     "brand": "LATTAFA",
-    "description": "",
+    "description": "Maahir de Lattafa Perfumes es una fragancia de la familia olfativa Oriental Floral para Hombres y Mujeres. Maahir se lanzó en 2019. Las Notas de Salida son bayas rojas, durazno (melocotón) y bergamota; las Notas de Corazón son jazmín, peonía y azucena roja; las Notas de Fondo son sándalo, flor de vainilla y almizcle.",
     "category": "unisex",
     "variants": [
       {
@@ -975,7 +975,7 @@ const initialProducts = [
     "id": "48",
     "name": "MAYAR CHERRY INTENSE 100ML",
     "brand": "LATTAFA",
-    "description": "",
+    "description": "Mayar Cherry Intense de Lattafa Perfumes es una fragancia de la familia olfativa Oriental Vainilla para Hombres y Mujeres. Esta fragrancia es nueva. Mayar Cherry Intense se lanzó en 2024. Las Notas de Salida son fresa y bergamota; las Notas de Corazón son Mermelada de cereza y cacao; las Notas de Fondo son vainilla, ámbar y pachulí.",
     "category": "femenino",
     "variants": [
       {
@@ -996,7 +996,7 @@ const initialProducts = [
     "id": "49",
     "name": "MAYAR EDP 100ML",
     "brand": "LATTAFA",
-    "description": "",
+    "description": "Mayar de Lattafa Perfumes es una fragancia de la familia olfativa Floral Frutal para Mujeres. Mayar se lanzó en 2022. Las Notas de Salida son lichi, frambuesa y hojas de violeta; las Notas de Corazón son rosa blanca, peonía y jazmín; las Notas de Fondo son almizcle y vainilla.",
     "category": "femenino",
     "variants": [
       {
@@ -1018,7 +1018,7 @@ const initialProducts = [
     "id": "50",
     "name": "MUSK CANDY ROSE EDP 100ML",
     "brand": "LATTAFA",
-    "description": "",
+    "description": "Musk Candy Rose de Lattafa Perfumes es una fragancia de la familia olfativa para Hombres y Mujeres. Musk Candy Rose se lanzó durante la 2020's. Las Notas de Salida son rosa y cítricos; las Notas de Corazón son almizcle blanco y notas florales; las Notas de Fondo son almizcle y ámbar.",
     "category": "femenino",
     "variants": [
       {
@@ -1039,7 +1039,7 @@ const initialProducts = [
     "id": "51",
     "name": "SEHR EDP 100ML",
     "brand": "LATTAFA",
-    "description": "",
+    "description": "Sehr de Lattafa Perfumes es una fragancia de la familia olfativa Oriental Floral para Hombres y Mujeres. Sehr se lanzó en 2024. Las Notas de Salida son almendra amarga y canela; las Notas de Corazón son Akigalawood, Pomarose y jazmín; las Notas de Fondo son absoluto de vainilla, haba tonka y ámbar.",
     "category": "unisex",
     "variants": [
       {
@@ -1057,7 +1057,7 @@ const initialProducts = [
     "id": "52",
     "name": "THE KINGDOM FOR MEN EDP 100ML",
     "brand": "LATTAFA",
-    "description": "",
+    "description": "The Kingdom For Men de Lattafa Perfumes es una fragancia de la familia olfativa Aromática para Hombres. Esta fragrancia es nueva. The Kingdom For Men se lanzó en 2024. Las Notas de Salida son lavanda, menta y salvia; las Notas de Corazón son vainilla, tabaco y flor de azahar del naranjo; las Notas de Fondo son haba tonka, benjuí y ládano.",
     "category": "masculino",
     "variants": [
       {
@@ -1079,7 +1079,7 @@ const initialProducts = [
     "id": "53",
     "name": "VINTAGE RADIO 100ML",
     "brand": "LATTAFA",
-    "description": "",
+    "description": "Vintage Radio de Lattafa Perfumes es una fragancia de la familia olfativa Oriental Amaderada para Hombres y Mujeres. Vintage Radio se lanzó en 2023. Las Notas de Salida son lavanda, salvia y bergamota; las Notas de Corazón son ciruela, palo santo y pimienta negra; las Notas de Fondo son sándalo y madera de oud.",
     "category": "unisex",
     "variants": [
       {
@@ -1097,7 +1097,7 @@ const initialProducts = [
     "id": "54",
     "name": "ASAD EDP 100ML",
     "brand": "LATTAFA",
-    "description": "",
+    "description": "Asad de Lattafa Perfumes es una fragancia de la familia olfativa Oriental para Hombres. Asad se lanzó en 2021. Las Notas de Salida son pimienta negra, tabaco y piña; las Notas de Corazón son pachulí, café y iris; las Notas de Fondo son vainilla, ámbar, Madera seca, benjuí y ládano.",
     "category": "masculino",
     "variants": [
       {
@@ -1118,7 +1118,7 @@ const initialProducts = [
     "id": "55",
     "name": "ASAD BOURBON EDP 100ML",
     "brand": "LATTAFA",
-    "description": "",
+    "description": "Asad Bourbon de Lattafa Perfumes es una fragancia de la familia olfativa Oriental Especiada para Hombres. Esta fragrancia es nueva. Asad Bourbon se lanzó en 2025. Las Notas de Salida son lavanda, ciruela Mirabel y pimienta rosa; las Notas de Corazón son cacao, nuez moscada y Davana; las Notas de Fondo son vainilla Bourbon, ámbar y vetiver.",
     "category": "masculino",
     "variants": [
       {
@@ -1140,7 +1140,7 @@ const initialProducts = [
     "id": "56",
     "name": "YARA CANDY WOMAN EDP 100ML",
     "brand": "LATTAFA",
-    "description": "",
+    "description": "Yara Candy de Lattafa Perfumes es una fragancia de la familia olfativa Floral Frutal Gourmand para Mujeres. Esta fragrancia es nueva. Yara Candy se lanzó en 2024. Las Notas de Salida son grosellas negras y Mandarina verde; las Notas de Corazón son Caramelo de fresa efervescente y gardenia; las Notas de Fondo son vainilla, almizcle, ámbar y sándalo.",
     "category": "femenino",
     "variants": [
       {
@@ -1162,7 +1162,7 @@ const initialProducts = [
     "id": "57",
     "name": "YARA MOI EDP 100ML",
     "brand": "LATTAFA",
-    "description": "",
+    "description": "Yara Moi de Lattafa Perfumes es una fragancia de la familia olfativa para Mujeres. Yara Moi se lanzó en 2022. Las Notas de Salida son jazmín y durazno (melocotón); las Notas de Corazón son caramelo y ámbar; las Notas de Fondo son pachulí y sándalo.",
     "category": "femenino",
     "variants": [
       {
@@ -1184,7 +1184,7 @@ const initialProducts = [
     "id": "58",
     "name": "YARA TOUS EDP 100ML",
     "brand": "LATTAFA",
-    "description": "",
+    "description": "Yara Tous de Lattafa Perfumes es una fragancia de la familia olfativa para Mujeres. Yara Tous se lanzó en 2023. Las Notas de Salida son mango, coco y maracuyá (fruta de la pasión); las Notas de Corazón son jazmín, flor de azahar del naranjo y heliotropo; las Notas de Fondo son vainilla, almizcle y cachemira.",
     "category": "femenino",
     "variants": [
       {
@@ -1206,7 +1206,7 @@ const initialProducts = [
     "id": "59",
     "name": "YARA WOMAN EDP 100ML",
     "brand": "LATTAFA",
-    "description": "",
+    "description": "Yara de Lattafa Perfumes es una fragancia de la familia olfativa Oriental Vainilla para Mujeres. Yara se lanzó en 2020. Las Notas de Salida son orquídea, heliotropo y naranja tangerina; las Notas de Corazón son Acorde goloso y frutas tropicales; las Notas de Fondo son vainilla, almizcle y sándalo.",
     "category": "femenino",
     "variants": [
       {
@@ -1228,7 +1228,7 @@ const initialProducts = [
     "id": "60",
     "name": "CORAL BLUSH 80ML",
     "brand": "MAISON ALHAMBRA",
-    "description": "",
+    "description": "Coral Blush de Maison Alhambra es una fragancia de la familia olfativa Floral Frutal para Hombres y Mujeres. Esta fragrancia es nueva. Coral Blush se lanzó en 2024. Las Notas de Salida son durazno (melocotón), hojas verdes y naranja sanguina; la Nota de Corazón es pachulí; las Notas de Fondo son coñac y miel.",
     "category": "unisex",
     "variants": [
       {
@@ -1250,7 +1250,7 @@ const initialProducts = [
     "id": "61",
     "name": "JEAN LOWE OMBRE EDP 100ML",
     "brand": "MAISON ALHAMBRA",
-    "description": "",
+    "description": "Jean Lowe Ombre de Maison Alhambra es una fragancia de la familia olfativa para Hombres. Jean Lowe Ombre se lanzó en 2023. Las Notas de Salida son madera de oud y incienso; las Notas de Corazón son rosa, azafrán, frambuesa y abedul; las Notas de Fondo son ámbar, benjuí y geranio.",
     "category": "masculino",
     "variants": [
       {
@@ -1271,7 +1271,7 @@ const initialProducts = [
     "id": "62",
     "name": "PHILOS PURA EDP 100ML",
     "brand": "MAISON ALHAMBRA",
-    "description": "",
+    "description": "Philos Pura de Maison Alhambra es una fragancia de la familia olfativa Aromática Frutal para Hombres y Mujeres. Philos Pura se lanzó en 2022. Las Notas de Salida son naranja, bergamota y limón (lima ácida); la Nota de Corazón es frutas; las Notas de Fondo son vainilla de Madagascar, almizcle blanco y ámbar.",
     "category": "unisex",
     "variants": [
       {
@@ -1390,7 +1390,7 @@ const initialProducts = [
     "id": "70",
     "name": "BORN IN ROMA INTENSE",
     "brand": "VALENTINO",
-    "description": "",
+    "description": "Valentino Donna Born In Roma Intense de Valentino es una fragancia de la familia olfativa Oriental Floral para Mujeres. Valentino Donna Born In Roma Intense se lanzó en 2023. Valentino Donna Born In Roma Intense fue creada por Amandine Clerc-Marie y Honorine Blanc. Las Notas de Salida son vainilla Bourbon y ámbar; la Nota de Corazón es jazmín; la Nota de Fondo es benjuí.",
     "category": "masculino",
     "variants": [
       {
@@ -1404,7 +1404,7 @@ const initialProducts = [
     "id": "71",
     "name": "EROS EDT 100ML",
     "brand": "VERSACE",
-    "description": "",
+    "description": "Eros de Versace es una fragancia de la familia olfativa Aromática Fougère para Hombres. Eros se lanzó en 2012. La Nariz detrás de esta fragrancia es Aurélien Guichard. Las Notas de Salida son menta, manzana verde y limón (lima ácida); las Notas de Corazón son haba tonka, ambroxan y geranio; las Notas de Fondo son vainilla de Madagascar, cedro de Virginia, cedro del Atlas, vetiver y musgo de roble.",
     "category": "masculino",
     "variants": [
       {
@@ -1418,7 +1418,7 @@ const initialProducts = [
     "id": "72",
     "name": "EROS FLAME EDP 200ml",
     "brand": "VERSACE",
-    "description": "",
+    "description": "Eros Flame de Versace es una fragancia de la familia olfativa Amaderada Especiada para Hombres. Eros Flame se lanzó en 2018. La Nariz detrás de esta fragrancia es Olivier Pescheux. Las Notas de Salida son mandarina, pimienta de Madagascar, limón (lima ácida), Chinotto y romero; las Notas de Corazón son geranio, rosa y Pepperwood™; las Notas de Fondo son vainilla, haba tonka, sándalo, cedro de Texas, pachulí y musgo de roble.",
     "category": "masculino",
     "variants": [
       {
