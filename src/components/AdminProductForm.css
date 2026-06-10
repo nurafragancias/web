@@ -30,43 +30,40 @@
   background: rgba(255, 255, 255, 0.05);
 }
 
-/* Image */
+/* Image Gallery */
 .admin-form__image-section {
   margin-bottom: 1.5rem;
 }
 
-.admin-form__image-upload {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 0.5rem;
-  padding: 2rem;
-  border: 2px dashed var(--border-gold);
-  border-radius: var(--radius-md);
+.admin-form__image-label {
+  display: block;
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
   color: var(--text-secondary);
-  cursor: pointer;
-  transition: all 0.3s ease;
+  margin-bottom: 0.5rem;
 }
 
-.admin-form__image-upload:hover {
-  border-color: var(--gold-primary);
-  background: var(--gold-muted);
-  color: var(--gold-primary);
-}
-
-.admin-form__image-upload span {
-  font-size: 0.8rem;
-  font-weight: 500;
+.admin-form__image-gallery {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  align-items: stretch;
 }
 
 .admin-form__image-preview {
   position: relative;
-  width: 120px;
-  height: 120px;
+  width: 110px;
+  height: 110px;
   border-radius: var(--radius-md);
   overflow: hidden;
   border: 1px solid var(--border-subtle);
+  transition: border-color 0.25s ease;
+}
+
+.admin-form__image-preview:hover {
+  border-color: var(--border-gold);
 }
 
 .admin-form__image-preview img {
@@ -77,17 +74,69 @@
 
 .admin-form__image-remove {
   position: absolute;
-  top: 0.4rem;
-  right: 0.4rem;
-  background: rgba(0, 0, 0, 0.7);
+  top: 0.3rem;
+  right: 0.3rem;
+  background: rgba(0, 0, 0, 0.75);
   color: #e74c3c;
   padding: 0.3rem;
   border-radius: 50%;
-  transition: background 0.2s ease;
+  transition: all 0.2s ease;
+  opacity: 0;
+  cursor: pointer;
+  border: none;
+}
+
+.admin-form__image-preview:hover .admin-form__image-remove {
+  opacity: 1;
 }
 
 .admin-form__image-remove:hover {
-  background: rgba(231, 76, 60, 0.3);
+  background: rgba(231, 76, 60, 0.4);
+  transform: scale(1.1);
+}
+
+.admin-form__image-index {
+  position: absolute;
+  bottom: 0.3rem;
+  left: 0.3rem;
+  background: rgba(0, 0, 0, 0.65);
+  color: var(--gold-primary);
+  font-size: 0.6rem;
+  font-weight: 700;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.admin-form__image-upload {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+  width: 110px;
+  height: 110px;
+  border: 2px dashed var(--border-gold);
+  border-radius: var(--radius-md);
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  flex-shrink: 0;
+}
+
+.admin-form__image-upload:hover {
+  border-color: var(--gold-primary);
+  background: var(--gold-muted);
+  color: var(--gold-primary);
+}
+
+.admin-form__image-upload span {
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
 }
 
 /* Fields */
@@ -260,5 +309,11 @@
 @media (max-width: 480px) {
   .admin-form__row {
     grid-template-columns: 1fr;
+  }
+
+  .admin-form__image-preview,
+  .admin-form__image-upload {
+    width: 90px;
+    height: 90px;
   }
 }

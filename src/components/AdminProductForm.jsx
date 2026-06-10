@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import { X, Plus, Trash2, Image, Save } from 'lucide-react';
+import React, { useState, useEffect, useRef } from 'react';
+import { X, Plus, Trash2, Image, Save, Upload } from 'lucide-react';
 import './AdminProductForm.css';
 
 const emptyProduct = {
@@ -7,18 +7,30 @@ const emptyProduct = {
   brand: '',
   description: '',
   category: 'masculino',
-  image: '',
+  images: [],
   variants: [
     { size: '5ml', price: 0 },
     { size: '100ml', price: 0 }
   ]
 };
 
+const normalizeProduct = (prod) => {
+  if (!prod) return emptyProduct;
+  const normalized = { ...prod };
+  // Convert legacy single 'image' field to 'images' array
+  if (!normalized.images || !Array.isArray(normalized.images)) {
+    normalized.images = normalized.image ? [normalized.image] : [];
+  }
+  delete normalized.image;
+  return normalized;
+};
+
 const AdminProductForm = ({ product, onSave, onCancel }) => {
-  const [form, setForm] = useState(product || emptyProduct);
+  const [form, setForm] = useState(() => normalizeProduct(product));
+  const fileInputRef = useRef(null);
 
   useEffect(() => {
-    setForm(product || emptyProduct);
+    setForm(normalizeProduct(product));
   }, [product]);
 
   const handleChange = (field, value) => {
@@ -50,13 +62,28 @@ const AdminProductForm = ({ product, onSave, onCancel }) => {
   };
 
   const handleImageUpload = (e) => {
-    const file = e.target.files[0];
-    if (!file) return;
-    const reader = new FileReader();
-    reader.onload = (ev) => {
-      handleChange('image', ev.target.result);
-    };
-    reader.readAsDataURL(file);
+    const files = Array.from(e.target.files);
+    if (files.length === 0) return;
+
+    files.forEach((file) => {
+      const reader = new FileReader();
+      reader.onload = (ev) => {
+        setForm(prev => ({
+          ...prev,
+          images: [...prev.images, ev.target.result]
+        }));
+      };
+      reader.readAsDataURL(file);
+    });
+    // Reset input so the same file can be re-selected
+    if (fileInputRef.current) fileInputRef.current.value = '';
+  };
+
+  const removeImage = (index) => {
+    setForm(prev => ({
+      ...prev,
+      images: prev.images.filter((_, i) => i !== index)
+    }));
   };
 
   const handleSubmit = (e) => {
@@ -74,22 +101,37 @@ const AdminProductForm = ({ product, onSave, onCancel }) => {
         </button>
       </div>
 
-      {/* Image */}
+      {/* Images Gallery */}
       <div className="admin-form__image-section">
-        {form.image ? (
-          <div className="admin-form__image-preview">
-            <img src={form.image} alt="Preview" />
-            <button type="button" className="admin-form__image-remove" onClick={() => handleChange('image', '')}>
-              <Trash2 size={14} />
-            </button>
-          </div>
-        ) : (
+        <label className="admin-form__image-label">Imágenes</label>
+        <div className="admin-form__image-gallery">
+          {form.images && form.images.map((img, index) => (
+            <div key={index} className="admin-form__image-preview">
+              <img src={img} alt={`Imagen ${index + 1}`} />
+              <button
+                type="button"
+                className="admin-form__image-remove"
+                onClick={() => removeImage(index)}
+                title="Eliminar imagen"
+              >
+                <Trash2 size={14} />
+              </button>
+              <span className="admin-form__image-index">{index + 1}</span>
+            </div>
+          ))}
           <label className="admin-form__image-upload">
-            <Image size={24} />
-            <span>Subir imagen</span>
-            <input type="file" accept="image/*" onChange={handleImageUpload} hidden />
+            <Upload size={22} />
+            <span>Agregar</span>
+            <input
+              type="file"
+              accept="image/*"
+              multiple
+              onChange={handleImageUpload}
+              ref={fileInputRef}
+              hidden
+            />
           </label>
-        )}
+        </div>
       </div>
 
       {/* Fields */}
