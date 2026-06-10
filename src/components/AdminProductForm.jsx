@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { X, Plus, Trash2, Image, Save, Upload } from 'lucide-react';
+import { X, Plus, Trash2, Image, Save, Upload, Loader } from 'lucide-react';
+import { uploadImageToDisk } from '../context/CatalogContext';
 import './AdminProductForm.css';
 
 const emptyProduct = {
@@ -27,6 +28,7 @@ const normalizeProduct = (prod) => {
 
 const AdminProductForm = ({ product, onSave, onCancel }) => {
   const [form, setForm] = useState(() => normalizeProduct(product));
+  const [uploading, setUploading] = useState(false);
   const fileInputRef = useRef(null);
 
   useEffect(() => {
@@ -61,20 +63,24 @@ const AdminProductForm = ({ product, onSave, onCancel }) => {
     }));
   };
 
-  const handleImageUpload = (e) => {
+  const handleImageUpload = async (e) => {
     const files = Array.from(e.target.files);
     if (files.length === 0) return;
 
-    files.forEach((file) => {
-      const reader = new FileReader();
-      reader.onload = (ev) => {
+    setUploading(true);
+    try {
+      for (const file of files) {
+        const imagePath = await uploadImageToDisk(file);
         setForm(prev => ({
           ...prev,
-          images: [...prev.images, ev.target.result]
+          images: [...prev.images, imagePath]
         }));
-      };
-      reader.readAsDataURL(file);
-    });
+      }
+    } catch (err) {
+      console.error('Error subiendo imagen:', err);
+      alert('Error al subir la imagen. Intentá de nuevo.');
+    }
+    setUploading(false);
     // Reset input so the same file can be re-selected
     if (fileInputRef.current) fileInputRef.current.value = '';
   };
@@ -119,17 +125,26 @@ const AdminProductForm = ({ product, onSave, onCancel }) => {
               <span className="admin-form__image-index">{index + 1}</span>
             </div>
           ))}
-          <label className="admin-form__image-upload">
-            <Upload size={22} />
-            <span>Agregar</span>
-            <input
-              type="file"
-              accept="image/*"
-              multiple
-              onChange={handleImageUpload}
-              ref={fileInputRef}
-              hidden
-            />
+          <label className={`admin-form__image-upload${uploading ? ' admin-form__image-upload--loading' : ''}`}>
+            {uploading ? (
+              <>
+                <Loader size={22} className="admin-form__spinner" />
+                <span>Subiendo...</span>
+              </>
+            ) : (
+              <>
+                <Upload size={22} />
+                <span>Agregar</span>
+                <input
+                  type="file"
+                  accept="image/*"
+                  multiple
+                  onChange={handleImageUpload}
+                  ref={fileInputRef}
+                  hidden
+                />
+              </>
+            )}
           </label>
         </div>
       </div>

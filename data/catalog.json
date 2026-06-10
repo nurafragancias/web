@@ -1,8 +1,4 @@
-import React, { createContext, useState, useEffect, useContext, useRef, useCallback } from 'react';
-
-const CatalogContext = createContext();
-
-const initialProducts = [
+[
   {
     "id": "1",
     "name": " 9 AM DIVE EDP 100ML",
@@ -20,9 +16,9 @@ const initialProducts = [
       }
     ],
     "images": [
-          "/images/products/9%20AM%20DIVE(1).jpg",
-          "/images/products/9%20AM%20DIVE(2).jpg",
-          "/images/products/9%20AM%20DIVE.jpg"
+      "/images/products/9%20AM%20DIVE(1).jpg",
+      "/images/products/9%20AM%20DIVE(2).jpg",
+      "/images/products/9%20AM%20DIVE.jpg"
     ]
   },
   {
@@ -42,9 +38,9 @@ const initialProducts = [
       }
     ],
     "images": [
-          "/images/products/AFNAN%209%20PM%203.jpg",
-          "/images/products/AFNAN%209%20PM%205.jpg",
-          "/images/products/AFNAN%209%20PM.jpg"
+      "/images/products/AFNAN%209%20PM%203.jpg",
+      "/images/products/AFNAN%209%20PM%205.jpg",
+      "/images/products/AFNAN%209%20PM.jpg"
     ]
   },
   {
@@ -64,9 +60,9 @@ const initialProducts = [
       }
     ],
     "images": [
-          "/images/products/9%20PM%20REBEL(1).jpg",
-          "/images/products/9%20PM%20REBEL(2).jpg",
-          "/images/products/9%20PM%20REBEL(3).JPG"
+      "/images/products/9%20PM%20REBEL(1).jpg",
+      "/images/products/9%20PM%20REBEL(2).jpg",
+      "/images/products/9%20PM%20REBEL(3).JPG"
     ]
   },
   {
@@ -104,9 +100,9 @@ const initialProducts = [
       }
     ],
     "images": [
-          "/images/products/AL%20HARAMAIN%20AMBER%20OUD%20GOLD%20EDITION(1).JPG",
-          "/images/products/AL%20HARAMAIN%20AMBER%20OUD%20GOLD%20EDITION(2).JPG",
-          "/images/products/AL%20HARAMAIN%20AMBER%20OUD%20GOLD%20EDITION(3).jpg"
+      "/images/products/AL%20HARAMAIN%20AMBER%20OUD%20GOLD%20EDITION(1).JPG",
+      "/images/products/AL%20HARAMAIN%20AMBER%20OUD%20GOLD%20EDITION(2).JPG",
+      "/images/products/AL%20HARAMAIN%20AMBER%20OUD%20GOLD%20EDITION(3).jpg"
     ]
   },
   {
@@ -126,9 +122,9 @@ const initialProducts = [
       }
     ],
     "images": [
-          "/images/products/AL%20WATANIAH%20DAR%20AL%20WARD(1).jpg",
-          "/images/products/AL%20WATANIAH%20DAR%20AL%20WARD(2).jpg",
-          "/images/products/AL%20WATANIAH%20DAR%20AL%20WARD.jpg"
+      "/images/products/AL%20WATANIAH%20DAR%20AL%20WARD(1).jpg",
+      "/images/products/AL%20WATANIAH%20DAR%20AL%20WARD(2).jpg",
+      "/images/products/AL%20WATANIAH%20DAR%20AL%20WARD.jpg"
     ]
   },
   {
@@ -148,9 +144,9 @@ const initialProducts = [
       }
     ],
     "images": [
-          "/images/products/CLUB%20DE%20NUIT%20ICONIC(1).jpg",
-          "/images/products/CLUB%20DE%20NUIT%20ICONIC(2).jpg",
-          "/images/products/CLUB%20DE%20NUIT%20ICONIC(3).jpg"
+      "/images/products/CLUB%20DE%20NUIT%20ICONIC(1).jpg",
+      "/images/products/CLUB%20DE%20NUIT%20ICONIC(2).jpg",
+      "/images/products/CLUB%20DE%20NUIT%20ICONIC(3).jpg"
     ]
   },
   {
@@ -170,8 +166,8 @@ const initialProducts = [
       }
     ],
     "images": [
-          "/images/products/CLUB%20DE%20NUIT%20INTENSE%20MAN(1).jpg",
-          "/images/products/CLUB%20DE%20NUIT%20INTENSE%20MAN.jpg"
+      "/images/products/CLUB%20DE%20NUIT%20INTENSE%20MAN(1).jpg",
+      "/images/products/CLUB%20DE%20NUIT%20INTENSE%20MAN.jpg"
     ]
   },
   {
@@ -191,8 +187,8 @@ const initialProducts = [
       }
     ],
     "images": [
-          "/images/products/CLUB%20DE%20NUIT%20MILESTONE..jpg",
-          "/images/products/CLUB%20DE%20NUIT%20MILESTONE.jpg"
+      "/images/products/CLUB%20DE%20NUIT%20MILESTONE..jpg",
+      "/images/products/CLUB%20DE%20NUIT%20MILESTONE.jpg"
     ]
   },
   {
@@ -212,9 +208,9 @@ const initialProducts = [
       }
     ],
     "images": [
-          "/images/products/CLUB%20DE%20NUIT%20SILAGE(1).jpg",
-          "/images/products/CLUB%20DE%20NUIT%20SILAGE(2).jpg",
-          "/images/products/CLUB%20DE%20NUIT%20SILAGE..JPG"
+      "/images/products/CLUB%20DE%20NUIT%20SILAGE(1).jpg",
+      "/images/products/CLUB%20DE%20NUIT%20SILAGE(2).jpg",
+      "/images/products/CLUB%20DE%20NUIT%20SILAGE..JPG"
     ]
   },
   {
@@ -252,9 +248,9 @@ const initialProducts = [
       }
     ],
     "images": [
-          "/images/products/CLUB%20DE%20NUIT%20URBAN%20MAN%20ELIXIR(1).jpg",
-          "/images/products/CLUB%20DE%20NUIT%20URBAN%20MAN%20ELIXIR(2).jpg",
-          "/images/products/CLUB%20DE%20NUIT%20URBAN%20MAN%20ELIXIR.jpg"
+      "/images/products/CLUB%20DE%20NUIT%20URBAN%20MAN%20ELIXIR(1).jpg",
+      "/images/products/CLUB%20DE%20NUIT%20URBAN%20MAN%20ELIXIR(2).jpg",
+      "/images/products/CLUB%20DE%20NUIT%20URBAN%20MAN%20ELIXIR.jpg"
     ]
   },
   {
@@ -274,9 +270,9 @@ const initialProducts = [
       }
     ],
     "images": [
-          "/images/products/CLUB%20DE%20NUIT%20WOMAN(1).jpg",
-          "/images/products/CLUB%20DE%20NUIT%20WOMAN(2).jpg",
-          "/images/products/CLUB%20DE%20NUIT%20WOMAN.jpg"
+      "/images/products/CLUB%20DE%20NUIT%20WOMAN(1).jpg",
+      "/images/products/CLUB%20DE%20NUIT%20WOMAN(2).jpg",
+      "/images/products/CLUB%20DE%20NUIT%20WOMAN.jpg"
     ]
   },
   {
@@ -296,9 +292,9 @@ const initialProducts = [
       }
     ],
     "images": [
-          "/images/products/ODYSSEY%20CANDEE(1).JPG",
-          "/images/products/ODYSSEY%20CANDEE(2).jpg",
-          "/images/products/ODYSSEY%20CANDEE.jpg"
+      "/images/products/ODYSSEY%20CANDEE(1).JPG",
+      "/images/products/ODYSSEY%20CANDEE(2).jpg",
+      "/images/products/ODYSSEY%20CANDEE.jpg"
     ]
   },
   {
@@ -336,9 +332,9 @@ const initialProducts = [
       }
     ],
     "images": [
-          "/images/products/ARMAF%20ODYSSEY%20LIMONI.jpg",
-          "/images/products/LATTAFA%20ODYSSEY%20LIMONI.jpg",
-          "/images/products/ODYSSEY%20LIMONI(1).jpg"
+      "/images/products/ARMAF%20ODYSSEY%20LIMONI.jpg",
+      "/images/products/LATTAFA%20ODYSSEY%20LIMONI.jpg",
+      "/images/products/ODYSSEY%20LIMONI(1).jpg"
     ]
   },
   {
@@ -358,8 +354,8 @@ const initialProducts = [
       }
     ],
     "images": [
-          "/images/products/ARMAF%20ODYSSEY%20MANDARIN%20SKY.jpg",
-          "/images/products/ODYSSEY%20MANDARIN%20SKY.JPG"
+      "/images/products/ARMAF%20ODYSSEY%20MANDARIN%20SKY.jpg",
+      "/images/products/ODYSSEY%20MANDARIN%20SKY.JPG"
     ]
   },
   {
@@ -379,9 +375,9 @@ const initialProducts = [
       }
     ],
     "images": [
-          "/images/products/Ventana%20marine(1).jpg",
-          "/images/products/Ventana%20marine(2).jpg",
-          "/images/products/Ventana%20marine(3).jpg"
+      "/images/products/Ventana%20marine(1).jpg",
+      "/images/products/Ventana%20marine(2).jpg",
+      "/images/products/Ventana%20marine(3).jpg"
     ]
   },
   {
@@ -419,9 +415,9 @@ const initialProducts = [
       }
     ],
     "images": [
-          "/images/products/ASDAAF%20ANDALEEB(1).jpg",
-          "/images/products/ASDAAF%20ANDALEEB(2).jpg",
-          "/images/products/ASDAAF%20ANDALEEB.jpg"
+      "/images/products/ASDAAF%20ANDALEEB(1).jpg",
+      "/images/products/ASDAAF%20ANDALEEB(2).jpg",
+      "/images/products/ASDAAF%20ANDALEEB.jpg"
     ]
   },
   {
@@ -477,9 +473,9 @@ const initialProducts = [
       }
     ],
     "images": [
-          "/images/products/BHARARA%20VIKING(1).JPG",
-          "/images/products/BHARARA%20VIKING(2).jpg",
-          "/images/products/BHARARA%20VIKING(3).jpg"
+      "/images/products/BHARARA%20VIKING(1).JPG",
+      "/images/products/BHARARA%20VIKING(2).jpg",
+      "/images/products/BHARARA%20VIKING(3).jpg"
     ]
   },
   {
@@ -517,9 +513,9 @@ const initialProducts = [
       }
     ],
     "images": [
-          "/images/products/HAWAS%20FOR%20HIM(1).jpg",
-          "/images/products/HAWAS%20FOR%20HIM(2).jpg",
-          "/images/products/HAWAS%20FOR%20HIM.jpg"
+      "/images/products/HAWAS%20FOR%20HIM(1).jpg",
+      "/images/products/HAWAS%20FOR%20HIM(2).jpg",
+      "/images/products/HAWAS%20FOR%20HIM.jpg"
     ]
   },
   {
@@ -549,8 +545,8 @@ const initialProducts = [
       }
     ],
     "images": [
-          "/images/products/JPG%20LE%20MALE%20ELIXIR%202.jpg",
-          "/images/products/JPG%20LE%20MALE%20ELIXIR.JPG"
+      "/images/products/JPG%20LE%20MALE%20ELIXIR%202.jpg",
+      "/images/products/JPG%20LE%20MALE%20ELIXIR.JPG"
     ]
   },
   {
@@ -566,8 +562,8 @@ const initialProducts = [
       }
     ],
     "images": [
-          "/images/products/JPG%20LE%20MALE%20LE%20PARFUM%202.JPG",
-          "/images/products/JPG%20LE%20MALE%20LE%20PARFUM.jpg"
+      "/images/products/JPG%20LE%20MALE%20LE%20PARFUM%202.JPG",
+      "/images/products/JPG%20LE%20MALE%20LE%20PARFUM.jpg"
     ]
   },
   {
@@ -601,9 +597,9 @@ const initialProducts = [
       }
     ],
     "images": [
-          "/images/products/AL%20NOBLE%20SAAFER(1).jpg",
-          "/images/products/AL%20NOBLE%20SAAFER(2).jpg",
-          "/images/products/AL%20NOBLE%20SAAFER(3).jpg"
+      "/images/products/AL%20NOBLE%20SAAFER(1).jpg",
+      "/images/products/AL%20NOBLE%20SAAFER(2).jpg",
+      "/images/products/AL%20NOBLE%20SAAFER(3).jpg"
     ]
   },
   {
@@ -769,9 +765,9 @@ const initialProducts = [
       }
     ],
     "images": [
-          "/images/products/ECLAIRE(1).jpg",
-          "/images/products/ECLAIRE(2).jpg",
-          "/images/products/ECLAIRE(3).jpg"
+      "/images/products/ECLAIRE(1).jpg",
+      "/images/products/ECLAIRE(2).jpg",
+      "/images/products/ECLAIRE(3).jpg"
     ]
   },
   {
@@ -791,9 +787,9 @@ const initialProducts = [
       }
     ],
     "images": [
-          "/images/products/EMEER(1).jpg",
-          "/images/products/EMEER(2).jpg",
-          "/images/products/EMEER(3).jpg"
+      "/images/products/EMEER(1).jpg",
+      "/images/products/EMEER(2).jpg",
+      "/images/products/EMEER(3).jpg"
     ]
   },
   {
@@ -813,9 +809,9 @@ const initialProducts = [
       }
     ],
     "images": [
-          "/images/products/FAKHAR%20BLACK(1).jpg",
-          "/images/products/FAKHAR%20BLACK(2).jpg",
-          "/images/products/FAKHAR%20BLACK(3).JPG"
+      "/images/products/FAKHAR%20BLACK(1).jpg",
+      "/images/products/FAKHAR%20BLACK(2).jpg",
+      "/images/products/FAKHAR%20BLACK(3).JPG"
     ]
   },
   {
@@ -835,9 +831,9 @@ const initialProducts = [
       }
     ],
     "images": [
-          "/images/products/FAKHAR%20EXTRAIT(1).jpg",
-          "/images/products/FAKHAR%20EXTRAIT(2).jpg",
-          "/images/products/FAKHAR%20EXTRAIT(3).jpg"
+      "/images/products/FAKHAR%20EXTRAIT(1).jpg",
+      "/images/products/FAKHAR%20EXTRAIT(2).jpg",
+      "/images/products/FAKHAR%20EXTRAIT(3).jpg"
     ]
   },
   {
@@ -857,9 +853,9 @@ const initialProducts = [
       }
     ],
     "images": [
-          "/images/products/FAKHAR%20WOMAN(1).jpg",
-          "/images/products/FAKHAR%20WOMAN(2).jpg",
-          "/images/products/FAKHAR%20WOMAN(3).jpg"
+      "/images/products/FAKHAR%20WOMAN(1).jpg",
+      "/images/products/FAKHAR%20WOMAN(2).jpg",
+      "/images/products/FAKHAR%20WOMAN(3).jpg"
     ]
   },
   {
@@ -879,9 +875,9 @@ const initialProducts = [
       }
     ],
     "images": [
-          "/images/products/LATTAFA%20HAYA%202.jpg",
-          "/images/products/LATTAFA%20HAYA%204(1).jpg",
-          "/images/products/LATTAFA%20HAYA%204.JPG"
+      "/images/products/LATTAFA%20HAYA%202.jpg",
+      "/images/products/LATTAFA%20HAYA%204(1).jpg",
+      "/images/products/LATTAFA%20HAYA%204.JPG"
     ]
   },
   {
@@ -901,9 +897,9 @@ const initialProducts = [
       }
     ],
     "images": [
-          "/images/products/LATTAFA%20HAYAATI(1).jpg",
-          "/images/products/LATTAFA%20HAYAATI(2).jpg",
-          "/images/products/LATTAFA%20HAYAATI(3).jpg"
+      "/images/products/LATTAFA%20HAYAATI(1).jpg",
+      "/images/products/LATTAFA%20HAYAATI(2).jpg",
+      "/images/products/LATTAFA%20HAYAATI(3).jpg"
     ]
   },
   {
@@ -923,9 +919,9 @@ const initialProducts = [
       }
     ],
     "images": [
-          "/images/products/LATTAFA%20KHAMRAH(1).JPG",
-          "/images/products/LATTAFA%20KHAMRAH(2).jpg",
-          "/images/products/LATTAFA%20KHAMRAH(3).jpg"
+      "/images/products/LATTAFA%20KHAMRAH(1).JPG",
+      "/images/products/LATTAFA%20KHAMRAH(2).jpg",
+      "/images/products/LATTAFA%20KHAMRAH(3).jpg"
     ]
   },
   {
@@ -945,8 +941,8 @@ const initialProducts = [
       }
     ],
     "images": [
-          "/images/products/MAHIIR%20BLACK(1).jpg",
-          "/images/products/MAHIIR%20BLACK.JPG"
+      "/images/products/MAHIIR%20BLACK(1).jpg",
+      "/images/products/MAHIIR%20BLACK.JPG"
     ]
   },
   {
@@ -966,9 +962,9 @@ const initialProducts = [
       }
     ],
     "images": [
-          "/images/products/MAHIIR%20GOLD(1).jpg",
-          "/images/products/MAHIIR%20GOLD.jpg",
-          "/images/products/MAHIR%20GOLD.JPG"
+      "/images/products/MAHIIR%20GOLD(1).jpg",
+      "/images/products/MAHIIR%20GOLD.jpg",
+      "/images/products/MAHIR%20GOLD.JPG"
     ]
   },
   {
@@ -988,8 +984,8 @@ const initialProducts = [
       }
     ],
     "images": [
-          "/images/products/LATTAFA%20MAYAR%20CHERRY.jpg",
-          "/images/products/MAYAR%20CHERRY.jpg"
+      "/images/products/LATTAFA%20MAYAR%20CHERRY.jpg",
+      "/images/products/MAYAR%20CHERRY.jpg"
     ]
   },
   {
@@ -1009,9 +1005,9 @@ const initialProducts = [
       }
     ],
     "images": [
-          "/images/products/LATTAFA%20MAYAR.jpg",
-          "/images/products/MAYAR(1).jpg",
-          "/images/products/MAYAR.JPG"
+      "/images/products/LATTAFA%20MAYAR.jpg",
+      "/images/products/MAYAR(1).jpg",
+      "/images/products/MAYAR.JPG"
     ]
   },
   {
@@ -1031,8 +1027,8 @@ const initialProducts = [
       }
     ],
     "images": [
-          "/images/products/LATTAFA%20CANDY%20MUSK(1).JPG",
-          "/images/products/LATTAFA%20CANDY%20MUSK.jpg"
+      "/images/products/LATTAFA%20CANDY%20MUSK(1).JPG",
+      "/images/products/LATTAFA%20CANDY%20MUSK.jpg"
     ]
   },
   {
@@ -1070,9 +1066,9 @@ const initialProducts = [
       }
     ],
     "images": [
-          "/images/products/LATTAFA%20THE%20KINGDOM.jpg",
-          "/images/products/THE%20KINGDOM(1).jpg",
-          "/images/products/THE%20KINGDOM(2).jpg"
+      "/images/products/LATTAFA%20THE%20KINGDOM.jpg",
+      "/images/products/THE%20KINGDOM(1).jpg",
+      "/images/products/THE%20KINGDOM(2).jpg"
     ]
   },
   {
@@ -1110,8 +1106,8 @@ const initialProducts = [
       }
     ],
     "images": [
-          "/images/products/LATTAFA%20ASAD(1).jpg",
-          "/images/products/LATTAFA%20ASAD.JPG"
+      "/images/products/LATTAFA%20ASAD(1).jpg",
+      "/images/products/LATTAFA%20ASAD.JPG"
     ]
   },
   {
@@ -1131,9 +1127,9 @@ const initialProducts = [
       }
     ],
     "images": [
-          "/images/products/BOURBON(1).jpg",
-          "/images/products/BOURBON.JPG",
-          "/images/products/LATTAFA%20ASAD%20BOURBON.JPG"
+      "/images/products/BOURBON(1).jpg",
+      "/images/products/BOURBON.JPG",
+      "/images/products/LATTAFA%20ASAD%20BOURBON.JPG"
     ]
   },
   {
@@ -1153,9 +1149,9 @@ const initialProducts = [
       }
     ],
     "images": [
-          "/images/products/YARA%20CANDY(1).JPG",
-          "/images/products/YARA%20CANDY(2).jpg",
-          "/images/products/YARA%20CANDY(3).jpg"
+      "/images/products/YARA%20CANDY(1).JPG",
+      "/images/products/YARA%20CANDY(2).jpg",
+      "/images/products/YARA%20CANDY(3).jpg"
     ]
   },
   {
@@ -1175,9 +1171,9 @@ const initialProducts = [
       }
     ],
     "images": [
-          "/images/products/YARA%20MOI(1).jpg",
-          "/images/products/YARA%20MOI(2).jpg",
-          "/images/products/YARA%20MOI.jpg"
+      "/images/products/YARA%20MOI(1).jpg",
+      "/images/products/YARA%20MOI(2).jpg",
+      "/images/products/YARA%20MOI.jpg"
     ]
   },
   {
@@ -1197,9 +1193,9 @@ const initialProducts = [
       }
     ],
     "images": [
-          "/images/products/YARA%20TOUS(1).JPG",
-          "/images/products/YARA%20TOUS(2).jpg",
-          "/images/products/YARA%20TOUS(3).jpg"
+      "/images/products/YARA%20TOUS(1).JPG",
+      "/images/products/YARA%20TOUS(2).jpg",
+      "/images/products/YARA%20TOUS(3).jpg"
     ]
   },
   {
@@ -1219,9 +1215,9 @@ const initialProducts = [
       }
     ],
     "images": [
-          "/images/products/YARA%20WOMAN(1).jpg",
-          "/images/products/YARA%20WOMAN(2).jpg",
-          "/images/products/YARA%20WOMAN.JPG"
+      "/images/products/YARA%20WOMAN(1).jpg",
+      "/images/products/YARA%20WOMAN(2).jpg",
+      "/images/products/YARA%20WOMAN.JPG"
     ]
   },
   {
@@ -1241,9 +1237,9 @@ const initialProducts = [
       }
     ],
     "images": [
-          "/images/products/CORAL%20BLUSH(1).jpg",
-          "/images/products/coral%20blush(2).jpg",
-          "/images/products/Coral%20blush(3).jpg"
+      "/images/products/CORAL%20BLUSH(1).jpg",
+      "/images/products/coral%20blush(2).jpg",
+      "/images/products/Coral%20blush(3).jpg"
     ]
   },
   {
@@ -1263,8 +1259,8 @@ const initialProducts = [
       }
     ],
     "images": [
-          "/images/products/JEAN%20LOWE%20NOIR(1).jpg",
-          "/images/products/JEAN%20LOWE%20NOIR.jpg"
+      "/images/products/JEAN%20LOWE%20NOIR(1).jpg",
+      "/images/products/JEAN%20LOWE%20NOIR.jpg"
     ]
   },
   {
@@ -1284,8 +1280,8 @@ const initialProducts = [
       }
     ],
     "images": [
-          "/images/products/PHILOS%20PURA(1).jpg",
-          "/images/products/PHILOS%20PURA.jpg"
+      "/images/products/PHILOS%20PURA(1).jpg",
+      "/images/products/PHILOS%20PURA.jpg"
     ]
   },
   {
@@ -1624,146 +1620,4 @@ const initialProducts = [
     ],
     "images": []
   }
-];
-
-const STORAGE_KEY = 'nura_catalog_v6';
-
-// Persist catalog to disk via API (data/catalog.json)
-const saveToDisk = async (products) => {
-  try {
-    await fetch('/api/catalog', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(products)
-    });
-  } catch (e) {
-    console.warn('No se pudo guardar en disco:', e.message);
-  }
-};
-
-// Upload image file to disk and return its public URL path
-export const uploadImageToDisk = async (file) => {
-  return new Promise((resolve, reject) => {
-    const reader = new FileReader();
-    reader.onload = async (ev) => {
-      try {
-        const res = await fetch('/api/upload-image', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({
-            filename: file.name,
-            data: ev.target.result
-          })
-        });
-        const result = await res.json();
-        if (result.ok) {
-          resolve(result.path);
-        } else {
-          reject(new Error(result.error));
-        }
-      } catch (e) {
-        reject(e);
-      }
-    };
-    reader.onerror = reject;
-    reader.readAsDataURL(file);
-  });
-};
-
-export const CatalogProvider = ({ children }) => {
-  const [products, setProducts] = useState(initialProducts);
-  const [loaded, setLoaded] = useState(false);
-  const saveTimerRef = useRef(null);
-
-  // Load catalog from disk on mount
-  useEffect(() => {
-    const loadCatalog = async () => {
-      try {
-        const res = await fetch('/api/catalog');
-        if (res.ok) {
-          const data = await res.json();
-          if (Array.isArray(data) && data.length > 0) {
-            setProducts(data);
-          }
-        }
-      } catch (e) {
-        // API not available, try localStorage fallback
-        try {
-          const saved = localStorage.getItem(STORAGE_KEY);
-          if (saved) {
-            const parsed = JSON.parse(saved);
-            if (Array.isArray(parsed) && parsed.length > 0) {
-              setProducts(parsed);
-            }
-          }
-        } catch (e2) { /* use initialProducts */ }
-      }
-      setLoaded(true);
-    };
-    loadCatalog();
-  }, []);
-
-  // Debounced save to disk + localStorage on every change
-  useEffect(() => {
-    if (!loaded) return; // Don't save during initial load
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(products));
-    if (saveTimerRef.current) clearTimeout(saveTimerRef.current);
-    saveTimerRef.current = setTimeout(() => {
-      saveToDisk(products);
-    }, 500);
-  }, [products, loaded]);
-
-  const addProduct = (product) => {
-    const newProduct = {
-      ...product,
-      id: Date.now().toString()
-    };
-    setProducts(prev => [...prev, newProduct]);
-  };
-
-  const updateProduct = (id, updatedData) => {
-    setProducts(prev =>
-      prev.map(p => p.id === id ? { ...p, ...updatedData } : p)
-    );
-  };
-
-  const deleteProduct = (id) => {
-    setProducts(prev => prev.filter(p => p.id !== id));
-  };
-
-  const getFilteredProducts = (category) => {
-    if (category === 'todos') return products;
-    if (category === 'masculino') {
-      return products.filter(p => p.category === 'masculino' || p.category === 'unisex');
-    }
-    if (category === 'femenino') {
-      return products.filter(p => p.category === 'femenino' || p.category === 'unisex');
-    }
-    return products.filter(p => p.category === category);
-  };
-
-  const resetCatalog = () => {
-    setProducts(initialProducts);
-    localStorage.removeItem(STORAGE_KEY);
-    saveToDisk(initialProducts);
-  };
-
-  return (
-    <CatalogContext.Provider value={{
-      products,
-      addProduct,
-      updateProduct,
-      deleteProduct,
-      getFilteredProducts,
-      resetCatalog
-    }}>
-      {children}
-    </CatalogContext.Provider>
-  );
-};
-
-export const useCatalog = () => {
-  const ctx = useContext(CatalogContext);
-  if (!ctx) throw new Error('useCatalog must be used within CatalogProvider');
-  return ctx;
-};
+]
