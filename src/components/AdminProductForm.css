@@ -45,6 +45,14 @@
   margin-bottom: 0.5rem;
 }
 
+.admin-form__image-hint {
+  font-weight: 400;
+  text-transform: none;
+  letter-spacing: 0;
+  color: var(--text-muted);
+  font-size: 0.65rem;
+}
+
 .admin-form__image-gallery {
   display: flex;
   flex-wrap: wrap;
@@ -59,11 +67,27 @@
   border-radius: var(--radius-md);
   overflow: hidden;
   border: 1px solid var(--border-subtle);
-  transition: border-color 0.25s ease;
+  transition: border-color 0.25s ease, opacity 0.2s ease, transform 0.2s ease;
+  cursor: grab;
+}
+
+.admin-form__image-preview:active {
+  cursor: grabbing;
 }
 
 .admin-form__image-preview:hover {
   border-color: var(--border-gold);
+}
+
+.admin-form__image-preview--dragging {
+  opacity: 0.4;
+  transform: scale(0.95);
+}
+
+.admin-form__image-preview--dragover {
+  border-color: var(--gold-primary);
+  box-shadow: 0 0 0 2px var(--gold-primary);
+  transform: scale(1.05);
 }
 
 .admin-form__image-preview img {
@@ -109,6 +133,25 @@
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+.admin-form__image-drag {
+  position: absolute;
+  bottom: 0.3rem;
+  right: 0.3rem;
+  background: rgba(0, 0, 0, 0.65);
+  color: rgba(255, 255, 255, 0.7);
+  padding: 0.15rem;
+  border-radius: 3px;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.admin-form__image-preview:hover .admin-form__image-drag {
+  opacity: 1;
 }
 
 .admin-form__image-upload {

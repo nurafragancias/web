@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { X, Plus, Trash2, Image, Save, Upload, Loader } from 'lucide-react';
+import { X, Plus, Trash2, Image, Save, Upload, Loader, GripVertical } from 'lucide-react';
 import { uploadImageToDisk } from '../context/CatalogContext';
 import './AdminProductForm.css';
 
@@ -29,6 +29,8 @@ const normalizeProduct = (prod) => {
 const AdminProductForm = ({ product, onSave, onCancel }) => {
   const [form, setForm] = useState(() => normalizeProduct(product));
   const [uploading, setUploading] = useState(false);
+  const [dragIndex, setDragIndex] = useState(null);
+  const [dragOverIndex, setDragOverIndex] = useState(null);
   const fileInputRef = useRef(null);
 
   useEffect(() => {
@@ -92,6 +94,38 @@ const AdminProductForm = ({ product, onSave, onCancel }) => {
     }));
   };
 
+  const handleDragStart = (index) => {
+    setDragIndex(index);
+  };
+
+  const handleDragOver = (e, index) => {
+    e.preventDefault();
+    if (dragIndex === null || dragIndex === index) return;
+    setDragOverIndex(index);
+  };
+
+  const handleDrop = (e, dropIndex) => {
+    e.preventDefault();
+    if (dragIndex === null || dragIndex === dropIndex) {
+      setDragIndex(null);
+      setDragOverIndex(null);
+      return;
+    }
+    setForm(prev => {
+      const newImages = [...prev.images];
+      const [dragged] = newImages.splice(dragIndex, 1);
+      newImages.splice(dropIndex, 0, dragged);
+      return { ...prev, images: newImages };
+    });
+    setDragIndex(null);
+    setDragOverIndex(null);
+  };
+
+  const handleDragEnd = () => {
+    setDragIndex(null);
+    setDragOverIndex(null);
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
     if (!form.name.trim() || !form.brand.trim()) return;
@@ -109,10 +143,18 @@ const AdminProductForm = ({ product, onSave, onCancel }) => {
 
       {/* Images Gallery */}
       <div className="admin-form__image-section">
-        <label className="admin-form__image-label">Imágenes</label>
+        <label className="admin-form__image-label">Imágenes <span className="admin-form__image-hint">(arrastrá para reordenar)</span></label>
         <div className="admin-form__image-gallery">
           {form.images && form.images.map((img, index) => (
-            <div key={index} className="admin-form__image-preview">
+            <div
+              key={img + index}
+              className={`admin-form__image-preview${dragIndex === index ? ' admin-form__image-preview--dragging' : ''}${dragOverIndex === index ? ' admin-form__image-preview--dragover' : ''}`}
+              draggable
+              onDragStart={() => handleDragStart(index)}
+              onDragOver={(e) => handleDragOver(e, index)}
+              onDrop={(e) => handleDrop(e, index)}
+              onDragEnd={handleDragEnd}
+            >
               <img src={img} alt={`Imagen ${index + 1}`} />
               <button
                 type="button"
@@ -123,6 +165,9 @@ const AdminProductForm = ({ product, onSave, onCancel }) => {
                 <Trash2 size={14} />
               </button>
               <span className="admin-form__image-index">{index + 1}</span>
+              <span className="admin-form__image-drag">
+                <GripVertical size={14} />
+              </span>
             </div>
           ))}
           <label className={`admin-form__image-upload${uploading ? ' admin-form__image-upload--loading' : ''}`}>
