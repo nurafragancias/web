@@ -1,14 +1,28 @@
 import React, { useState, useEffect } from 'react';
-import { ShoppingBag, Menu, X } from 'lucide-react';
+import { ShoppingBag, Menu, X, Search } from 'lucide-react';
 import { useCart } from '../context/CartContext';
 import { Link, useLocation } from 'react-router-dom';
+import SearchOverlay from './SearchOverlay';
 import './Navbar.css';
 
 const Navbar = () => {
   const { cartCount, setIsCartOpen } = useCart();
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
+  const [searchOpen, setSearchOpen] = useState(false);
   const location = useLocation();
+
+  // Keyboard shortcut: Ctrl/Cmd + K to open search
+  useEffect(() => {
+    const onKey = (e) => {
+      if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 'k') {
+        e.preventDefault();
+        setSearchOpen(true);
+      }
+    };
+    window.addEventListener('keydown', onKey);
+    return () => window.removeEventListener('keydown', onKey);
+  }, []);
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 40);
@@ -39,6 +53,15 @@ const Navbar = () => {
 
         <div className="navbar__actions">
           <button
+            className="navbar__search-btn"
+            onClick={() => setSearchOpen(true)}
+            aria-label="Buscar perfumes"
+            title="Buscar (Ctrl+K)"
+          >
+            <Search size={22} />
+          </button>
+
+          <button
             className="navbar__cart-btn"
             onClick={() => setIsCartOpen(true)}
             aria-label="Abrir carrito"
@@ -59,6 +82,8 @@ const Navbar = () => {
           </button>
         </div>
       </div>
+
+      <SearchOverlay open={searchOpen} onClose={() => setSearchOpen(false)} />
     </nav>
   );
 };
