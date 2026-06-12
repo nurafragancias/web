@@ -7,6 +7,12 @@
   flex-direction: column;
   transition: all 0.4s var(--ease-out);
   animation: fadeInUp 0.6s var(--ease-out) both;
+  cursor: pointer;
+}
+
+.product-card:focus-visible {
+  outline: 2px solid var(--gold-primary);
+  outline-offset: 2px;
 }
 
 .product-card:hover {

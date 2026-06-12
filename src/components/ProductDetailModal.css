@@ -1,0 +1,418 @@
+/* Overlay */
+.product-modal__overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.75);
+  backdrop-filter: blur(6px);
+  z-index: 1000;
+  animation: fadeIn 0.25s ease;
+}
+
+/* Modal container */
+.product-modal {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: min(1100px, 95vw);
+  max-height: 92vh;
+  overflow-y: auto;
+  background: var(--bg-card, #161616);
+  border: 1px solid var(--border-gold);
+  border-radius: var(--radius-lg);
+  z-index: 1001;
+  animation: modalIn 0.3s var(--ease-out);
+  padding: 2rem;
+  box-shadow: 0 30px 80px rgba(0, 0, 0, 0.6);
+}
+
+@keyframes modalIn {
+  from { opacity: 0; transform: translate(-50%, -45%); }
+  to { opacity: 1; transform: translate(-50%, -50%); }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; } to { opacity: 1; }
+}
+
+.product-modal__close {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  background: rgba(255, 255, 255, 0.05);
+  color: var(--text-secondary);
+  border: 1px solid var(--border-subtle);
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  z-index: 2;
+}
+
+.product-modal__close:hover {
+  background: rgba(255, 255, 255, 0.1);
+  color: var(--text-primary);
+  transform: rotate(90deg);
+}
+
+/* Top section: gallery + info */
+.product-modal__top {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: 2rem;
+  margin-bottom: 2rem;
+}
+
+/* Gallery */
+.product-modal__gallery {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.product-modal__main-image {
+  width: 100%;
+  aspect-ratio: 1;
+  background: var(--bg-tertiary);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.product-modal__main-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.product-modal__placeholder {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  color: var(--text-muted);
+  font-family: 'Playfair Display', serif;
+  text-align: center;
+  padding: 1rem;
+}
+
+.product-modal__placeholder-icon {
+  font-size: 3rem;
+  opacity: 0.5;
+}
+
+.product-modal__thumbs {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.product-modal__thumb {
+  width: 70px;
+  height: 70px;
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+  border: 2px solid var(--border-subtle);
+  background: var(--bg-tertiary);
+  cursor: pointer;
+  padding: 0;
+  transition: border-color 0.2s ease;
+}
+
+.product-modal__thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.product-modal__thumb:hover {
+  border-color: var(--border-gold);
+}
+
+.product-modal__thumb--active {
+  border-color: var(--gold-primary);
+}
+
+/* Info */
+.product-modal__info {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.product-modal__brand {
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--gold-primary);
+}
+
+.product-modal__name {
+  font-family: 'Playfair Display', serif;
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  line-height: 1.15;
+  margin: 0;
+}
+
+.product-modal__category {
+  display: inline-block;
+  width: fit-content;
+  padding: 0.25rem 0.7rem;
+  background: var(--gold-muted, rgba(200, 169, 96, 0.1));
+  border: 1px solid var(--border-gold);
+  border-radius: 100px;
+  font-size: 0.65rem;
+  font-weight: 600;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--gold-primary);
+}
+
+.product-modal__price {
+  display: flex;
+  align-items: baseline;
+  gap: 0.2rem;
+  padding: 0.75rem 0;
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.product-modal__price-currency {
+  font-size: 1.1rem;
+  color: var(--gold-primary);
+  font-weight: 500;
+}
+
+.product-modal__price-amount {
+  font-family: 'Playfair Display', serif;
+  font-size: 2.2rem;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+/* Variants */
+.product-modal__variants {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.product-modal__variants-label {
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--text-secondary);
+}
+
+.product-modal__variants-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.product-modal__variant {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 0.6rem 1rem;
+  background: var(--bg-tertiary);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  transition: all 0.25s ease;
+  min-width: 110px;
+}
+
+.product-modal__variant:hover {
+  border-color: var(--border-gold);
+}
+
+.product-modal__variant--active {
+  border-color: var(--gold-primary);
+  background: var(--gold-muted, rgba(200, 169, 96, 0.08));
+}
+
+.product-modal__variant-size {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.product-modal__variant-price {
+  font-size: 0.75rem;
+  color: var(--text-secondary);
+  margin-top: 0.15rem;
+}
+
+.product-modal__variant--active .product-modal__variant-price {
+  color: var(--gold-primary);
+}
+
+/* Add button */
+.product-modal__add-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.9rem 1.5rem;
+  background: var(--gold-gradient);
+  color: var(--bg-primary);
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  border: none;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  transition: all 0.3s var(--ease-out);
+  margin-top: 0.5rem;
+}
+
+.product-modal__add-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-gold);
+}
+
+.product-modal__add-btn--added {
+  background: linear-gradient(135deg, #2d8c4e, #1a6b35);
+  pointer-events: none;
+}
+
+/* Tabs */
+.product-modal__tabs {
+  display: flex;
+  border-bottom: 1px solid var(--border-subtle);
+  gap: 0;
+  margin-bottom: 1.5rem;
+}
+
+.product-modal__tab {
+  flex: 1;
+  padding: 0.9rem 1rem;
+  background: none;
+  border: none;
+  color: var(--text-secondary);
+  font-size: 0.85rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  cursor: pointer;
+  border-bottom: 2px solid transparent;
+  transition: all 0.25s ease;
+}
+
+.product-modal__tab:hover {
+  color: var(--text-primary);
+}
+
+.product-modal__tab--active {
+  color: var(--gold-primary);
+  border-bottom-color: var(--gold-primary);
+}
+
+.product-modal__tab-content {
+  min-height: 120px;
+}
+
+.product-modal__desc p {
+  font-size: 0.95rem;
+  line-height: 1.7;
+  color: var(--text-secondary);
+  margin: 0;
+}
+
+.product-modal__empty {
+  color: var(--text-muted);
+  font-style: italic;
+  text-align: center;
+  padding: 2rem;
+}
+
+/* Notes */
+.product-modal__notes {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.product-modal__note-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.product-modal__note-title {
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--gold-primary);
+  margin: 0;
+}
+
+.product-modal__note-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.product-modal__note-chip {
+  padding: 0.4rem 0.85rem;
+  background: var(--bg-tertiary);
+  border: 1px solid var(--border-subtle);
+  border-radius: 100px;
+  font-size: 0.8rem;
+  color: var(--text-primary);
+  transition: border-color 0.2s ease;
+}
+
+.product-modal__note-chip:hover {
+  border-color: var(--border-gold);
+}
+
+/* Mobile */
+@media (max-width: 720px) {
+  .product-modal {
+    padding: 1.5rem 1rem;
+    width: 100vw;
+    height: 100vh;
+    max-height: 100vh;
+    border-radius: 0;
+    top: 0;
+    left: 0;
+    transform: none;
+  }
+
+  @keyframes modalIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+
+  .product-modal__top {
+    grid-template-columns: 1fr;
+    gap: 1.25rem;
+  }
+
+  .product-modal__name {
+    font-size: 1.5rem;
+  }
+
+  .product-modal__price-amount {
+    font-size: 1.7rem;
+  }
+
+  .product-modal__thumb {
+    width: 56px;
+    height: 56px;
+  }
+}

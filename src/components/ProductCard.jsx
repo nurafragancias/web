@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { ShoppingBag, Check } from 'lucide-react';
 import { useCart } from '../context/CartContext';
+import ProductDetailModal from './ProductDetailModal';
 import './ProductCard.css';
 
 const ProductCard = ({ product, index = 0 }) => {
@@ -9,13 +10,14 @@ const ProductCard = ({ product, index = 0 }) => {
   const [isAdding, setIsAdding] = useState(false);
   const [imageError, setImageError] = useState(false);
   const [currentImage, setCurrentImage] = useState(0);
-  const [showFullDesc, setShowFullDesc] = useState(false);
+  const [showDetail, setShowDetail] = useState(false);
 
   const hasMultipleImages = product.images && product.images.length > 1;
 
   const variant = product.variants[selectedVariant];
 
-  const handleAdd = () => {
+  const handleAdd = (e) => {
+    e.stopPropagation();
     addToCart(product, variant);
     setIsAdding(true);
     setTimeout(() => setIsAdding(false), 1200);
@@ -33,115 +35,112 @@ const ProductCard = ({ product, index = 0 }) => {
   ];
 
   return (
-    <div
-      className="product-card"
-      style={{ animationDelay: `${index * 0.1}s` }}
-    >
-      <div className="product-card__image-wrap">
-        {product.images && product.images.length > 0 && !imageError ? (
-          <>
-            <img
-              src={product.images[currentImage]}
-              alt={product.name}
-              className="product-card__image"
-              onError={() => setImageError(true)}
-            />
-            {hasMultipleImages && (
-              <>
-                <button
-                  className="product-card__img-nav product-card__img-nav--prev"
-                  onClick={(e) => { e.stopPropagation(); setCurrentImage(i => (i - 1 + product.images.length) % product.images.length); }}
-                  aria-label="Imagen anterior"
-                >&#8249;</button>
-                <button
-                  className="product-card__img-nav product-card__img-nav--next"
-                  onClick={(e) => { e.stopPropagation(); setCurrentImage(i => (i + 1) % product.images.length); }}
-                  aria-label="Imagen siguiente"
-                >&#8250;</button>
-                <div className="product-card__img-dots">
-                  {product.images.map((_, i) => (
-                    <span key={i} className={`product-card__img-dot${i === currentImage ? ' product-card__img-dot--active' : ''}`} onClick={(e) => { e.stopPropagation(); setCurrentImage(i); }} />
-                  ))}
-                </div>
-              </>
-            )}
-          </>
-        ) : (
-          <div
-            className="product-card__placeholder"
-            style={{ background: placeholderGradients[index % placeholderGradients.length] }}
-          >
-            <div className="product-card__placeholder-icon">🌙</div>
-            <span className="product-card__placeholder-text">{product.name}</span>
-          </div>
-        )}
-        <div className="product-card__image-overlay"></div>
-        <span className="product-card__category-tag">{product.category}</span>
-      </div>
-
-      <div className="product-card__body">
-        <div className="product-card__header">
-          <span className="product-card__brand">{product.brand}</span>
-          <h3 className="product-card__name">{product.name}</h3>
-        </div>
-
-        {product.description && (
-          <div className="product-card__desc-wrap">
-            <p className={`product-card__desc${showFullDesc ? ' product-card__desc--expanded' : ''}`}>
-              {product.description}
-            </p>
-            {product.description.length > 120 && (
-              <button
-                className="product-card__desc-toggle"
-                onClick={() => setShowFullDesc(!showFullDesc)}
-              >
-                {showFullDesc ? 'Ver menos' : 'Ver más'}
-              </button>
-            )}
-          </div>
-        )}
-
-        <div className="product-card__variants">
-          {product.variants.map((v, i) => (
-            <button
-              key={v.size}
-              className={`product-card__variant ${i === selectedVariant ? 'product-card__variant--active' : ''}`}
-              onClick={() => setSelectedVariant(i)}
+    <>
+      <div
+        className="product-card"
+        style={{ animationDelay: `${index * 0.1}s` }}
+        onClick={() => setShowDetail(true)}
+        role="button"
+        tabIndex={0}
+        onKeyDown={(e) => { if (e.key === 'Enter') setShowDetail(true); }}
+      >
+        <div className="product-card__image-wrap">
+          {product.images && product.images.length > 0 && !imageError ? (
+            <>
+              <img
+                src={product.images[currentImage]}
+                alt={product.name}
+                className="product-card__image"
+                onError={() => setImageError(true)}
+              />
+              {hasMultipleImages && (
+                <>
+                  <button
+                    className="product-card__img-nav product-card__img-nav--prev"
+                    onClick={(e) => { e.stopPropagation(); setCurrentImage(i => (i - 1 + product.images.length) % product.images.length); }}
+                    aria-label="Imagen anterior"
+                  >&#8249;</button>
+                  <button
+                    className="product-card__img-nav product-card__img-nav--next"
+                    onClick={(e) => { e.stopPropagation(); setCurrentImage(i => (i + 1) % product.images.length); }}
+                    aria-label="Imagen siguiente"
+                  >&#8250;</button>
+                  <div className="product-card__img-dots">
+                    {product.images.map((_, i) => (
+                      <span key={i} className={`product-card__img-dot${i === currentImage ? ' product-card__img-dot--active' : ''}`} onClick={(e) => { e.stopPropagation(); setCurrentImage(i); }} />
+                    ))}
+                  </div>
+                </>
+              )}
+            </>
+          ) : (
+            <div
+              className="product-card__placeholder"
+              style={{ background: placeholderGradients[index % placeholderGradients.length] }}
             >
-              {v.size}
-            </button>
-          ))}
+              <div className="product-card__placeholder-icon">🌙</div>
+              <span className="product-card__placeholder-text">{product.name}</span>
+            </div>
+          )}
+          <div className="product-card__image-overlay"></div>
+          <span className="product-card__category-tag">{product.category}</span>
         </div>
 
-        <div className="product-card__footer">
-          <div className="product-card__price">
-            <span className="product-card__price-currency">$</span>
-            <span className="product-card__price-amount">
-              {variant.price.toLocaleString('es-AR')}
-            </span>
+        <div className="product-card__body">
+          <div className="product-card__header">
+            <span className="product-card__brand">{product.brand}</span>
+            <h3 className="product-card__name">{product.name}</h3>
           </div>
 
-          <button
-            className={`product-card__add-btn ${isAdding ? 'product-card__add-btn--added' : ''}`}
-            onClick={handleAdd}
-            disabled={isAdding}
-            id={`add-to-cart-${product.id}`}
-          >
-            {isAdding ? (
-              <>
-                <Check size={16} />
-                Agregado
-              </>
-            ) : (
-              <>
-                <ShoppingBag size={16} />
-                Agregar
-              </>
-            )}
-          </button>
+          <div className="product-card__variants">
+            {product.variants.map((v, i) => (
+              <button
+                key={v.size}
+                className={`product-card__variant ${i === selectedVariant ? 'product-card__variant--active' : ''}`}
+                onClick={(e) => { e.stopPropagation(); setSelectedVariant(i); }}
+              >
+                {v.size}
+              </button>
+            ))}
+          </div>
+
+          <div className="product-card__footer">
+            <div className="product-card__price">
+              <span className="product-card__price-currency">$</span>
+              <span className="product-card__price-amount">
+                {variant.price.toLocaleString('es-AR')}
+              </span>
+            </div>
+
+            <button
+              className={`product-card__add-btn ${isAdding ? 'product-card__add-btn--added' : ''}`}
+              onClick={handleAdd}
+              disabled={isAdding}
+              id={`add-to-cart-${product.id}`}
+            >
+              {isAdding ? (
+                <>
+                  <Check size={16} />
+                  Agregado
+                </>
+              ) : (
+                <>
+                  <ShoppingBag size={16} />
+                  Agregar
+                </>
+              )}
+            </button>
+          </div>
         </div>
       </div>
-    </div>
+
+      {showDetail && (
+        <ProductDetailModal
+          product={product}
+          onClose={() => setShowDetail(false)}
+        />
+      )}
+    </>
   );
 };
 
