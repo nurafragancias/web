@@ -1,0 +1,11 @@
+# Configuración de deploy para Netlify (alternativa a Vercel).
+[build]
+  command = "npm run build"
+  publish = "dist"
+
+# Fallback de SPA: todas las rutas desconocidas sirven index.html
+# (los archivos estáticos existentes se sirven primero).
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200

@@ -1675,19 +1675,36 @@ export const CatalogProvider = ({ children }) => {
   const [loaded, setLoaded] = useState(false);
   const saveTimerRef = useRef(null);
 
-  // Load catalog from disk on mount
+  // Load catalog on mount.
+  // Order of preference:
+  //   1) /api/catalog   -> live data from the dev server (admin edits persist here)
+  //   2) /catalog.json  -> static snapshot generated at build time (production hosting)
+  //   3) localStorage   -> last data seen in this browser
+  //   4) initialProducts (bundled fallback)
   useEffect(() => {
-    const loadCatalog = async () => {
+    // Fetch a URL and return a valid products array, or null if unavailable.
+    const fetchProducts = async (url) => {
       try {
-        const res = await fetch('/api/catalog');
-        if (res.ok) {
-          const data = await res.json();
-          if (Array.isArray(data) && data.length > 0) {
-            setProducts(data);
-          }
-        }
-      } catch (e) {
-        // API not available, try localStorage fallback
+        const res = await fetch(url);
+        if (!res.ok) return null;
+        const contentType = res.headers.get('content-type') || '';
+        // On static hosting a SPA rewrite may answer unknown paths with index.html;
+        // ignore anything that isn't actually JSON.
+        if (!contentType.includes('application/json')) return null;
+        const data = await res.json();
+        return Array.isArray(data) && data.length > 0 ? data : null;
+      } catch {
+        return null;
+      }
+    };
+
+    const loadCatalog = async () => {
+      let data = await fetchProducts('/api/catalog');
+      if (!data) data = await fetchProducts('/catalog.json');
+
+      if (data) {
+        setProducts(data);
+      } else {
         try {
           const saved = localStorage.getItem(STORAGE_KEY);
           if (saved) {
@@ -1696,7 +1713,7 @@ export const CatalogProvider = ({ children }) => {
               setProducts(parsed);
             }
           }
-        } catch (e2) { /* use initialProducts */ }
+        } catch { /* use initialProducts */ }
       }
       setLoaded(true);
     };

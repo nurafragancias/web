@@ -26,3 +26,9 @@ dist-ssr
 # Temporary/helper files
 drive_html.txt
 localtunnel.log
+
+# Snapshot del catálogo generado en build (prebuild lo regenera desde data/catalog.json)
+public/catalog.json
+
+# Vercel
+.vercel

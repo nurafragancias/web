@@ -5,9 +5,11 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
+    "prebuild": "node scripts/snapshot-catalog.mjs",
     "build": "vite build",
     "lint": "eslint .",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "optimize-images": "node scripts/optimize-images.mjs"
   },
   "dependencies": {
     "lucide-react": "^1.14.0",
