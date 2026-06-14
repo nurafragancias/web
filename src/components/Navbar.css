@@ -103,6 +103,99 @@
   width: 100%;
 }
 
+/* Brands dropdown */
+.navbar__brands {
+  position: relative;
+}
+
+.navbar__brands-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  font-family: inherit;
+}
+
+.navbar__brands-chevron {
+  transition: transform 0.3s var(--ease-out);
+}
+
+.navbar__brands-toggle--open .navbar__brands-chevron {
+  transform: rotate(180deg);
+}
+
+.navbar__brands-toggle--open {
+  color: var(--gold-primary);
+}
+
+.navbar__brands-dropdown {
+  position: absolute;
+  top: calc(100% + 1.25rem);
+  left: 50%;
+  transform: translateX(-50%);
+  width: 300px;
+  background: var(--bg-card, #161616);
+  border: 1px solid var(--border-gold);
+  border-radius: var(--radius-md);
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.55);
+  padding: 0.5rem;
+  z-index: 200;
+  animation: brandsDrop 0.22s var(--ease-out);
+}
+
+@keyframes brandsDrop {
+  from { opacity: 0; transform: translate(-50%, -8px); }
+  to { opacity: 1; transform: translate(-50%, 0); }
+}
+
+.navbar__brands-list {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.15rem;
+  max-height: 320px;
+  overflow-y: auto;
+}
+
+.navbar__brands-item {
+  display: block;
+  width: 100%;
+  text-align: left;
+  padding: 0.55rem 0.7rem;
+  background: transparent;
+  border: none;
+  border-radius: var(--radius-sm);
+  color: var(--text-secondary);
+  font-family: inherit;
+  font-size: 0.78rem;
+  letter-spacing: 0.04em;
+  cursor: pointer;
+  transition: all 0.18s ease;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.navbar__brands-item:hover {
+  background: var(--gold-muted, rgba(200, 169, 96, 0.1));
+  color: var(--gold-primary);
+}
+
+.navbar__brands-item--all {
+  grid-column: 1 / -1;
+  text-align: center;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  font-size: 0.7rem;
+  color: var(--gold-primary);
+  border-bottom: 1px solid var(--border-subtle);
+  border-radius: 0;
+  margin-bottom: 0.35rem;
+  padding-bottom: 0.6rem;
+}
+
 /* Actions */
 .navbar__actions {
   display: flex;
@@ -175,5 +268,29 @@
 
   .navbar__links--open .navbar__link {
     font-size: 1.1rem;
+  }
+
+  .navbar__brands {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .navbar__brands-toggle {
+    font-size: 1.1rem;
+    justify-content: center;
+  }
+
+  .navbar__brands-dropdown {
+    position: static;
+    transform: none;
+    width: min(90vw, 360px);
+    margin-top: 1rem;
+    animation: none;
+  }
+
+  .navbar__brands-list {
+    max-height: 40vh;
   }
 }

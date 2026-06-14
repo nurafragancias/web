@@ -82,7 +82,7 @@ const SearchOverlay = ({ open, onClose }) => {
             type="text"
             value={query}
             onChange={(e) => setQuery(e.target.value)}
-            placeholder="Buscar perfumes (ej: oud, vainilla, masculino, afnan...)"
+            placeholder="Buscar perfumes por nombre, marca o nota..."
             className="search-overlay__input"
             autoComplete="off"
           />
@@ -97,20 +97,7 @@ const SearchOverlay = ({ open, onClose }) => {
         </div>
 
         <div className="search-overlay__results">
-          {query.trim() === '' ? (
-            <div className="search-overlay__hint">
-              <p>Escribí palabras clave para buscar:</p>
-              <div className="search-overlay__suggestions">
-                <button onClick={() => setQuery('oud')}>oud</button>
-                <button onClick={() => setQuery('vainilla')}>vainilla</button>
-                <button onClick={() => setQuery('masculino')}>masculino</button>
-                <button onClick={() => setQuery('femenino')}>femenino</button>
-                <button onClick={() => setQuery('lattafa')}>lattafa</button>
-                <button onClick={() => setQuery('amber')}>amber</button>
-                <button onClick={() => setQuery('rose')}>rose</button>
-              </div>
-            </div>
-          ) : results.length === 0 ? (
+          {query.trim() === '' ? null : results.length === 0 ? (
             <div className="search-overlay__empty">
               <p>No encontramos perfumes para <strong>"{query}"</strong></p>
               <p className="search-overlay__empty-hint">Intentá con otras palabras clave o probá con la marca.</p>

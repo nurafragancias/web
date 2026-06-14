@@ -44,6 +44,43 @@
   font-weight: 300;
 }
 
+.catalog__brand-filter {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+  margin: 0 0 2rem;
+}
+
+.catalog__brand-filter-label {
+  font-size: 0.8rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text-secondary);
+}
+
+.catalog__brand-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  padding: 0.45rem 1rem;
+  background: var(--gold-muted);
+  border: 1px solid var(--border-gold);
+  border-radius: 100px;
+  color: var(--gold-primary);
+  font-family: inherit;
+  font-size: 0.85rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.catalog__brand-chip:hover {
+  background: var(--gold-primary);
+  color: var(--bg-primary);
+}
+
 .catalog__grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
