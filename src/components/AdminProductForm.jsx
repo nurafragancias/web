@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { X, Plus, Trash2, Image, Save, Upload, Loader, GripVertical } from 'lucide-react';
-import { uploadImageToDisk } from '../context/CatalogContext';
+import { uploadProductImage } from '../context/CatalogContext';
 import './AdminProductForm.css';
 
 const emptyProduct = {
@@ -72,7 +72,7 @@ const AdminProductForm = ({ product, onSave, onCancel }) => {
     setUploading(true);
     try {
       for (const file of files) {
-        const imagePath = await uploadImageToDisk(file);
+        const imagePath = await uploadProductImage(file);
         setForm(prev => ({
           ...prev,
           images: [...prev.images, imagePath]

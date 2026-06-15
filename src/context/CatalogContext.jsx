@@ -1,4 +1,5 @@
 import React, { createContext, useState, useEffect, useContext, useRef, useCallback } from 'react';
+import { supabase, isSupabaseConfigured, PRODUCT_IMAGES_BUCKET } from '../lib/supabase';
 
 const CatalogContext = createContext();
 
@@ -1641,8 +1642,25 @@ const saveToDisk = async (products) => {
   }
 };
 
-// Upload image file to disk and return its public URL path
-export const uploadImageToDisk = async (file) => {
+// Sube una imagen y devuelve su URL pública.
+// Con Supabase configurado -> Supabase Storage (sirve en producción).
+// Sin Supabase -> API del servidor de desarrollo (escribe en public/images).
+export const uploadProductImage = async (file) => {
+  if (isSupabaseConfigured) {
+    const dot = file.name.lastIndexOf('.');
+    const ext = (dot >= 0 ? file.name.slice(dot + 1) : 'jpg').toLowerCase();
+    const base = (dot >= 0 ? file.name.slice(0, dot) : file.name)
+      .replace(/[^a-zA-Z0-9._-]/g, '-')
+      .slice(0, 60) || 'imagen';
+    const objectPath = `${Date.now()}-${Math.random().toString(36).slice(2, 8)}-${base}.${ext}`;
+    const { error } = await supabase.storage
+      .from(PRODUCT_IMAGES_BUCKET)
+      .upload(objectPath, file, { contentType: file.type || undefined, upsert: false });
+    if (error) throw error;
+    const { data } = supabase.storage.from(PRODUCT_IMAGES_BUCKET).getPublicUrl(objectPath);
+    return data.publicUrl;
+  }
+
   return new Promise((resolve, reject) => {
     const reader = new FileReader();
     reader.onload = async (ev) => {
@@ -1699,6 +1717,19 @@ export const CatalogProvider = ({ children }) => {
     };
 
     const loadCatalog = async () => {
+      // 0) Supabase: fuente principal cuando está configurado.
+      if (isSupabaseConfigured) {
+        const { data: rows, error } = await supabase
+          .from('products')
+          .select('*')
+          .order('position', { ascending: true });
+        if (!error && Array.isArray(rows) && rows.length > 0) {
+          setProducts(rows);
+          setLoaded(true);
+          return;
+        }
+      }
+
       let data = await fetchProducts('/api/catalog');
       if (!data) data = await fetchProducts('/catalog.json');
 
@@ -1720,9 +1751,11 @@ export const CatalogProvider = ({ children }) => {
     loadCatalog();
   }, []);
 
-  // Debounced save to disk + localStorage on every change
+  // Guardado por archivo (solo modo legacy sin Supabase). Con Supabase los
+  // cambios se persisten por operación (insert/update/delete), abajo.
   useEffect(() => {
     if (!loaded) return; // Don't save during initial load
+    if (isSupabaseConfigured) return;
     localStorage.setItem(STORAGE_KEY, JSON.stringify(products));
     if (saveTimerRef.current) clearTimeout(saveTimerRef.current);
     saveTimerRef.current = setTimeout(() => {
@@ -1730,21 +1763,59 @@ export const CatalogProvider = ({ children }) => {
     }, 500);
   }, [products, loaded]);
 
-  const addProduct = (product) => {
-    const newProduct = {
-      ...product,
-      id: Date.now().toString()
-    };
+  // Mapea un producto a las columnas de la tabla (evita mandar campos extra).
+  const toRow = (p) => ({
+    name: p.name,
+    brand: p.brand ?? null,
+    description: p.description ?? null,
+    category: p.category ?? null,
+    variants: p.variants ?? [],
+    images: p.images ?? []
+  });
+
+  const addProduct = async (product) => {
+    const id = Date.now().toString();
+    const position = products.length
+      ? Math.max(...products.map(p => p.position ?? 0)) + 1
+      : 0;
+
+    if (isSupabaseConfigured) {
+      const { data, error } = await supabase
+        .from('products')
+        .insert({ id, position, ...toRow(product) })
+        .select()
+        .single();
+      if (error) throw error;
+      setProducts(prev => [...prev, data]);
+      return data;
+    }
+
+    const newProduct = { ...product, id, position };
     setProducts(prev => [...prev, newProduct]);
+    return newProduct;
   };
 
-  const updateProduct = (id, updatedData) => {
-    setProducts(prev =>
-      prev.map(p => p.id === id ? { ...p, ...updatedData } : p)
-    );
+  const updateProduct = async (id, updatedData) => {
+    if (isSupabaseConfigured) {
+      const { data, error } = await supabase
+        .from('products')
+        .update({ ...toRow(updatedData), updated_at: new Date().toISOString() })
+        .eq('id', id)
+        .select()
+        .single();
+      if (error) throw error;
+      setProducts(prev => prev.map(p => p.id === id ? data : p));
+      return data;
+    }
+
+    setProducts(prev => prev.map(p => p.id === id ? { ...p, ...updatedData } : p));
   };
 
-  const deleteProduct = (id) => {
+  const deleteProduct = async (id) => {
+    if (isSupabaseConfigured) {
+      const { error } = await supabase.from('products').delete().eq('id', id);
+      if (error) throw error;
+    }
     setProducts(prev => prev.filter(p => p.id !== id));
   };
 
@@ -1772,7 +1843,8 @@ export const CatalogProvider = ({ children }) => {
       updateProduct,
       deleteProduct,
       getFilteredProducts,
-      resetCatalog
+      resetCatalog,
+      usingSupabase: isSupabaseConfigured
     }}>
       {children}
     </CatalogContext.Provider>

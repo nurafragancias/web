@@ -1,48 +1,89 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Plus, Edit3, Trash2, Lock, LogOut, RotateCcw } from 'lucide-react';
 import { useCatalog } from '../context/CatalogContext';
+import { supabase, isSupabaseConfigured } from '../lib/supabase';
 import AdminProductForm from '../components/AdminProductForm';
 import './Admin.css';
 
 const ADMIN_PASS = 'nura2026';
 
 const Admin = () => {
-  const { products, addProduct, updateProduct, deleteProduct, resetCatalog } = useCatalog();
-  const [isAuth, setIsAuth] = useState(false);
+  const { products, addProduct, updateProduct, deleteProduct, resetCatalog, usingSupabase } = useCatalog();
+  const [session, setSession] = useState(null);
+  const [authReady, setAuthReady] = useState(!isSupabaseConfigured);
+  const [isAuthLegacy, setIsAuthLegacy] = useState(false);
+  const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [passError, setPassError] = useState('');
+  const [loggingIn, setLoggingIn] = useState(false);
   const [editingProduct, setEditingProduct] = useState(null);
   const [showForm, setShowForm] = useState(false);
   const [deleteConfirm, setDeleteConfirm] = useState(null);
+  const [actionError, setActionError] = useState('');
 
-  const handleLogin = (e) => {
+  // Supabase auth: leer sesión actual y escuchar cambios
+  useEffect(() => {
+    if (!isSupabaseConfigured) return;
+    supabase.auth.getSession().then(({ data }) => {
+      setSession(data.session);
+      setAuthReady(true);
+    });
+    const { data: sub } = supabase.auth.onAuthStateChange((_event, sess) => {
+      setSession(sess);
+    });
+    return () => sub.subscription.unsubscribe();
+  }, []);
+
+  const isAuth = isSupabaseConfigured ? Boolean(session) : isAuthLegacy;
+
+  const handleLogin = async (e) => {
     e.preventDefault();
-    if (password === ADMIN_PASS) {
-      setIsAuth(true);
-      setPassError('');
+    setPassError('');
+    if (isSupabaseConfigured) {
+      setLoggingIn(true);
+      const { error } = await supabase.auth.signInWithPassword({
+        email: email.trim(),
+        password
+      });
+      setLoggingIn(false);
+      if (error) setPassError('Email o contraseña incorrectos');
     } else {
-      setPassError('Contraseña incorrecta');
+      if (password === ADMIN_PASS) setIsAuthLegacy(true);
+      else setPassError('Contraseña incorrecta');
     }
   };
 
-  const handleSave = (formData) => {
-    if (editingProduct) {
-      updateProduct(editingProduct.id, formData);
-    } else {
-      addProduct(formData);
+  const handleLogout = async () => {
+    if (isSupabaseConfigured) await supabase.auth.signOut();
+    else setIsAuthLegacy(false);
+  };
+
+  const handleSave = async (formData) => {
+    setActionError('');
+    try {
+      if (editingProduct) await updateProduct(editingProduct.id, formData);
+      else await addProduct(formData);
+      setShowForm(false);
+      setEditingProduct(null);
+    } catch (err) {
+      setActionError('No se pudo guardar: ' + (err?.message || 'error desconocido'));
     }
-    setShowForm(false);
-    setEditingProduct(null);
   };
 
   const handleEdit = (product) => {
+    setActionError('');
     setEditingProduct(product);
     setShowForm(true);
   };
 
-  const handleDelete = (id) => {
-    deleteProduct(id);
-    setDeleteConfirm(null);
+  const handleDelete = async (id) => {
+    setActionError('');
+    try {
+      await deleteProduct(id);
+      setDeleteConfirm(null);
+    } catch (err) {
+      setActionError('No se pudo eliminar: ' + (err?.message || 'error desconocido'));
+    }
   };
 
   const handleCancel = () => {
@@ -50,24 +91,47 @@ const Admin = () => {
     setEditingProduct(null);
   };
 
+  // Mientras Supabase verifica la sesión, evitamos parpadear el login
+  if (!authReady) {
+    return (
+      <div className="admin-page">
+        <div className="admin-login"><p>Cargando…</p></div>
+      </div>
+    );
+  }
+
   if (!isAuth) {
     return (
       <div className="admin-page">
         <div className="admin-login">
           <div className="admin-login__icon"><Lock size={32} /></div>
           <h2>Panel de Administración</h2>
-          <p>Ingresá la contraseña para acceder</p>
+          <p>{isSupabaseConfigured ? 'Ingresá con tu email y contraseña' : 'Ingresá la contraseña para acceder'}</p>
           <form onSubmit={handleLogin} className="admin-login__form">
+            {isSupabaseConfigured && (
+              <input
+                type="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                placeholder="Email"
+                className="admin-login__input"
+                autoComplete="username"
+                autoFocus
+              />
+            )}
             <input
               type="password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               placeholder="Contraseña"
               className="admin-login__input"
-              autoFocus
+              autoComplete="current-password"
+              autoFocus={!isSupabaseConfigured}
             />
             {passError && <span className="admin-login__error">{passError}</span>}
-            <button type="submit" className="btn-gold admin-login__btn">Ingresar</button>
+            <button type="submit" className="btn-gold admin-login__btn" disabled={loggingIn}>
+              {loggingIn ? 'Ingresando…' : 'Ingresar'}
+            </button>
           </form>
         </div>
       </div>
@@ -83,14 +147,20 @@ const Admin = () => {
             <p className="admin-header__subtitle">Gestioná tu catálogo de fragancias</p>
           </div>
           <div className="admin-header__actions">
-            <button className="btn-outline-gold" onClick={resetCatalog} title="Restaurar ejemplos">
-              <RotateCcw size={16} /> Reset
-            </button>
-            <button className="btn-outline-gold" onClick={() => setIsAuth(false)}>
+            {!usingSupabase && (
+              <button className="btn-outline-gold" onClick={resetCatalog} title="Restaurar ejemplos">
+                <RotateCcw size={16} /> Reset
+              </button>
+            )}
+            <button className="btn-outline-gold" onClick={handleLogout}>
               <LogOut size={16} /> Salir
             </button>
           </div>
         </div>
+
+        {actionError && (
+          <div className="admin-error-banner">{actionError}</div>
+        )}
 
         {!showForm && (
           <button className="admin-add-btn" onClick={() => { setEditingProduct(null); setShowForm(true); }}>
