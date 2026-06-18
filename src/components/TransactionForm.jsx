@@ -1,6 +1,7 @@
 import React, { useState, useMemo } from 'react';
 import { Plus, Trash2, Save, X } from 'lucide-react';
 import { variantAffectsStock } from '../lib/stock';
+import ProductPicker from './ProductPicker';
 import './TransactionForm.css';
 
 const today = () => new Date().toISOString().slice(0, 10);
@@ -133,16 +134,11 @@ const TransactionForm = ({ mode, products, onSubmit, onCancel, submitting }) => 
           const subtotal = (Number(line.qty) || 0) * (Number(line.price) || 0);
           return (
             <div key={i} className="tx-form__line">
-              <select
-                className="tx-form__line-product"
+              <ProductPicker
+                products={sortedProducts}
                 value={line.productId}
-                onChange={e => handleProductChange(i, e.target.value)}
-              >
-                <option value="">Elegí un producto…</option>
-                {sortedProducts.map(p => (
-                  <option key={p.id} value={p.id}>{p.brand} — {p.name}</option>
-                ))}
-              </select>
+                onChange={(id) => handleProductChange(i, id)}
+              />
 
               <select
                 className="tx-form__line-size"
