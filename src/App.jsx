@@ -1,6 +1,7 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { CatalogProvider } from './context/CatalogContext';
+import { SalesProvider } from './context/SalesContext';
 import { CartProvider, useCart } from './context/CartContext';
 import Navbar from './components/Navbar';
 import CartDrawer from './components/CartDrawer';
@@ -17,6 +18,7 @@ const ToastNotification = () => {
 const App = () => {
   return (
     <CatalogProvider>
+      <SalesProvider>
       <CartProvider>
         <Router>
           <div className="app">
@@ -33,6 +35,7 @@ const App = () => {
           </div>
         </Router>
       </CartProvider>
+      </SalesProvider>
     </CatalogProvider>
   );
 };

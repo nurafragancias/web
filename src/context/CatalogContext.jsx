@@ -1820,6 +1820,22 @@ export const CatalogProvider = ({ children }) => {
     setProducts(prev => prev.filter(p => p.id !== id));
   };
 
+  // Ajusta el stock de un producto (delta negativo = venta, positivo = compra).
+  // Hace una actualización puntual de la columna stock (no toca el resto).
+  const adjustStock = async (productId, delta) => {
+    const prod = products.find(p => p.id === productId);
+    if (!prod) return;
+    const newStock = Math.max(0, (prod.stock ?? 0) + delta);
+    if (isSupabaseConfigured) {
+      const { error } = await supabase
+        .from('products')
+        .update({ stock: newStock, updated_at: new Date().toISOString() })
+        .eq('id', productId);
+      if (error) throw error;
+    }
+    setProducts(prev => prev.map(p => p.id === productId ? { ...p, stock: newStock } : p));
+  };
+
   const getFilteredProducts = (category) => {
     if (category === 'todos') return products;
     if (category === 'masculino') {
@@ -1843,6 +1859,7 @@ export const CatalogProvider = ({ children }) => {
       addProduct,
       updateProduct,
       deleteProduct,
+      adjustStock,
       getFilteredProducts,
       resetCatalog,
       usingSupabase: isSupabaseConfigured

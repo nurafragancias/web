@@ -3,6 +3,7 @@ import { Plus, Edit3, Trash2, Lock, LogOut, RotateCcw } from 'lucide-react';
 import { useCatalog } from '../context/CatalogContext';
 import { supabase, isSupabaseConfigured } from '../lib/supabase';
 import AdminProductForm from '../components/AdminProductForm';
+import AdminTransactions from '../components/AdminTransactions';
 import './Admin.css';
 
 const ADMIN_PASS = 'nura2026';
@@ -20,6 +21,7 @@ const Admin = () => {
   const [showForm, setShowForm] = useState(false);
   const [deleteConfirm, setDeleteConfirm] = useState(null);
   const [actionError, setActionError] = useState('');
+  const [tab, setTab] = useState('productos');
 
   // Supabase auth: leer sesión actual y escuchar cambios
   useEffect(() => {
@@ -158,6 +160,16 @@ const Admin = () => {
           </div>
         </div>
 
+        <div className="admin-tabs">
+          <button className={`admin-tab${tab === 'productos' ? ' admin-tab--active' : ''}`} onClick={() => setTab('productos')}>Productos</button>
+          <button className={`admin-tab${tab === 'ventas' ? ' admin-tab--active' : ''}`} onClick={() => setTab('ventas')}>Ventas</button>
+          <button className={`admin-tab${tab === 'compras' ? ' admin-tab--active' : ''}`} onClick={() => setTab('compras')}>Compras</button>
+        </div>
+
+        {tab === 'ventas' && <AdminTransactions mode="venta" />}
+        {tab === 'compras' && <AdminTransactions mode="compra" />}
+
+        {tab === 'productos' && (<>
         {actionError && (
           <div className="admin-error-banner">{actionError}</div>
         )}
@@ -233,6 +245,7 @@ const Admin = () => {
             </div>
           )}
         </div>
+        </>)}
       </div>
     </div>
   );

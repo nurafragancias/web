@@ -74,6 +74,38 @@
   margin-bottom: 1.25rem;
 }
 
+/* Tabs */
+.admin-tabs {
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 1.5rem;
+  border-bottom: 1px solid var(--border-subtle);
+  flex-wrap: wrap;
+}
+
+.admin-tab {
+  background: none;
+  border: none;
+  border-bottom: 2px solid transparent;
+  color: var(--text-secondary);
+  font-family: inherit;
+  font-size: 0.85rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  padding: 0.65rem 1rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  margin-bottom: -1px;
+}
+
+.admin-tab:hover { color: var(--text-primary); }
+
+.admin-tab--active {
+  color: var(--gold-primary);
+  border-bottom-color: var(--gold-primary);
+}
+
 /* Container */
 .admin-container {
   max-width: 900px;
