@@ -1,0 +1,165 @@
+.admin-debtors {
+  animation: fadeIn 0.3s ease;
+}
+
+.admin-debtors__summary {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 1.25rem;
+  background: var(--bg-tertiary);
+  border: 1px solid var(--border-gold);
+  border-radius: var(--radius-md);
+  margin-bottom: 1.25rem;
+}
+
+.admin-debtors__summary span {
+  font-size: 0.8rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--text-secondary);
+}
+
+.admin-debtors__summary strong {
+  font-size: 1.4rem;
+  color: var(--gold-primary);
+}
+
+.admin-debtors__loading,
+.admin-debtors__empty {
+  text-align: center;
+  color: var(--text-muted);
+  padding: 2.5rem;
+}
+
+.admin-debtors__empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.6rem;
+  color: var(--text-secondary);
+}
+
+.admin-debtors__list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+.admin-debtor {
+  background: var(--bg-tertiary);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+}
+
+.admin-debtor__head {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.9rem 1rem;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var(--text-primary);
+  font-family: inherit;
+  text-align: left;
+}
+
+.admin-debtor__head svg { color: var(--gold-primary); flex-shrink: 0; }
+
+.admin-debtor__name { font-weight: 600; font-size: 0.95rem; }
+
+.admin-debtor__count {
+  font-size: 0.72rem;
+  color: var(--text-muted);
+  margin-left: auto;
+}
+
+.admin-debtor__total {
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: #e67e22;
+  min-width: 90px;
+  text-align: right;
+}
+
+.admin-debtor__sales {
+  border-top: 1px solid var(--border-subtle);
+  padding: 0.5rem 1rem 0.9rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.admin-debtor__sale {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  padding: 0.6rem 0;
+  border-bottom: 1px dashed var(--border-subtle);
+  flex-wrap: wrap;
+}
+.admin-debtor__sale:last-child { border-bottom: none; }
+
+.admin-debtor__sale-info { display: flex; flex-direction: column; gap: 0.15rem; }
+.admin-debtor__sale-date { font-size: 0.8rem; color: var(--text-primary); }
+.admin-debtor__sale-detail { font-size: 0.72rem; color: var(--text-muted); }
+
+.admin-debtor__sale-right {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
+
+.admin-debtor__sale-saldo {
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: #e67e22;
+}
+
+.admin-debtor__pay-btn {
+  background: var(--gold-muted, rgba(200, 169, 96, 0.1));
+  border: 1px solid var(--border-gold);
+  color: var(--gold-primary);
+  padding: 0.4rem 0.8rem;
+  border-radius: 100px;
+  font-size: 0.75rem;
+  cursor: pointer;
+}
+.admin-debtor__pay-btn:hover { background: var(--gold-primary); color: var(--bg-primary); }
+
+.admin-debtor__payform {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  flex-wrap: wrap;
+}
+
+.admin-debtor__payform input,
+.admin-debtor__payform select {
+  padding: 0.4rem 0.6rem;
+  background: var(--bg-primary);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-sm);
+  color: var(--text-primary);
+  font-family: inherit;
+  font-size: 0.8rem;
+}
+.admin-debtor__payform input { width: 90px; }
+
+.admin-debtor__pay-confirm {
+  padding: 0.4rem 0.8rem !important;
+  font-size: 0.75rem !important;
+}
+
+.admin-debtor__pay-cancel {
+  background: none;
+  border: none;
+  color: var(--text-muted);
+  font-size: 0.75rem;
+  cursor: pointer;
+}

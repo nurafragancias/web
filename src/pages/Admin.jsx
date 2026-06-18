@@ -4,6 +4,7 @@ import { useCatalog } from '../context/CatalogContext';
 import { supabase, isSupabaseConfigured } from '../lib/supabase';
 import AdminProductForm from '../components/AdminProductForm';
 import AdminTransactions from '../components/AdminTransactions';
+import AdminDebtors from '../components/AdminDebtors';
 import './Admin.css';
 
 const ADMIN_PASS = 'nura2026';
@@ -164,10 +165,12 @@ const Admin = () => {
           <button className={`admin-tab${tab === 'productos' ? ' admin-tab--active' : ''}`} onClick={() => setTab('productos')}>Productos</button>
           <button className={`admin-tab${tab === 'ventas' ? ' admin-tab--active' : ''}`} onClick={() => setTab('ventas')}>Ventas</button>
           <button className={`admin-tab${tab === 'compras' ? ' admin-tab--active' : ''}`} onClick={() => setTab('compras')}>Compras</button>
+          <button className={`admin-tab${tab === 'deudores' ? ' admin-tab--active' : ''}`} onClick={() => setTab('deudores')}>Deudores</button>
         </div>
 
         {tab === 'ventas' && <AdminTransactions mode="venta" />}
         {tab === 'compras' && <AdminTransactions mode="compra" />}
+        {tab === 'deudores' && <AdminDebtors />}
 
         {tab === 'productos' && (<>
         {actionError && (
