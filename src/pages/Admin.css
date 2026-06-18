@@ -258,6 +258,20 @@
   color: var(--text-secondary);
 }
 
+.admin-product-item__stock {
+  font-size: 0.7rem;
+  font-weight: 600;
+  color: var(--gold-primary);
+  padding: 0.1rem 0.5rem;
+  border: 1px solid var(--border-gold);
+  border-radius: 100px;
+}
+
+.admin-product-item__stock--zero {
+  color: #e74c3c;
+  border-color: rgba(231, 76, 60, 0.4);
+}
+
 .admin-product-item__actions {
   display: flex;
   align-items: center;

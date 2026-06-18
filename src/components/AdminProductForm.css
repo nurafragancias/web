@@ -342,6 +342,24 @@
   -moz-appearance: textfield;
 }
 
+.admin-form__variant-stock {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  font-size: 0.72rem;
+  color: var(--text-secondary);
+  cursor: pointer;
+  white-space: nowrap;
+  user-select: none;
+}
+
+.admin-form__variant-stock input {
+  width: 15px;
+  height: 15px;
+  accent-color: var(--gold-primary);
+  cursor: pointer;
+}
+
 .admin-form__remove-variant {
   color: var(--text-muted);
   padding: 0.4rem;

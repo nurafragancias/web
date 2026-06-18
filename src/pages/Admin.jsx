@@ -204,6 +204,9 @@ const Admin = () => {
                           {v.size}: ${v.price.toLocaleString('es-AR')}
                         </span>
                       ))}
+                      <span className={`admin-product-item__stock${(product.stock ?? 0) === 0 ? ' admin-product-item__stock--zero' : ''}`}>
+                        Stock: {product.stock ?? 0}
+                      </span>
                     </div>
                   </div>
                   <div className="admin-product-item__actions">

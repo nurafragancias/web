@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { X, Plus, Trash2, Image, Save, Upload, Loader, GripVertical } from 'lucide-react';
 import { uploadProductImage } from '../context/CatalogContext';
+import { variantAffectsStock } from '../lib/stock';
 import './AdminProductForm.css';
 
 const emptyProduct = {
@@ -8,10 +9,11 @@ const emptyProduct = {
   brand: '',
   description: '',
   category: 'masculino',
+  stock: 0,
   images: [],
   variants: [
-    { size: '5ml', price: 0 },
-    { size: '100ml', price: 0 }
+    { size: '5ml', price: 0, affectsStock: false },
+    { size: '100ml', price: 0, affectsStock: true }
   ]
 };
 
@@ -23,6 +25,12 @@ const normalizeProduct = (prod) => {
     normalized.images = normalized.image ? [normalized.image] : [];
   }
   delete normalized.image;
+  // Stock (frascos completos) y marca de "frasco" por variante
+  normalized.stock = Number.isFinite(normalized.stock) ? normalized.stock : 0;
+  normalized.variants = (normalized.variants || []).map(v => ({
+    ...v,
+    affectsStock: variantAffectsStock(v)
+  }));
   return normalized;
 };
 
@@ -228,22 +236,33 @@ const AdminProductForm = ({ product, onSave, onCancel }) => {
         />
       </div>
 
-      <div className="admin-form__field">
-        <label>Categoría</label>
-        <select
-          value={form.category}
-          onChange={(e) => handleChange('category', e.target.value)}
-        >
-          <option value="masculino">Masculino</option>
-          <option value="femenino">Femenino</option>
-          <option value="unisex">Unisex</option>
-        </select>
+      <div className="admin-form__row">
+        <div className="admin-form__field">
+          <label>Categoría</label>
+          <select
+            value={form.category}
+            onChange={(e) => handleChange('category', e.target.value)}
+          >
+            <option value="masculino">Masculino</option>
+            <option value="femenino">Femenino</option>
+            <option value="unisex">Unisex</option>
+          </select>
+        </div>
+        <div className="admin-form__field">
+          <label>Stock (frascos completos)</label>
+          <input
+            type="number"
+            min="0"
+            value={form.stock ?? 0}
+            onChange={(e) => handleChange('stock', Math.max(0, Number(e.target.value) || 0))}
+          />
+        </div>
       </div>
 
       {/* Variants */}
       <div className="admin-form__variants">
         <div className="admin-form__variants-header">
-          <label>Variantes (tamaño y precio)</label>
+          <label>Variantes (tamaño y precio) <span className="admin-form__image-hint">— marcá "Frasco" en la que descuenta stock</span></label>
           {form.variants.length < 3 && (
             <button type="button" className="admin-form__add-variant" onClick={addVariant}>
               <Plus size={14} /> Agregar
@@ -271,6 +290,17 @@ const AdminProductForm = ({ product, onSave, onCancel }) => {
                 min="0"
               />
             </div>
+            <label
+              className="admin-form__variant-stock"
+              title="Marcalo si esta variante es el frasco completo (al venderla descuenta del stock)"
+            >
+              <input
+                type="checkbox"
+                checked={!!v.affectsStock}
+                onChange={(e) => handleVariantChange(i, 'affectsStock', e.target.checked)}
+              />
+              <span>Frasco</span>
+            </label>
             {form.variants.length > 1 && (
               <button
                 type="button"
