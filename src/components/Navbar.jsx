@@ -132,6 +132,7 @@ const Navbar = () => {
             )}
           </div>
 
+          <Link to="/promociones" className="navbar__link" onClick={() => setMobileOpen(false)}>Promociones</Link>
           <Link to="/admin" className="navbar__link" onClick={() => setMobileOpen(false)}>Admin</Link>
         </div>
 

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { X, ShoppingBag, Check } from 'lucide-react';
 import { useCart } from '../context/CartContext';
+import { isOnPromo, discountedPrice } from '../lib/price';
 import './ProductDetailModal.css';
 
 // Parse Fragrantica-style description to extract perfume notes
@@ -102,12 +103,23 @@ const ProductDetailModal = ({ product, onClose }) => {
             <h2 className="product-modal__name">{product.name}</h2>
             <span className="product-modal__category">{product.category}</span>
 
-            <div className="product-modal__price">
-              <span className="product-modal__price-currency">$</span>
-              <span className="product-modal__price-amount">
-                {variant.price.toLocaleString('es-AR')}
-              </span>
-            </div>
+            {isOnPromo(product) ? (
+              <div className="product-modal__price product-modal__price--promo">
+                <span className="product-modal__price-old">${variant.price.toLocaleString('es-AR')}</span>
+                <span className="product-modal__price-amount">
+                  <span className="product-modal__price-currency">$</span>
+                  {discountedPrice(variant.price, product).toLocaleString('es-AR')}
+                </span>
+                <span className="product-modal__price-badge">-{product.discount}%</span>
+              </div>
+            ) : (
+              <div className="product-modal__price">
+                <span className="product-modal__price-currency">$</span>
+                <span className="product-modal__price-amount">
+                  {variant.price.toLocaleString('es-AR')}
+                </span>
+              </div>
+            )}
 
             <div className="product-modal__variants">
               <span className="product-modal__variants-label">Tamaño</span>
@@ -120,7 +132,7 @@ const ProductDetailModal = ({ product, onClose }) => {
                     onClick={() => setSelectedVariant(i)}
                   >
                     <span className="product-modal__variant-size">{v.size}</span>
-                    <span className="product-modal__variant-price">${v.price.toLocaleString('es-AR')}</span>
+                    <span className="product-modal__variant-price">${discountedPrice(v.price, product).toLocaleString('es-AR')}</span>
                   </button>
                 ))}
               </div>

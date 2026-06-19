@@ -1,4 +1,5 @@
 import React, { createContext, useState, useContext, useEffect, useCallback } from 'react';
+import { discountedPrice } from '../lib/price';
 
 const CartContext = createContext();
 
@@ -45,7 +46,7 @@ export const CartProvider = ({ children }) => {
         brand: product.brand,
         image: product.images && product.images.length > 0 ? product.images[0] : null,
         size: variant.size,
-        price: variant.price,
+        price: discountedPrice(variant.price, product),
         quantity: 1
       }];
     });

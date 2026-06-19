@@ -1,0 +1,5 @@
+/* La página de Promociones no tiene Hero, así que dejamos espacio para el navbar fijo. */
+.promos-page {
+  padding-top: calc(var(--nav-height, 72px) + 3rem);
+  min-height: 70vh;
+}

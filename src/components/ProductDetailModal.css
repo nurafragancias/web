@@ -199,6 +199,27 @@
   color: var(--text-primary);
 }
 
+/* Promo */
+.product-modal__price--promo { flex-wrap: wrap; }
+.product-modal__price--promo .product-modal__price-amount { color: #2ecc71; }
+
+.product-modal__price-old {
+  font-size: 1.1rem;
+  color: var(--text-muted);
+  text-decoration: line-through;
+  align-self: center;
+}
+
+.product-modal__price-badge {
+  align-self: center;
+  background: #e74c3c;
+  color: #fff;
+  font-size: 0.8rem;
+  font-weight: 800;
+  padding: 0.2rem 0.6rem;
+  border-radius: 100px;
+}
+
 /* Variants */
 .product-modal__variants {
   display: flex;

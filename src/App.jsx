@@ -7,6 +7,7 @@ import Navbar from './components/Navbar';
 import CartDrawer from './components/CartDrawer';
 import Footer from './components/Footer';
 import Home from './pages/Home';
+import Promociones from './pages/Promociones';
 import Admin from './pages/Admin';
 import './App.css';
 
@@ -27,6 +28,7 @@ const App = () => {
             <main>
               <Routes>
                 <Route path="/" element={<Home />} />
+                <Route path="/promociones" element={<Promociones />} />
                 <Route path="/admin" element={<Admin />} />
               </Routes>
             </main>

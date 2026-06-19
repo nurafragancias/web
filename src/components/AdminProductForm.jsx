@@ -10,6 +10,8 @@ const emptyProduct = {
   description: '',
   category: 'masculino',
   stock: 0,
+  discount: 0,
+  on_sale: false,
   images: [],
   variants: [
     { size: '5ml', price: 0, affectsStock: false },
@@ -27,6 +29,8 @@ const normalizeProduct = (prod) => {
   delete normalized.image;
   // Stock (frascos completos) y marca de "frasco" por variante
   normalized.stock = Number.isFinite(normalized.stock) ? normalized.stock : 0;
+  normalized.discount = Number.isFinite(normalized.discount) ? normalized.discount : 0;
+  normalized.on_sale = !!normalized.on_sale;
   normalized.variants = (normalized.variants || []).map(v => ({
     ...v,
     affectsStock: variantAffectsStock(v)
@@ -256,6 +260,32 @@ const AdminProductForm = ({ product, onSave, onCancel }) => {
             value={form.stock ?? 0}
             onChange={(e) => handleChange('stock', Math.max(0, Number(e.target.value) || 0))}
           />
+        </div>
+      </div>
+
+      {/* Promoción */}
+      <div className="admin-form__promo">
+        <label className="admin-form__promo-toggle">
+          <input
+            type="checkbox"
+            checked={!!form.on_sale}
+            onChange={(e) => handleChange('on_sale', e.target.checked)}
+          />
+          <span>Mostrar en Promociones</span>
+        </label>
+        <div className="admin-form__promo-discount">
+          <label>Descuento</label>
+          <div className="admin-form__promo-input">
+            <input
+              type="number"
+              min="0"
+              max="100"
+              value={form.discount || ''}
+              onChange={(e) => handleChange('discount', Math.min(100, Math.max(0, Number(e.target.value) || 0)))}
+              placeholder="0"
+            />
+            <span>%</span>
+          </div>
         </div>
       </div>
 

@@ -1780,7 +1780,9 @@ export const CatalogProvider = ({ children }) => {
     category: p.category ?? null,
     variants: p.variants ?? [],
     images: p.images ?? [],
-    stock: Number.isFinite(p.stock) ? p.stock : 0
+    stock: Number.isFinite(p.stock) ? p.stock : 0,
+    discount: Number.isFinite(p.discount) ? p.discount : 0,
+    on_sale: !!p.on_sale
   });
 
   const addProduct = async (product) => {

@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { ShoppingBag, Check } from 'lucide-react';
 import { useCart } from '../context/CartContext';
+import { isOnPromo, discountedPrice } from '../lib/price';
 import ProductDetailModal from './ProductDetailModal';
 import './ProductCard.css';
 
@@ -84,6 +85,9 @@ const ProductCard = ({ product, index = 0 }) => {
           )}
           <div className="product-card__image-overlay"></div>
           <span className="product-card__category-tag">{product.category}</span>
+          {isOnPromo(product) && (
+            <span className="product-card__promo-badge">-{product.discount}%</span>
+          )}
         </div>
 
         <div className="product-card__body">
@@ -105,12 +109,22 @@ const ProductCard = ({ product, index = 0 }) => {
           </div>
 
           <div className="product-card__footer">
-            <div className="product-card__price">
-              <span className="product-card__price-currency">$</span>
-              <span className="product-card__price-amount">
-                {variant.price.toLocaleString('es-AR')}
-              </span>
-            </div>
+            {isOnPromo(product) ? (
+              <div className="product-card__price product-card__price--promo">
+                <span className="product-card__price-old">${variant.price.toLocaleString('es-AR')}</span>
+                <span className="product-card__price-amount">
+                  <span className="product-card__price-currency">$</span>
+                  {discountedPrice(variant.price, product).toLocaleString('es-AR')}
+                </span>
+              </div>
+            ) : (
+              <div className="product-card__price">
+                <span className="product-card__price-currency">$</span>
+                <span className="product-card__price-amount">
+                  {variant.price.toLocaleString('es-AR')}
+                </span>
+              </div>
+            )}
 
             <button
               className={`product-card__add-btn ${isAdding ? 'product-card__add-btn--added' : ''}`}

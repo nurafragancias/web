@@ -360,6 +360,68 @@
   cursor: pointer;
 }
 
+.admin-form__promo {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  flex-wrap: wrap;
+  margin-bottom: 1rem;
+  padding: 0.9rem 1rem;
+  background: var(--gold-muted, rgba(200, 169, 96, 0.08));
+  border: 1px solid var(--border-gold);
+  border-radius: var(--radius-md);
+}
+
+.admin-form__promo-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  cursor: pointer;
+  font-size: 0.9rem;
+  color: var(--text-primary);
+  user-select: none;
+}
+
+.admin-form__promo-toggle input {
+  width: 18px;
+  height: 18px;
+  accent-color: var(--gold-primary);
+  cursor: pointer;
+}
+
+.admin-form__promo-discount {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.admin-form__promo-discount label {
+  font-size: 0.75rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--text-secondary);
+}
+
+.admin-form__promo-input {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.admin-form__promo-input input {
+  width: 70px;
+  padding: 0.5rem 0.6rem;
+  background: var(--bg-primary);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-sm);
+  color: var(--text-primary);
+  font-family: inherit;
+  text-align: center;
+}
+
+.admin-form__promo-input span { color: var(--text-secondary); }
+
 .admin-form__remove-variant {
   color: var(--text-muted);
   padding: 0.4rem;
