@@ -62,23 +62,6 @@ const Hero = () => {
             Explorar Colección
           </button>
         </div>
-
-        <div className="hero__stats animate-fade-in-up" style={{ animationDelay: '0.6s' }}>
-          <div className="hero__stat">
-            <span className="hero__stat-number gold-text">100+</span>
-            <span className="hero__stat-label">Fragancias</span>
-          </div>
-          <div className="hero__stat-divider"></div>
-          <div className="hero__stat">
-            <span className="hero__stat-number gold-text">Premium</span>
-            <span className="hero__stat-label">Calidad</span>
-          </div>
-          <div className="hero__stat-divider"></div>
-          <div className="hero__stat">
-            <span className="hero__stat-number gold-text">24hs</span>
-            <span className="hero__stat-label">Envíos</span>
-          </div>
-        </div>
       </div>
 
       <div className="hero__scroll-indicator animate-fade-in" style={{ animationDelay: '1s' }}>

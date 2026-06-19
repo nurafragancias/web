@@ -1688,6 +1688,15 @@ export const uploadProductImage = async (file) => {
   });
 };
 
+// Ordena el catálogo por marca y, dentro de cada marca, alfabéticamente por
+// nombre. Se aplica siempre (al cargar y al agregar/editar), así un producto
+// nuevo queda en su lugar automáticamente.
+const sortByBrandThenName = (arr) => [...arr].sort((a, b) => {
+  const brandCmp = (a.brand || '').localeCompare(b.brand || '', 'es', { sensitivity: 'base' });
+  if (brandCmp !== 0) return brandCmp;
+  return (a.name || '').localeCompare(b.name || '', 'es', { sensitivity: 'base' });
+});
+
 export const CatalogProvider = ({ children }) => {
   const [products, setProducts] = useState(initialProducts);
   const [loaded, setLoaded] = useState(false);
@@ -1724,7 +1733,7 @@ export const CatalogProvider = ({ children }) => {
           .select('*')
           .order('position', { ascending: true });
         if (!error && Array.isArray(rows) && rows.length > 0) {
-          setProducts(rows);
+          setProducts(sortByBrandThenName(rows));
           setLoaded(true);
           return;
         }
@@ -1734,14 +1743,14 @@ export const CatalogProvider = ({ children }) => {
       if (!data) data = await fetchProducts('/catalog.json');
 
       if (data) {
-        setProducts(data);
+        setProducts(sortByBrandThenName(data));
       } else {
         try {
           const saved = localStorage.getItem(STORAGE_KEY);
           if (saved) {
             const parsed = JSON.parse(saved);
             if (Array.isArray(parsed) && parsed.length > 0) {
-              setProducts(parsed);
+              setProducts(sortByBrandThenName(parsed));
             }
           }
         } catch { /* use initialProducts */ }
@@ -1787,12 +1796,12 @@ export const CatalogProvider = ({ children }) => {
         .select()
         .single();
       if (error) throw error;
-      setProducts(prev => [...prev, data]);
+      setProducts(prev => sortByBrandThenName([...prev, data]));
       return data;
     }
 
     const newProduct = { ...product, id, position };
-    setProducts(prev => [...prev, newProduct]);
+    setProducts(prev => sortByBrandThenName([...prev, newProduct]));
     return newProduct;
   };
 
@@ -1805,11 +1814,11 @@ export const CatalogProvider = ({ children }) => {
         .select()
         .single();
       if (error) throw error;
-      setProducts(prev => prev.map(p => p.id === id ? data : p));
+      setProducts(prev => sortByBrandThenName(prev.map(p => p.id === id ? data : p)));
       return data;
     }
 
-    setProducts(prev => prev.map(p => p.id === id ? { ...p, ...updatedData } : p));
+    setProducts(prev => sortByBrandThenName(prev.map(p => p.id === id ? { ...p, ...updatedData } : p)));
   };
 
   const deleteProduct = async (id) => {
@@ -1837,14 +1846,12 @@ export const CatalogProvider = ({ children }) => {
   };
 
   const getFilteredProducts = (category) => {
-    if (category === 'todos') return products;
-    if (category === 'masculino') {
-      return products.filter(p => p.category === 'masculino' || p.category === 'unisex');
-    }
-    if (category === 'femenino') {
-      return products.filter(p => p.category === 'femenino' || p.category === 'unisex');
-    }
-    return products.filter(p => p.category === category);
+    let result;
+    if (category === 'todos') result = products;
+    else if (category === 'masculino') result = products.filter(p => p.category === 'masculino' || p.category === 'unisex');
+    else if (category === 'femenino') result = products.filter(p => p.category === 'femenino' || p.category === 'unisex');
+    else result = products.filter(p => p.category === category);
+    return sortByBrandThenName(result);
   };
 
   const resetCatalog = () => {
