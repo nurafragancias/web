@@ -186,8 +186,8 @@ const Admin = () => {
           </button>
         )}
 
-        {showForm && (
-          <AdminProductForm product={editingProduct} onSave={handleSave} onCancel={handleCancel} />
+        {showForm && !editingProduct && (
+          <AdminProductForm product={null} onSave={handleSave} onCancel={handleCancel} />
         )}
 
         <div className="admin-products">
@@ -200,52 +200,59 @@ const Admin = () => {
           ) : (
             <div className="admin-products__list">
               {products.map(product => (
-                <div key={product.id} className="admin-product-item">
-                  <div className="admin-product-item__image">
-                    {product.images && product.images.length > 0 ? (
-                      <img src={product.images[0]} alt={product.name} />
-                    ) : (
-                      <div className="admin-product-item__placeholder">🌙</div>
-                    )}
-                  </div>
-                  <div className="admin-product-item__info">
-                    <div className="admin-product-item__top">
-                      <span className="admin-product-item__brand">{product.brand}</span>
-                      <span className={`admin-product-item__cat admin-product-item__cat--${product.category}`}>
-                        {product.category}
-                      </span>
+                <div key={product.id} className="admin-product-row">
+                  <div className="admin-product-item">
+                    <div className="admin-product-item__image">
+                      {product.images && product.images.length > 0 ? (
+                        <img src={product.images[0]} alt={product.name} />
+                      ) : (
+                        <div className="admin-product-item__placeholder">🌙</div>
+                      )}
                     </div>
-                    <h4 className="admin-product-item__name">{product.name}</h4>
-                    <div className="admin-product-item__variants">
-                      {product.variants.map(v => (
-                        <span key={v.size} className="admin-product-item__variant">
-                          {v.size}: ${v.price.toLocaleString('es-AR')}
+                    <div className="admin-product-item__info">
+                      <div className="admin-product-item__top">
+                        <span className="admin-product-item__brand">{product.brand}</span>
+                        <span className={`admin-product-item__cat admin-product-item__cat--${product.category}`}>
+                          {product.category}
                         </span>
-                      ))}
-                      <span className={`admin-product-item__stock${(product.stock ?? 0) === 0 ? ' admin-product-item__stock--zero' : ''}`}>
-                        Stock: {product.stock ?? 0}
-                      </span>
+                      </div>
+                      <h4 className="admin-product-item__name">{product.name}</h4>
+                      <div className="admin-product-item__variants">
+                        {product.variants.map(v => (
+                          <span key={v.size} className="admin-product-item__variant">
+                            {v.size}: ${v.price.toLocaleString('es-AR')}
+                          </span>
+                        ))}
+                        <span className={`admin-product-item__stock${(product.stock ?? 0) === 0 ? ' admin-product-item__stock--zero' : ''}`}>
+                          Stock: {product.stock ?? 0}
+                        </span>
+                      </div>
+                    </div>
+                    <div className="admin-product-item__actions">
+                      <button className="admin-product-item__edit" onClick={() => handleEdit(product)} title="Editar">
+                        <Edit3 size={16} />
+                      </button>
+                      {deleteConfirm === product.id ? (
+                        <div className="admin-product-item__confirm">
+                          <button className="admin-product-item__confirm-yes" onClick={() => handleDelete(product.id)}>
+                            Sí
+                          </button>
+                          <button className="admin-product-item__confirm-no" onClick={() => setDeleteConfirm(null)}>
+                            No
+                          </button>
+                        </div>
+                      ) : (
+                        <button className="admin-product-item__delete" onClick={() => setDeleteConfirm(product.id)} title="Eliminar">
+                          <Trash2 size={16} />
+                        </button>
+                      )}
                     </div>
                   </div>
-                  <div className="admin-product-item__actions">
-                    <button className="admin-product-item__edit" onClick={() => handleEdit(product)} title="Editar">
-                      <Edit3 size={16} />
-                    </button>
-                    {deleteConfirm === product.id ? (
-                      <div className="admin-product-item__confirm">
-                        <button className="admin-product-item__confirm-yes" onClick={() => handleDelete(product.id)}>
-                          Sí
-                        </button>
-                        <button className="admin-product-item__confirm-no" onClick={() => setDeleteConfirm(null)}>
-                          No
-                        </button>
-                      </div>
-                    ) : (
-                      <button className="admin-product-item__delete" onClick={() => setDeleteConfirm(product.id)} title="Eliminar">
-                        <Trash2 size={16} />
-                      </button>
-                    )}
-                  </div>
+                  {editingProduct?.id === product.id && showForm && (
+                    <div className="admin-product-row__form">
+                      <AdminProductForm product={editingProduct} onSave={handleSave} onCancel={handleCancel} />
+                    </div>
+                  )}
                 </div>
               ))}
             </div>
