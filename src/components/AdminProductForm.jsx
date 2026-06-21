@@ -12,10 +12,11 @@ const emptyProduct = {
   stock: 0,
   discount: 0,
   on_sale: false,
+  active: true,
   images: [],
   variants: [
-    { size: '5ml', price: 0, affectsStock: false },
-    { size: '100ml', price: 0, affectsStock: true }
+    { size: '5ml', price: 0, affectsStock: false, active: true },
+    { size: '100ml', price: 0, affectsStock: true, active: true }
   ]
 };
 
@@ -31,9 +32,11 @@ const normalizeProduct = (prod) => {
   normalized.stock = Number.isFinite(normalized.stock) ? normalized.stock : 0;
   normalized.discount = Number.isFinite(normalized.discount) ? normalized.discount : 0;
   normalized.on_sale = !!normalized.on_sale;
+  normalized.active = normalized.active === false ? false : true;
   normalized.variants = (normalized.variants || []).map(v => ({
     ...v,
-    affectsStock: variantAffectsStock(v)
+    affectsStock: variantAffectsStock(v),
+    active: v.active === false ? false : true
   }));
   return normalized;
 };
@@ -263,6 +266,25 @@ const AdminProductForm = ({ product, onSave, onCancel }) => {
         </div>
       </div>
 
+      {/* Activo */}
+      <div className={`admin-form__active${form.active === false ? ' admin-form__active--off' : ''}`}>
+        <label className="admin-form__active-toggle">
+          <input
+            type="checkbox"
+            checked={form.active !== false}
+            onChange={(e) => handleChange('active', e.target.checked)}
+          />
+          <span>
+            <strong>Visible en el catálogo</strong>
+            <span className="admin-form__active-hint">
+              {form.active === false
+                ? 'Oculto del catálogo público. Lo seguís viendo acá.'
+                : 'Desmarcalo para ocultarlo temporalmente del público (ej: sin reposición).'}
+            </span>
+          </span>
+        </label>
+      </div>
+
       {/* Promoción */}
       <div className="admin-form__promo">
         <label className="admin-form__promo-toggle">
@@ -301,7 +323,7 @@ const AdminProductForm = ({ product, onSave, onCancel }) => {
         </div>
 
         {form.variants.map((v, i) => (
-          <div key={i} className="admin-form__variant-row">
+          <div key={i} className={`admin-form__variant-row${v.active === false ? ' admin-form__variant-row--off' : ''}`}>
             <input
               type="text"
               value={v.size}
@@ -330,6 +352,17 @@ const AdminProductForm = ({ product, onSave, onCancel }) => {
                 onChange={(e) => handleVariantChange(i, 'affectsStock', e.target.checked)}
               />
               <span>Frasco</span>
+            </label>
+            <label
+              className="admin-form__variant-stock"
+              title="Si la desactivás, esta variante no aparece como opción al público"
+            >
+              <input
+                type="checkbox"
+                checked={v.active !== false}
+                onChange={(e) => handleVariantChange(i, 'active', e.target.checked)}
+              />
+              <span>Disponible</span>
             </label>
             {form.variants.length > 1 && (
               <button

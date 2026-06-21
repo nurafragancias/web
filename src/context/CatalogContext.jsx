@@ -1782,8 +1782,20 @@ export const CatalogProvider = ({ children }) => {
     images: p.images ?? [],
     stock: Number.isFinite(p.stock) ? p.stock : 0,
     discount: Number.isFinite(p.discount) ? p.discount : 0,
-    on_sale: !!p.on_sale
+    on_sale: !!p.on_sale,
+    active: p.active === false ? false : true
   });
+
+  // Filtra variantes "no activas" (active === false). Por compat, variantes
+  // sin el campo se consideran activas.
+  const activeVariants = (variants) => (variants || []).filter(v => v?.active !== false);
+  const isProductPublicVisible = (p) => p?.active !== false && activeVariants(p?.variants).length > 0;
+  // Lista filtrada para el publico (oculta inactivos y los que no tienen
+  // ninguna variante disponible). El admin sigue viendo `products` completo.
+  const publicProducts = React.useMemo(
+    () => products.filter(isProductPublicVisible).map(p => ({ ...p, variants: activeVariants(p.variants) })),
+    [products]
+  );
 
   const addProduct = async (product) => {
     const id = Date.now().toString();
@@ -1849,10 +1861,10 @@ export const CatalogProvider = ({ children }) => {
 
   const getFilteredProducts = (category) => {
     let result;
-    if (category === 'todos') result = products;
-    else if (category === 'masculino') result = products.filter(p => p.category === 'masculino' || p.category === 'unisex');
-    else if (category === 'femenino') result = products.filter(p => p.category === 'femenino' || p.category === 'unisex');
-    else result = products.filter(p => p.category === category);
+    if (category === 'todos') result = publicProducts;
+    else if (category === 'masculino') result = publicProducts.filter(p => p.category === 'masculino' || p.category === 'unisex');
+    else if (category === 'femenino') result = publicProducts.filter(p => p.category === 'femenino' || p.category === 'unisex');
+    else result = publicProducts.filter(p => p.category === category);
     return sortByBrandThenName(result);
   };
 
@@ -1865,6 +1877,7 @@ export const CatalogProvider = ({ children }) => {
   return (
     <CatalogContext.Provider value={{
       products,
+      publicProducts,
       addProduct,
       updateProduct,
       deleteProduct,

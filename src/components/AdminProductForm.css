@@ -360,6 +360,59 @@
   cursor: pointer;
 }
 
+.admin-form__active {
+  margin-bottom: 0.75rem;
+  padding: 0.85rem 1rem;
+  background: var(--bg-tertiary);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+}
+
+.admin-form__active--off {
+  background: rgba(231, 76, 60, 0.06);
+  border-color: rgba(231, 76, 60, 0.35);
+}
+
+.admin-form__active-toggle {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.6rem;
+  cursor: pointer;
+  user-select: none;
+  font-size: 0.9rem;
+  color: var(--text-primary);
+}
+
+.admin-form__active-toggle input {
+  width: 18px;
+  height: 18px;
+  accent-color: var(--gold-primary);
+  cursor: pointer;
+  margin-top: 0.15rem;
+}
+
+.admin-form__active-toggle > span {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+}
+
+.admin-form__active-hint {
+  font-size: 0.78rem;
+  color: var(--text-muted);
+  font-weight: 400;
+}
+
+.admin-form__variant-row--off {
+  opacity: 0.55;
+}
+
+.admin-form__variant-row--off .admin-form__variant-size,
+.admin-form__variant-row--off .admin-form__variant-price-wrap {
+  text-decoration: line-through;
+  text-decoration-color: var(--text-muted);
+}
+
 .admin-form__promo {
   display: flex;
   align-items: center;
