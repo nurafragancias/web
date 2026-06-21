@@ -1,13 +1,18 @@
-import React from 'react';
-import { X, Minus, Plus, Trash2, MessageCircle } from 'lucide-react';
+import React, { useState, useEffect } from 'react';
+import { X, Minus, Plus, Trash2, MessageCircle, Ticket } from 'lucide-react';
 import { useCart } from '../context/CartContext';
 import './CartDrawer.css';
 
 const CartDrawer = () => {
   const {
     cartItems,
+    cartSubtotal,
     cartTotal,
     cartCount,
+    couponState,
+    couponDiscount,
+    applyCoupon,
+    removeCoupon,
     isCartOpen,
     setIsCartOpen,
     updateQuantity,
@@ -16,7 +21,24 @@ const CartDrawer = () => {
     getWhatsAppUrl
   } = useCart();
 
+  const [codeInput, setCodeInput] = useState(couponState.code || '');
+
+  useEffect(() => {
+    // Mantiene el input sincronizado si el cupón se limpia desde afuera.
+    if (!couponState.code) setCodeInput('');
+  }, [couponState.code]);
+
   if (!isCartOpen) return null;
+
+  const handleApplyCoupon = (e) => {
+    e.preventDefault();
+    applyCoupon(codeInput);
+  };
+
+  const handleRemoveCoupon = () => {
+    removeCoupon();
+    setCodeInput('');
+  };
 
   const handleCheckout = () => {
     if (cartItems.length === 0) return;
@@ -107,6 +129,59 @@ const CartDrawer = () => {
         {/* Footer */}
         {cartItems.length > 0 && (
           <div className="cart-drawer__footer">
+            {/* Cupón */}
+            <div className="cart-coupon">
+              {couponState.valid ? (
+                <div className="cart-coupon__applied">
+                  <div className="cart-coupon__applied-info">
+                    <Ticket size={15} />
+                    <div>
+                      <span className="cart-coupon__code">{couponState.code}</span>
+                      {couponState.coupon?.description && (
+                        <span className="cart-coupon__desc">{couponState.coupon.description}</span>
+                      )}
+                    </div>
+                  </div>
+                  <button type="button" className="cart-coupon__remove" onClick={handleRemoveCoupon}>
+                    Quitar
+                  </button>
+                </div>
+              ) : (
+                <form className="cart-coupon__form" onSubmit={handleApplyCoupon}>
+                  <div className="cart-coupon__input-wrap">
+                    <Ticket size={15} className="cart-coupon__icon" />
+                    <input
+                      type="text"
+                      className="cart-coupon__input"
+                      value={codeInput}
+                      onChange={e => setCodeInput(e.target.value.toUpperCase())}
+                      placeholder="¿Tenés un cupón?"
+                      autoComplete="off"
+                    />
+                  </div>
+                  <button type="submit" className="cart-coupon__apply" disabled={!codeInput.trim()}>
+                    Aplicar
+                  </button>
+                </form>
+              )}
+              {couponState.code && !couponState.valid && couponState.reason && (
+                <span className="cart-coupon__error">{couponState.reason}</span>
+              )}
+            </div>
+
+            {couponDiscount > 0 && (
+              <>
+                <div className="cart-drawer__line">
+                  <span>Subtotal</span>
+                  <span>${cartSubtotal.toLocaleString('es-AR')}</span>
+                </div>
+                <div className="cart-drawer__line cart-drawer__line--discount">
+                  <span>Descuento ({couponState.code})</span>
+                  <span>-${couponDiscount.toLocaleString('es-AR')}</span>
+                </div>
+              </>
+            )}
+
             <div className="cart-drawer__subtotal">
               <span>Total</span>
               <span className="cart-drawer__total-amount">
