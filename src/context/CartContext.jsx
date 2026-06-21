@@ -1,12 +1,14 @@
 import React, { createContext, useState, useContext, useEffect, useCallback } from 'react';
 import { discountedPrice } from '../lib/price';
+import { useSettings } from './SettingsContext';
 
 const CartContext = createContext();
 
 const CART_KEY = 'nura_cart';
-const WHATSAPP_NUMBER = '543562447897';
+const WHATSAPP_FALLBACK = '543562447897';
 
 export const CartProvider = ({ children }) => {
+  const { getSetting } = useSettings();
   const [cartItems, setCartItems] = useState(() => {
     try {
       const saved = localStorage.getItem(CART_KEY);
@@ -94,7 +96,8 @@ export const CartProvider = ({ children }) => {
   };
 
   const getWhatsAppUrl = () => {
-    return `https://wa.me/${WHATSAPP_NUMBER}?text=${buildWhatsAppMessage()}`;
+    const number = (getSetting('whatsapp_number', WHATSAPP_FALLBACK) || WHATSAPP_FALLBACK).replace(/\D/g, '');
+    return `https://wa.me/${number}?text=${buildWhatsAppMessage()}`;
   };
 
   return (
