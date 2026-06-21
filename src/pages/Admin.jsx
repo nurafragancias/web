@@ -6,6 +6,7 @@ import AdminProductForm from '../components/AdminProductForm';
 import AdminTransactions from '../components/AdminTransactions';
 import AdminDebtors from '../components/AdminDebtors';
 import AdminStats from '../components/AdminStats';
+import AdminReports from '../components/AdminReports';
 import './Admin.css';
 
 const ADMIN_PASS = 'nura2026';
@@ -168,12 +169,14 @@ const Admin = () => {
           <button className={`admin-tab${tab === 'compras' ? ' admin-tab--active' : ''}`} onClick={() => setTab('compras')}>Compras</button>
           <button className={`admin-tab${tab === 'deudores' ? ' admin-tab--active' : ''}`} onClick={() => setTab('deudores')}>Deudores</button>
           <button className={`admin-tab${tab === 'estadisticas' ? ' admin-tab--active' : ''}`} onClick={() => setTab('estadisticas')}>Estadísticas</button>
+          <button className={`admin-tab${tab === 'informes' ? ' admin-tab--active' : ''}`} onClick={() => setTab('informes')}>Informes</button>
         </div>
 
         {tab === 'ventas' && <AdminTransactions mode="venta" />}
         {tab === 'compras' && <AdminTransactions mode="compra" />}
         {tab === 'deudores' && <AdminDebtors />}
         {tab === 'estadisticas' && <AdminStats />}
+        {tab === 'informes' && <AdminReports />}
 
         {tab === 'productos' && (<>
         {actionError && (
