@@ -1,0 +1,143 @@
+.admin-settings {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.admin-settings__intro {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.8rem;
+  padding: 1rem 1.2rem;
+  background: var(--bg-tertiary);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  color: var(--gold-primary);
+}
+
+.admin-settings__intro h3 {
+  margin: 0 0 0.25rem;
+  color: var(--text-primary);
+  font-family: var(--font-display, inherit);
+}
+
+.admin-settings__intro p {
+  margin: 0;
+  font-size: 0.9rem;
+  color: var(--text-muted);
+}
+
+.admin-settings__card {
+  padding: 1.2rem 1.3rem;
+  background: var(--bg-tertiary);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  display: flex;
+  flex-direction: column;
+  gap: 0.9rem;
+}
+
+.admin-settings__card-head h4 {
+  margin: 0 0 0.35rem;
+  color: var(--text-primary);
+  font-size: 1rem;
+}
+
+.admin-settings__card-head p {
+  margin: 0;
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  line-height: 1.5;
+}
+
+.admin-settings__card-head code {
+  background: var(--bg-primary);
+  border: 1px solid var(--border-subtle);
+  border-radius: 4px;
+  padding: 0.05rem 0.35rem;
+  font-size: 0.8rem;
+  color: var(--gold-primary);
+}
+
+.admin-settings__field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+}
+
+.admin-settings__field label {
+  font-size: 0.78rem;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.admin-settings__field input {
+  background: var(--bg-primary);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-sm);
+  padding: 0.6rem 0.8rem;
+  color: var(--text-primary);
+  font-family: inherit;
+  font-size: 0.95rem;
+  letter-spacing: 0.03em;
+}
+
+.admin-settings__field input:focus {
+  outline: none;
+  border-color: var(--gold-primary);
+}
+
+.admin-settings__hint {
+  font-size: 0.78rem;
+  color: var(--text-muted);
+}
+
+.admin-settings__hint code {
+  background: var(--bg-primary);
+  border: 1px solid var(--border-subtle);
+  border-radius: 4px;
+  padding: 0.05rem 0.35rem;
+  color: var(--gold-primary);
+}
+
+.admin-settings__preview {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  font-size: 0.85rem;
+  color: var(--gold-primary);
+  text-decoration: none;
+  width: fit-content;
+}
+
+.admin-settings__preview:hover {
+  text-decoration: underline;
+}
+
+.admin-settings__error {
+  padding: 0.6rem 0.8rem;
+  background: rgba(231, 76, 60, 0.1);
+  border: 1px solid rgba(231, 76, 60, 0.4);
+  color: #f0a39c;
+  border-radius: var(--radius-sm);
+  font-size: 0.85rem;
+}
+
+.admin-settings__success {
+  padding: 0.6rem 0.8rem;
+  background: rgba(76, 175, 80, 0.1);
+  border: 1px solid rgba(76, 175, 80, 0.4);
+  color: #a3d9a5;
+  border-radius: var(--radius-sm);
+  font-size: 0.85rem;
+}
+
+.admin-settings__save {
+  align-self: flex-start;
+}
+
+.admin-settings__save:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}

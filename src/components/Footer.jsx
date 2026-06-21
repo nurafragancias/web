@@ -1,9 +1,12 @@
 import React from 'react';
 import { MessageCircle, Camera, Mail } from 'lucide-react';
+import { useSettings } from '../context/SettingsContext';
 import './Footer.css';
 
 const Footer = () => {
+  const { getSetting } = useSettings();
   const year = new Date().getFullYear();
+  const whatsappNumber = (getSetting('whatsapp_number', '543562447897') || '543562447897').replace(/\D/g, '');
 
   return (
     <footer className="footer">
@@ -25,7 +28,7 @@ const Footer = () => {
 
           <div className="footer__social">
             <a
-              href="https://wa.me/543562447897"
+              href={`https://wa.me/${whatsappNumber}`}
               target="_blank"
               rel="noopener noreferrer"
               className="footer__social-link"

@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { CatalogProvider } from './context/CatalogContext';
 import { SalesProvider } from './context/SalesContext';
 import { CartProvider, useCart } from './context/CartContext';
+import { SettingsProvider } from './context/SettingsContext';
 import Navbar from './components/Navbar';
 import CartDrawer from './components/CartDrawer';
 import Footer from './components/Footer';
@@ -18,6 +19,7 @@ const ToastNotification = () => {
 
 const App = () => {
   return (
+    <SettingsProvider>
     <CatalogProvider>
       <SalesProvider>
       <CartProvider>
@@ -39,6 +41,7 @@ const App = () => {
       </CartProvider>
       </SalesProvider>
     </CatalogProvider>
+    </SettingsProvider>
   );
 };
 

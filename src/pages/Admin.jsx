@@ -7,6 +7,7 @@ import AdminTransactions from '../components/AdminTransactions';
 import AdminDebtors from '../components/AdminDebtors';
 import AdminStats from '../components/AdminStats';
 import AdminReports from '../components/AdminReports';
+import AdminSettings from '../components/AdminSettings';
 import './Admin.css';
 
 const ADMIN_PASS = 'nura2026';
@@ -170,6 +171,7 @@ const Admin = () => {
           <button className={`admin-tab${tab === 'deudores' ? ' admin-tab--active' : ''}`} onClick={() => setTab('deudores')}>Deudores</button>
           <button className={`admin-tab${tab === 'estadisticas' ? ' admin-tab--active' : ''}`} onClick={() => setTab('estadisticas')}>Estadísticas</button>
           <button className={`admin-tab${tab === 'informes' ? ' admin-tab--active' : ''}`} onClick={() => setTab('informes')}>Informes</button>
+          <button className={`admin-tab${tab === 'ajustes' ? ' admin-tab--active' : ''}`} onClick={() => setTab('ajustes')}>Ajustes</button>
         </div>
 
         {tab === 'ventas' && <AdminTransactions mode="venta" />}
@@ -177,6 +179,7 @@ const Admin = () => {
         {tab === 'deudores' && <AdminDebtors />}
         {tab === 'estadisticas' && <AdminStats />}
         {tab === 'informes' && <AdminReports />}
+        {tab === 'ajustes' && <AdminSettings />}
 
         {tab === 'productos' && (<>
         {actionError && (
