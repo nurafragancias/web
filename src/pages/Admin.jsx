@@ -204,7 +204,7 @@ const Admin = () => {
             <div className="admin-products__list">
               {products.map(product => (
                 <div key={product.id} className="admin-product-row">
-                  <div className="admin-product-item">
+                  <div className={`admin-product-item${product.active === false ? ' admin-product-item--inactive' : ''}`}>
                     <div className="admin-product-item__image">
                       {product.images && product.images.length > 0 ? (
                         <img src={product.images[0]} alt={product.name} />
@@ -218,6 +218,9 @@ const Admin = () => {
                         <span className={`admin-product-item__cat admin-product-item__cat--${product.category}`}>
                           {product.category}
                         </span>
+                        {product.active === false && (
+                          <span className="admin-product-item__inactive-badge">Inactivo</span>
+                        )}
                       </div>
                       <h4 className="admin-product-item__name">{product.name}</h4>
                       <div className="admin-product-item__variants">

@@ -8,7 +8,7 @@ import './Navbar.css';
 
 const Navbar = () => {
   const { cartCount, setIsCartOpen } = useCart();
-  const { products } = useCatalog();
+  const { publicProducts: products } = useCatalog();
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
   const [searchOpen, setSearchOpen] = useState(false);

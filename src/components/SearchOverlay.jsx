@@ -25,7 +25,7 @@ const matchesProduct = (product, terms) => {
 };
 
 const SearchOverlay = ({ open, onClose }) => {
-  const { products } = useCatalog();
+  const { publicProducts: products } = useCatalog();
   const [query, setQuery] = useState('');
   const [selectedProduct, setSelectedProduct] = useState(null);
   const inputRef = useRef(null);

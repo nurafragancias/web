@@ -196,6 +196,25 @@
   margin-left: 1.5rem;
 }
 
+.admin-product-item--inactive {
+  opacity: 0.6;
+  background: rgba(231, 76, 60, 0.04);
+  border-color: rgba(231, 76, 60, 0.25);
+}
+
+.admin-product-item__inactive-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.15rem 0.5rem;
+  border-radius: 999px;
+  background: rgba(231, 76, 60, 0.18);
+  color: #f0a39c;
+  font-size: 0.65rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
 /* Product item */
 .admin-product-item {
   display: flex;

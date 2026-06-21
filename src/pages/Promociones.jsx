@@ -6,8 +6,8 @@ import './Home.css';
 import './Promociones.css';
 
 const Promociones = () => {
-  const { products } = useCatalog();
-  const promos = products.filter(isOnPromo);
+  const { publicProducts } = useCatalog();
+  const promos = publicProducts.filter(isOnPromo);
 
   return (
     <section className="catalog promos-page" id="promociones">
