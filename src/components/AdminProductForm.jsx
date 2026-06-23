@@ -170,7 +170,7 @@ const AdminProductForm = ({ product, onSave, onCancel }) => {
               onDrop={(e) => handleDrop(e, index)}
               onDragEnd={handleDragEnd}
             >
-              <img src={img} alt={`Imagen ${index + 1}`} />
+              <img src={img} alt={`Imagen ${index + 1}`} loading="lazy" decoding="async" />
               <button
                 type="button"
                 className="admin-form__image-remove"

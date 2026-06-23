@@ -78,7 +78,7 @@ const CartDrawer = () => {
               <div key={item.key} className="cart-item" style={{ animationDelay: `${i * 0.05}s` }}>
                 <div className="cart-item__image">
                   {item.image ? (
-                    <img src={item.image} alt={item.name} />
+                    <img src={item.image} alt={item.name} loading="lazy" decoding="async" />
                   ) : (
                     <div className="cart-item__placeholder">🌙</div>
                   )}
