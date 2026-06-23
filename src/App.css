@@ -7,3 +7,12 @@
 .app > main {
   flex: 1;
 }
+
+.route-loading {
+  min-height: 60vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-muted, #888);
+  font-size: 0.95rem;
+}

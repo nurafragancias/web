@@ -10,13 +10,10 @@ import AdminReports from '../components/AdminReports';
 import AdminSettings from '../components/AdminSettings';
 import './Admin.css';
 
-const ADMIN_PASS = 'nura2026';
-
 const Admin = () => {
   const { products, addProduct, updateProduct, deleteProduct, resetCatalog, usingSupabase } = useCatalog();
   const [session, setSession] = useState(null);
-  const [authReady, setAuthReady] = useState(!isSupabaseConfigured);
-  const [isAuthLegacy, setIsAuthLegacy] = useState(false);
+  const [authReady, setAuthReady] = useState(false);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [passError, setPassError] = useState('');
@@ -29,7 +26,7 @@ const Admin = () => {
 
   // Supabase auth: leer sesión actual y escuchar cambios
   useEffect(() => {
-    if (!isSupabaseConfigured) return;
+    if (!isSupabaseConfigured) { setAuthReady(true); return; }
     supabase.auth.getSession().then(({ data }) => {
       setSession(data.session);
       setAuthReady(true);
@@ -40,28 +37,26 @@ const Admin = () => {
     return () => sub.subscription.unsubscribe();
   }, []);
 
-  const isAuth = isSupabaseConfigured ? Boolean(session) : isAuthLegacy;
+  const isAuth = Boolean(session);
 
   const handleLogin = async (e) => {
     e.preventDefault();
     setPassError('');
-    if (isSupabaseConfigured) {
-      setLoggingIn(true);
-      const { error } = await supabase.auth.signInWithPassword({
-        email: email.trim(),
-        password
-      });
-      setLoggingIn(false);
-      if (error) setPassError('Email o contraseña incorrectos');
-    } else {
-      if (password === ADMIN_PASS) setIsAuthLegacy(true);
-      else setPassError('Contraseña incorrecta');
+    if (!isSupabaseConfigured) {
+      setPassError('El panel todavía no está configurado. Falta conectar Supabase.');
+      return;
     }
+    setLoggingIn(true);
+    const { error } = await supabase.auth.signInWithPassword({
+      email: email.trim(),
+      password
+    });
+    setLoggingIn(false);
+    if (error) setPassError('Email o contraseña incorrectos');
   };
 
   const handleLogout = async () => {
     if (isSupabaseConfigured) await supabase.auth.signOut();
-    else setIsAuthLegacy(false);
   };
 
   const handleSave = async (formData) => {
@@ -112,19 +107,17 @@ const Admin = () => {
         <div className="admin-login">
           <div className="admin-login__icon"><Lock size={32} /></div>
           <h2>Panel de Administración</h2>
-          <p>{isSupabaseConfigured ? 'Ingresá con tu email y contraseña' : 'Ingresá la contraseña para acceder'}</p>
+          <p>Ingresá con tu email y contraseña</p>
           <form onSubmit={handleLogin} className="admin-login__form">
-            {isSupabaseConfigured && (
-              <input
-                type="email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                placeholder="Email"
-                className="admin-login__input"
-                autoComplete="username"
-                autoFocus
-              />
-            )}
+            <input
+              type="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              placeholder="Email"
+              className="admin-login__input"
+              autoComplete="username"
+              autoFocus
+            />
             <input
               type="password"
               value={password}
@@ -132,7 +125,6 @@ const Admin = () => {
               placeholder="Contraseña"
               className="admin-login__input"
               autoComplete="current-password"
-              autoFocus={!isSupabaseConfigured}
             />
             {passError && <span className="admin-login__error">{passError}</span>}
             <button type="submit" className="btn-gold admin-login__btn" disabled={loggingIn}>
