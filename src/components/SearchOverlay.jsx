@@ -117,7 +117,7 @@ const SearchOverlay = ({ open, onClose }) => {
                   >
                     <div className="search-result__image">
                       {product.images && product.images.length > 0 ? (
-                        <img src={product.images[0]} alt={product.name} />
+                        <img src={product.images[0]} alt={product.name} loading="lazy" decoding="async" />
                       ) : (
                         <div className="search-result__placeholder">🌙</div>
                       )}

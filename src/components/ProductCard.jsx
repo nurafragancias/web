@@ -52,6 +52,8 @@ const ProductCard = ({ product, index = 0 }) => {
                 src={product.images[currentImage]}
                 alt={product.name}
                 className="product-card__image"
+                loading="lazy"
+                decoding="async"
                 onError={() => setImageError(true)}
               />
               {hasMultipleImages && (

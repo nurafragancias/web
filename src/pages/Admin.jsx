@@ -210,7 +210,7 @@ const Admin = () => {
                   <div className={`admin-product-item${product.active === false ? ' admin-product-item--inactive' : ''}`}>
                     <div className="admin-product-item__image">
                       {product.images && product.images.length > 0 ? (
-                        <img src={product.images[0]} alt={product.name} />
+                        <img src={product.images[0]} alt={product.name} loading="lazy" decoding="async" />
                       ) : (
                         <div className="admin-product-item__placeholder">🌙</div>
                       )}

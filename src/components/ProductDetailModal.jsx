@@ -72,6 +72,7 @@ const ProductDetailModal = ({ product, onClose }) => {
                 <img
                   src={product.images[currentImage]}
                   alt={product.name}
+                  decoding="async"
                   onError={() => setImageError(true)}
                 />
               ) : (
@@ -90,7 +91,7 @@ const ProductDetailModal = ({ product, onClose }) => {
                     className={`product-modal__thumb${i === currentImage ? ' product-modal__thumb--active' : ''}`}
                     onClick={() => setCurrentImage(i)}
                   >
-                    <img src={img} alt={`${product.name} ${i + 1}`} />
+                    <img src={img} alt={`${product.name} ${i + 1}`} loading="lazy" decoding="async" />
                   </button>
                 ))}
               </div>
