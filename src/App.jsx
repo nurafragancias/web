@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Suspense, lazy } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { CatalogProvider } from './context/CatalogContext';
 import { SalesProvider } from './context/SalesContext';
@@ -8,9 +8,13 @@ import Navbar from './components/Navbar';
 import CartDrawer from './components/CartDrawer';
 import Footer from './components/Footer';
 import Home from './pages/Home';
-import Promociones from './pages/Promociones';
-import Admin from './pages/Admin';
 import './App.css';
+
+// Cargados bajo demanda: no viajan en el bundle inicial del público.
+// El admin (con la librería de Excel) y promociones se descargan sólo al
+// entrar a esas rutas.
+const Promociones = lazy(() => import('./pages/Promociones'));
+const Admin = lazy(() => import('./pages/Admin'));
 
 const ToastNotification = () => {
   const { toast } = useCart();
@@ -28,11 +32,13 @@ const App = () => {
             <Navbar />
             <CartDrawer />
             <main>
-              <Routes>
-                <Route path="/" element={<Home />} />
-                <Route path="/promociones" element={<Promociones />} />
-                <Route path="/admin" element={<Admin />} />
-              </Routes>
+              <Suspense fallback={<div className="route-loading">Cargando…</div>}>
+                <Routes>
+                  <Route path="/" element={<Home />} />
+                  <Route path="/promociones" element={<Promociones />} />
+                  <Route path="/admin" element={<Admin />} />
+                </Routes>
+              </Suspense>
             </main>
             <Footer />
             <ToastNotification />
