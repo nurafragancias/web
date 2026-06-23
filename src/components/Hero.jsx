@@ -54,7 +54,7 @@ const Hero = () => {
         <p className="hero__subtitle animate-fade-in-up" style={{ animationDelay: '0.2s' }}>
           Perfumes de alta gama seleccionados para quienes buscan
           <br className="hero__br" />
-          lo extraordinario. Tu esencia, tu identidad.
+          {' '}lo extraordinario. Tu esencia, tu identidad.
         </p>
 
         <div className="hero__actions animate-fade-in-up" style={{ animationDelay: '0.4s' }}>
