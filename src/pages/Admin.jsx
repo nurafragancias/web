@@ -8,6 +8,7 @@ import AdminDebtors from '../components/AdminDebtors';
 import AdminStats from '../components/AdminStats';
 import AdminReports from '../components/AdminReports';
 import AdminSettings from '../components/AdminSettings';
+import AdminBulkPrices from '../components/AdminBulkPrices';
 import './Admin.css';
 
 const Admin = () => {
@@ -177,6 +178,8 @@ const Admin = () => {
         {actionError && (
           <div className="admin-error-banner">{actionError}</div>
         )}
+
+        <AdminBulkPrices />
 
         {!showForm && (
           <button className="admin-add-btn" onClick={() => { setEditingProduct(null); setShowForm(true); }}>
