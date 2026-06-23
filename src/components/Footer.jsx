@@ -22,8 +22,7 @@ const Footer = () => {
           </div>
 
           <p className="footer__desc">
-            Exclusividad en cada esencia. Perfumes de alta gama
-            seleccionados para quienes buscan lo extraordinario.
+            AROMAS QUE TRASCIENDEN
           </p>
 
           <div className="footer__social">
