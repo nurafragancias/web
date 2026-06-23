@@ -47,7 +47,7 @@ const Home = () => {
             <span className="catalog__label">Colección Exclusiva</span>
             <h2 className="catalog__title">Nuestras Fragancias</h2>
             <p className="catalog__subtitle">
-              Cada perfume cuenta una historia. Encontrá la tuya.
+              Cada perfume cuenta una historia.<br />Encontrá la tuya.
             </p>
           </div>
 
