@@ -5,7 +5,8 @@ const categories = [
   { key: 'todos', label: 'Todos' },
   { key: 'masculino', label: 'Masculino' },
   { key: 'femenino', label: 'Femenino' },
-  { key: 'unisex', label: 'Unisex' }
+  { key: 'unisex', label: 'Unisex' },
+  { key: 'combos', label: 'Combos' }
 ];
 
 const CategoryFilter = ({ active, onChange }) => {

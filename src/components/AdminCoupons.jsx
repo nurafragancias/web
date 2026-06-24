@@ -248,6 +248,7 @@ const AdminCoupons = () => {
                     <option value="masculino">Masculino</option>
                     <option value="femenino">Femenino</option>
                     <option value="unisex">Unisex</option>
+                    <option value="combos">Combos</option>
                   </select>
                 </label>
               )}
