@@ -373,6 +373,7 @@ const AdminReports = () => {
                 <option value="masculino">Masculino</option>
                 <option value="femenino">Femenino</option>
                 <option value="unisex">Unisex</option>
+                <option value="combos">Combos</option>
               </select>
             </label>
             <label className="reports__field reports__field--check">

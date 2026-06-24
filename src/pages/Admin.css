@@ -301,6 +301,11 @@
   color: #bb8fce;
 }
 
+.admin-product-item__cat--combos {
+  background: rgba(200, 169, 96, 0.18);
+  color: var(--gold-primary, #c8a960);
+}
+
 .admin-product-item__name {
   font-family: 'Inter', sans-serif;
   font-size: 0.9rem;
