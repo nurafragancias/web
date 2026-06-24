@@ -1859,13 +1859,22 @@ export const CatalogProvider = ({ children }) => {
     setProducts(prev => prev.map(p => p.id === productId ? { ...p, stock: newStock } : p));
   };
 
+  // No filtra: muestra todo el catálogo, pero ordena los de la categoría
+  // elegida primero (luego unisex, luego el resto). Dentro de cada grupo,
+  // por marca y nombre.
   const getFilteredProducts = (category) => {
-    let result;
-    if (category === 'todos') result = publicProducts;
-    else if (category === 'masculino') result = publicProducts.filter(p => p.category === 'masculino' || p.category === 'unisex');
-    else if (category === 'femenino') result = publicProducts.filter(p => p.category === 'femenino' || p.category === 'unisex');
-    else result = publicProducts.filter(p => p.category === category);
-    return sortByBrandThenName(result);
+    const score = (p) => {
+      if (category === 'todos' || !category) return 0;
+      const c = p.category || '';
+      if (c === category) return 0;
+      if (c === 'unisex' && category !== 'unisex') return 1;
+      return 2;
+    };
+    const sortedByBrand = sortByBrandThenName(publicProducts);
+    return sortedByBrand
+      .map((p, i) => ({ p, i, s: score(p) }))
+      .sort((a, b) => a.s - b.s || a.i - b.i)
+      .map(({ p }) => p);
   };
 
   const resetCatalog = () => {

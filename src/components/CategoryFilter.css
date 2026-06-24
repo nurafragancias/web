@@ -25,9 +25,14 @@
   white-space: nowrap;
 }
 
-.category-filter__tab:hover:not(.category-filter__tab--active) {
-  color: var(--text-primary);
-  background: rgba(255, 255, 255, 0.04);
+/* :hover sólo en dispositivos con cursor real. En touch, el primer tap no
+   debe quedar "hovereado" (eso causaba que el cliente tuviera que tocar
+   dos veces para cambiar de categoría en el celular). */
+@media (hover: hover) {
+  .category-filter__tab:hover:not(.category-filter__tab--active) {
+    color: var(--text-primary);
+    background: rgba(255, 255, 255, 0.04);
+  }
 }
 
 .category-filter__tab--active {
