@@ -1,10 +1,12 @@
-import React from 'react';
-import { MessageCircle, Camera, Mail } from 'lucide-react';
+import React, { useState } from 'react';
+import { MessageCircle, Camera, Mail, ChevronDown } from 'lucide-react';
+import { Link } from 'react-router-dom';
 import { useSettings } from '../context/SettingsContext';
 import './Footer.css';
 
 const Footer = () => {
   const { getSetting } = useSettings();
+  const [nosotrosOpen, setNosotrosOpen] = useState(false);
   const year = new Date().getFullYear();
   const whatsappNumber = (getSetting('whatsapp_number', '543562447897') || '543562447897').replace(/\D/g, '');
 
@@ -24,6 +26,30 @@ const Footer = () => {
           <p className="footer__desc">
             AROMAS QUE TRASCIENDEN
           </p>
+
+          <nav className="footer__nav">
+            <Link to="/" className="footer__nav-link">Inicio</Link>
+            <a href="/#catalogo" className="footer__nav-link">Catálogo</a>
+            <Link to="/?categoria=combos#catalogo" className="footer__nav-link">Combos</Link>
+            <Link to="/promociones" className="footer__nav-link">Promociones</Link>
+            <button
+              type="button"
+              className={`footer__nav-link footer__nav-nosotros${nosotrosOpen ? ' footer__nav-nosotros--open' : ''}`}
+              onClick={() => setNosotrosOpen(o => !o)}
+            >
+              Nosotros
+              <ChevronDown size={14} className="footer__nav-chevron" />
+            </button>
+          </nav>
+
+          {nosotrosOpen && (
+            <div className="footer__nosotros">
+              <p>Nacimos de una pasión compartida por el arte de las fragancias. Cada aroma es un viaje, un recuerdo, una conexión que buscamos compartir.</p>
+              <p>En nuestro emprendimiento, seleccionamos cuidadosamente cada perfume para que puedas encontrar una esencia que hable de ti, que te inspire y te acompañe en cada paso.</p>
+              <p>Gracias por ser parte de esta aventura con nosotros.</p>
+              <p><strong>Bienvenidos a nuestro mundo de fragancias.</strong></p>
+            </div>
+          )}
 
           <div className="footer__social">
             <a

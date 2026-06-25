@@ -63,6 +63,69 @@
   line-height: 1.6;
 }
 
+.footer__nav {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.5rem 1.5rem;
+}
+
+.footer__nav-link {
+  font-size: 0.78rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-secondary);
+  transition: color 0.3s ease;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-family: inherit;
+  padding: 0;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+@media (hover: hover) {
+  .footer__nav-link:hover {
+    color: var(--gold-primary);
+  }
+}
+
+.footer__nav-chevron {
+  transition: transform 0.3s ease;
+}
+
+.footer__nav-nosotros--open .footer__nav-chevron {
+  transform: rotate(180deg);
+}
+
+.footer__nosotros {
+  max-width: 500px;
+  text-align: center;
+  animation: footerNosotrosFadeIn 0.35s ease;
+}
+
+.footer__nosotros p {
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+  line-height: 1.7;
+  margin-bottom: 0.75rem;
+}
+
+.footer__nosotros p:last-child {
+  margin-bottom: 0;
+}
+
+.footer__nosotros strong {
+  color: var(--gold-primary);
+}
+
+@keyframes footerNosotrosFadeIn {
+  from { opacity: 0; transform: translateY(-8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
 .footer__social {
   display: flex;
   gap: 0.75rem;
