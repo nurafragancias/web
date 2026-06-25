@@ -7,11 +7,26 @@ import CategoryFilter from '../components/CategoryFilter';
 import { useCatalog } from '../context/CatalogContext';
 import './Home.css';
 
+const VALID_CATEGORIES = ['todos', 'masculino', 'femenino', 'unisex', 'combos'];
+
 const Home = () => {
   const { getFilteredProducts } = useCatalog();
-  const [activeCategory, setActiveCategory] = useState('todos');
   const [searchParams, setSearchParams] = useSearchParams();
   const activeBrand = searchParams.get('marca') || null;
+  const categoryFromUrl = searchParams.get('categoria');
+  const initialCategory = VALID_CATEGORIES.includes(categoryFromUrl) ? categoryFromUrl : 'todos';
+  const [activeCategory, setActiveCategory] = useState(initialCategory);
+
+  // Si el cliente entra con ?categoria=combos (ej. desde el navbar),
+  // sincronizamos el filtro y hacemos scroll al catálogo.
+  useEffect(() => {
+    if (VALID_CATEGORIES.includes(categoryFromUrl) && categoryFromUrl !== activeCategory) {
+      setActiveCategory(categoryFromUrl);
+      const el = document.getElementById('catalogo');
+      if (el) setTimeout(() => el.scrollIntoView({ behavior: 'smooth', block: 'start' }), 60);
+    }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [categoryFromUrl]);
 
   let filteredProducts = getFilteredProducts(activeCategory);
   if (activeBrand) {
