@@ -42,29 +42,34 @@
   box-shadow: var(--shadow-gold);
 }
 
-/* Pantallas medianas: bajamos un toque para que entren las 5 categorias */
+/* En pantallas chicas, el filtro pasa a scroll horizontal: las pestañas
+   mantienen un tamaño cómodo para el dedo y el cliente desliza si hay
+   más categorías. La activa siempre queda visible. */
 @media (max-width: 640px) {
   .category-filter {
-    padding: 0 0.5rem;
+    /* Permite que el track use todo el ancho disponible y haga scroll */
+    margin-left: -1rem;
+    margin-right: -1rem;
+    padding: 0 1rem;
+    overflow-x: auto;
+    overflow-y: hidden;
+    justify-content: flex-start;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    -webkit-overflow-scrolling: touch;
+    scroll-snap-type: x proximity;
   }
-  .category-filter__track {
-    width: 100%;
-    max-width: 100%;
-    gap: 0.15rem;
-    padding: 0.25rem;
-  }
-  .category-filter__tab {
-    flex: 1;
-    padding: 0.55rem 0.4rem;
-    font-size: 0.7rem;
-    letter-spacing: 0.04em;
-  }
-}
+  .category-filter::-webkit-scrollbar { display: none; }
 
-@media (max-width: 380px) {
+  .category-filter__track {
+    gap: 0.3rem;
+    padding: 0.3rem;
+    flex-shrink: 0;
+  }
   .category-filter__tab {
-    font-size: 0.62rem;
-    letter-spacing: 0.02em;
-    padding: 0.5rem 0.25rem;
+    padding: 0.55rem 1.1rem;
+    font-size: 0.72rem;
+    letter-spacing: 0.06em;
+    scroll-snap-align: center;
   }
 }

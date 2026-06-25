@@ -132,6 +132,13 @@ const Navbar = () => {
             )}
           </div>
 
+          <Link
+            to="/?categoria=combos#catalogo"
+            className="navbar__link"
+            onClick={() => setMobileOpen(false)}
+          >
+            Combos
+          </Link>
           <Link to="/promociones" className="navbar__link" onClick={() => setMobileOpen(false)}>Promociones</Link>
         </div>
 
