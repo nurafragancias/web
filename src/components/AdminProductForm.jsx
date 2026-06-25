@@ -53,7 +53,15 @@ const AdminProductForm = ({ product, onSave, onCancel }) => {
   }, [product]);
 
   const handleChange = (field, value) => {
-    setForm(prev => ({ ...prev, [field]: value }));
+    setForm(prev => {
+      const next = { ...prev, [field]: value };
+      if (field === 'stock') {
+        next.variants = prev.variants.map(v =>
+          v.affectsStock ? { ...v, active: value > 0 } : v
+        );
+      }
+      return next;
+    });
   };
 
   const handleVariantChange = (index, field, value) => {
