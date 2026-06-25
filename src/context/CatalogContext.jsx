@@ -1849,14 +1849,17 @@ export const CatalogProvider = ({ children }) => {
     const prod = products.find(p => p.id === productId);
     if (!prod) return;
     const newStock = Math.max(0, (prod.stock ?? 0) + delta);
+    const variants = (prod.variants || []).map(v =>
+      v.affectsStock ? { ...v, active: newStock > 0 } : v
+    );
     if (isSupabaseConfigured) {
       const { error } = await supabase
         .from('products')
-        .update({ stock: newStock, updated_at: new Date().toISOString() })
+        .update({ stock: newStock, variants, updated_at: new Date().toISOString() })
         .eq('id', productId);
       if (error) throw error;
     }
-    setProducts(prev => prev.map(p => p.id === productId ? { ...p, stock: newStock } : p));
+    setProducts(prev => prev.map(p => p.id === productId ? { ...p, stock: newStock, variants } : p));
   };
 
   // Filtra según la categoría elegida:
