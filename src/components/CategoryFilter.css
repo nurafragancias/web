@@ -42,9 +42,29 @@
   box-shadow: var(--shadow-gold);
 }
 
-@media (max-width: 480px) {
+/* Pantallas medianas: bajamos un toque para que entren las 5 categorias */
+@media (max-width: 640px) {
+  .category-filter {
+    padding: 0 0.5rem;
+  }
+  .category-filter__track {
+    width: 100%;
+    max-width: 100%;
+    gap: 0.15rem;
+    padding: 0.25rem;
+  }
   .category-filter__tab {
-    padding: 0.5rem 1rem;
+    flex: 1;
+    padding: 0.55rem 0.4rem;
     font-size: 0.7rem;
+    letter-spacing: 0.04em;
+  }
+}
+
+@media (max-width: 380px) {
+  .category-filter__tab {
+    font-size: 0.62rem;
+    letter-spacing: 0.02em;
+    padding: 0.5rem 0.25rem;
   }
 }
