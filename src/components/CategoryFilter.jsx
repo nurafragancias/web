@@ -14,14 +14,18 @@ const CategoryFilter = ({ active, onChange }) => {
 
   // En mobile el filtro tiene scroll horizontal. Cuando cambia la pestaña
   // activa (por ejemplo, deep-link "?categoria=combos"), la traemos a la
-  // vista para que el cliente no tenga que buscarla.
+  // vista — pero solo dentro del propio contenedor, sin tocar el scroll de
+  // la página (scrollIntoView arrastraba la página hacia el filtro al cargar).
   useEffect(() => {
     const wrap = wrapRef.current;
     if (!wrap) return;
     const btn = wrap.querySelector(`#filter-${active}`);
-    if (btn && typeof btn.scrollIntoView === 'function') {
-      btn.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
-    }
+    if (!btn) return;
+    const wrapRect = wrap.getBoundingClientRect();
+    const btnRect = btn.getBoundingClientRect();
+    const currentOffset = (btnRect.left - wrapRect.left) + wrap.scrollLeft;
+    const target = currentOffset - (wrap.clientWidth / 2) + (btn.offsetWidth / 2);
+    wrap.scrollTo({ left: Math.max(0, target), behavior: 'smooth' });
   }, [active]);
 
   return (
