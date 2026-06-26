@@ -4,6 +4,7 @@ import { X } from 'lucide-react';
 import Hero from '../components/Hero';
 import ProductCard from '../components/ProductCard';
 import CategoryFilter from '../components/CategoryFilter';
+import BrandsCarousel from '../components/BrandsCarousel';
 import { useCatalog } from '../context/CatalogContext';
 import './Home.css';
 
@@ -55,6 +56,8 @@ const Home = () => {
   return (
     <>
       <Hero />
+
+      <BrandsCarousel />
 
       <section className="catalog" id="catalogo">
         <div className="catalog__container">

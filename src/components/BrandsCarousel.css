@@ -1,0 +1,135 @@
+.brands-carousel {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  padding: 1.5rem 0;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(201, 168, 76, 0.04) 50%,
+    transparent 100%
+  );
+  border-top: 1px solid var(--border-subtle);
+  border-bottom: 1px solid var(--border-subtle);
+  /* Desvanece los bordes para que las marcas aparezcan/desaparezcan suave */
+  mask-image: linear-gradient(
+    90deg,
+    transparent 0,
+    #000 80px,
+    #000 calc(100% - 80px),
+    transparent 100%
+  );
+  -webkit-mask-image: linear-gradient(
+    90deg,
+    transparent 0,
+    #000 80px,
+    #000 calc(100% - 80px),
+    transparent 100%
+  );
+}
+
+.brands-carousel__track {
+  display: flex;
+  align-items: center;
+  gap: 3.5rem;
+  width: max-content;
+  animation: brandsScroll 45s linear infinite;
+}
+
+.brands-carousel:hover .brands-carousel__track {
+  animation-play-state: paused;
+}
+
+.brands-carousel__item {
+  flex: 0 0 auto;
+  background: #f5f1e8;
+  border: 1px solid var(--border-subtle);
+  border-radius: 10px;
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+  opacity: 0.85;
+  transition: opacity 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 64px;
+  min-width: 120px;
+}
+
+.brands-carousel__item img {
+  max-height: 44px;
+  max-width: 130px;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+  mix-blend-mode: multiply;
+}
+
+.brands-carousel__item--text {
+  background: transparent;
+  border-color: var(--gold-muted, rgba(201, 168, 76, 0.2));
+}
+
+.brands-carousel__item--text span {
+  font-size: 0.95rem;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--text-secondary);
+  white-space: nowrap;
+  font-family: var(--font-display, serif);
+}
+
+@media (hover: hover) {
+  .brands-carousel__item:hover {
+    opacity: 1;
+    transform: scale(1.06);
+    box-shadow: 0 4px 18px rgba(201, 168, 76, 0.2);
+  }
+  .brands-carousel__item--text:hover {
+    border-color: var(--gold-primary);
+    box-shadow: 0 4px 18px rgba(201, 168, 76, 0.15);
+  }
+  .brands-carousel__item--text:hover span {
+    color: var(--gold-primary);
+  }
+}
+
+@keyframes brandsScroll {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+
+@media (max-width: 640px) {
+  .brands-carousel {
+    padding: 1rem 0;
+  }
+  .brands-carousel__track {
+    gap: 1.25rem;
+    animation-duration: 35s;
+  }
+  .brands-carousel__item {
+    height: 50px;
+    padding: 0.35rem 0.75rem;
+    min-width: 95px;
+  }
+  .brands-carousel__item img {
+    max-height: 34px;
+    max-width: 95px;
+  }
+  .brands-carousel__item--text span {
+    font-size: 0.78rem;
+  }
+}
+
+/* Respeta a quienes prefieren menos movimiento */
+@media (prefers-reduced-motion: reduce) {
+  .brands-carousel__track {
+    animation: none;
+  }
+  .brands-carousel {
+    overflow-x: auto;
+    mask-image: none;
+    -webkit-mask-image: none;
+  }
+}
