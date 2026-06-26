@@ -34,7 +34,11 @@ export const SettingsProvider = ({ children }) => {
   );
 
   const setSetting = useCallback(async (key, value) => {
-    const cleaned = String(value ?? '');
+    // Si recibimos un objeto/array, lo serializamos a JSON. Strings y números
+    // los guardamos tal cual como string.
+    const cleaned = (value !== null && typeof value === 'object')
+      ? JSON.stringify(value)
+      : String(value ?? '');
     if (isSupabaseConfigured) {
       const { error } = await supabase
         .from('site_settings')
@@ -44,8 +48,22 @@ export const SettingsProvider = ({ children }) => {
     setSettings(prev => ({ ...prev, [key]: cleaned }));
   }, []);
 
+  // Helper para settings que son objetos JSON. Devuelve el fallback si el
+  // valor no parsea o está vacío.
+  const getJsonSetting = useCallback((key, fallback = {}) => {
+    const raw = settings[key];
+    if (!raw) return fallback;
+    if (typeof raw === 'object') return raw;
+    try {
+      const parsed = JSON.parse(raw);
+      return parsed && typeof parsed === 'object' ? parsed : fallback;
+    } catch {
+      return fallback;
+    }
+  }, [settings]);
+
   return (
-    <SettingsContext.Provider value={{ settings, loaded, getSetting, setSetting }}>
+    <SettingsContext.Provider value={{ settings, loaded, getSetting, getJsonSetting, setSetting }}>
       {children}
     </SettingsContext.Provider>
   );

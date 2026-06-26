@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Save, Phone, ExternalLink } from 'lucide-react';
 import { useSettings } from '../context/SettingsContext';
 import AdminCoupons from './AdminCoupons';
+import AdminBrandLogos from './AdminBrandLogos';
 import './AdminSettings.css';
 
 const stripNonDigits = (s) => String(s || '').replace(/\D/g, '');
@@ -102,6 +103,8 @@ const AdminSettings = () => {
           {saving ? 'Guardando…' : 'Guardar cambios'}
         </button>
       </div>
+
+      <AdminBrandLogos />
 
       <AdminCoupons />
     </div>

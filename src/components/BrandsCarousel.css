@@ -65,33 +65,11 @@
   mix-blend-mode: multiply;
 }
 
-.brands-carousel__item--text {
-  background: transparent;
-  border-color: var(--gold-muted, rgba(201, 168, 76, 0.2));
-}
-
-.brands-carousel__item--text span {
-  font-size: 0.95rem;
-  font-weight: 500;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: var(--text-secondary);
-  white-space: nowrap;
-  font-family: var(--font-display, serif);
-}
-
 @media (hover: hover) {
   .brands-carousel__item:hover {
     opacity: 1;
     transform: scale(1.06);
     box-shadow: 0 4px 18px rgba(201, 168, 76, 0.2);
-  }
-  .brands-carousel__item--text:hover {
-    border-color: var(--gold-primary);
-    box-shadow: 0 4px 18px rgba(201, 168, 76, 0.15);
-  }
-  .brands-carousel__item--text:hover span {
-    color: var(--gold-primary);
   }
 }
 
@@ -116,9 +94,6 @@
   .brands-carousel__item img {
     max-height: 34px;
     max-width: 95px;
-  }
-  .brands-carousel__item--text span {
-    font-size: 0.78rem;
   }
 }
 
