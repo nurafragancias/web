@@ -1,5 +1,5 @@
 import React, { Suspense, lazy } from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
 import { CatalogProvider } from './context/CatalogContext';
 import { SalesProvider } from './context/SalesContext';
 import { CartProvider, useCart } from './context/CartContext';
@@ -7,6 +7,7 @@ import { SettingsProvider } from './context/SettingsContext';
 import Navbar from './components/Navbar';
 import CartDrawer from './components/CartDrawer';
 import Footer from './components/Footer';
+import WhatsAppFAB from './components/WhatsAppFAB';
 import Home from './pages/Home';
 import './App.css';
 
@@ -19,6 +20,14 @@ const Admin = lazy(() => import('./pages/Admin'));
 const ToastNotification = () => {
   const { toast } = useCart();
   return <div className={`toast ${toast ? 'show' : ''}`}>{toast}</div>;
+};
+
+// El FAB de WhatsApp solo aparece en las rutas públicas; en /admin no tiene
+// sentido mostrarle un contacto al dueño.
+const FloatingWhatsApp = () => {
+  const { pathname } = useLocation();
+  if (pathname.startsWith('/admin')) return null;
+  return <WhatsAppFAB />;
 };
 
 const App = () => {
@@ -41,6 +50,7 @@ const App = () => {
               </Suspense>
             </main>
             <Footer />
+            <FloatingWhatsApp />
             <ToastNotification />
           </div>
         </Router>
