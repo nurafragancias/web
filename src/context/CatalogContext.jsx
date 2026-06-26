@@ -1786,14 +1786,24 @@ export const CatalogProvider = ({ children }) => {
     active: p.active === false ? false : true
   });
 
-  // Filtra variantes "no activas" (active === false). Por compat, variantes
-  // sin el campo se consideran activas.
-  const activeVariants = (variants) => (variants || []).filter(v => v?.active !== false);
-  const isProductPublicVisible = (p) => p?.active !== false && activeVariants(p?.variants).length > 0;
+  // Filtra variantes disponibles al público. Una variante NO se muestra si:
+  // - el admin la marcó como inactiva (v.active === false), o
+  // - es una variante "frasco" (affectsStock) y el stock del producto es 0.
+  // Esto último cubre productos que ya estaban con stock 0 en la DB y nunca
+  // tuvieron una venta posterior que disparara la auto-desactivación.
+  const visibleVariants = (product) => {
+    const stock = product?.stock ?? 0;
+    return (product?.variants || []).filter(v => {
+      if (v?.active === false) return false;
+      if (v?.affectsStock && stock <= 0) return false;
+      return true;
+    });
+  };
+  const isProductPublicVisible = (p) => p?.active !== false && visibleVariants(p).length > 0;
   // Lista filtrada para el publico (oculta inactivos y los que no tienen
   // ninguna variante disponible). El admin sigue viendo `products` completo.
   const publicProducts = React.useMemo(
-    () => products.filter(isProductPublicVisible).map(p => ({ ...p, variants: activeVariants(p.variants) })),
+    () => products.filter(isProductPublicVisible).map(p => ({ ...p, variants: visibleVariants(p) })),
     [products]
   );
 
