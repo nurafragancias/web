@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { ShoppingBag, Check } from 'lucide-react';
 import { useCart } from '../context/CartContext';
 import { isOnPromo, discountedPrice } from '../lib/price';
@@ -12,8 +12,38 @@ const ProductCard = ({ product, index = 0 }) => {
   const [imageError, setImageError] = useState(false);
   const [currentImage, setCurrentImage] = useState(0);
   const [showDetail, setShowDetail] = useState(false);
+  const trackRef = useRef(null);
 
   const hasMultipleImages = product.images && product.images.length > 1;
+
+  // Sincroniza el indicador activo con el scroll horizontal del track.
+  // El cliente swipea con el dedo (mobile) o usa las flechas (desktop) y
+  // el dot dorado se actualiza segun la imagen que mas se ve.
+  useEffect(() => {
+    if (!hasMultipleImages) return;
+    const track = trackRef.current;
+    if (!track) return;
+    let raf = 0;
+    const onScroll = () => {
+      if (raf) return;
+      raf = requestAnimationFrame(() => {
+        raf = 0;
+        const idx = Math.round(track.scrollLeft / track.clientWidth);
+        setCurrentImage(prev => (prev === idx ? prev : idx));
+      });
+    };
+    track.addEventListener('scroll', onScroll, { passive: true });
+    return () => {
+      track.removeEventListener('scroll', onScroll);
+      if (raf) cancelAnimationFrame(raf);
+    };
+  }, [hasMultipleImages]);
+
+  const scrollToImage = (i) => {
+    const track = trackRef.current;
+    if (!track) return;
+    track.scrollTo({ left: i * track.clientWidth, behavior: 'smooth' });
+  };
 
   const variant = product.variants[selectedVariant];
 
@@ -48,29 +78,39 @@ const ProductCard = ({ product, index = 0 }) => {
         <div className="product-card__image-wrap">
           {product.images && product.images.length > 0 && !imageError ? (
             <>
-              <img
-                src={product.images[currentImage]}
-                alt={product.name}
-                className="product-card__image"
-                loading="lazy"
-                decoding="async"
-                onError={() => setImageError(true)}
-              />
+              <div className="product-card__image-track" ref={trackRef}>
+                {product.images.map((src, i) => (
+                  <img
+                    key={i}
+                    src={src}
+                    alt={product.name}
+                    className="product-card__image"
+                    loading="lazy"
+                    decoding="async"
+                    onError={() => { if (i === 0) setImageError(true); }}
+                    draggable={false}
+                  />
+                ))}
+              </div>
               {hasMultipleImages && (
                 <>
                   <button
                     className="product-card__img-nav product-card__img-nav--prev"
-                    onClick={(e) => { e.stopPropagation(); setCurrentImage(i => (i - 1 + product.images.length) % product.images.length); }}
+                    onClick={(e) => { e.stopPropagation(); scrollToImage((currentImage - 1 + product.images.length) % product.images.length); }}
                     aria-label="Imagen anterior"
                   >&#8249;</button>
                   <button
                     className="product-card__img-nav product-card__img-nav--next"
-                    onClick={(e) => { e.stopPropagation(); setCurrentImage(i => (i + 1) % product.images.length); }}
+                    onClick={(e) => { e.stopPropagation(); scrollToImage((currentImage + 1) % product.images.length); }}
                     aria-label="Imagen siguiente"
                   >&#8250;</button>
                   <div className="product-card__img-dots">
                     {product.images.map((_, i) => (
-                      <span key={i} className={`product-card__img-dot${i === currentImage ? ' product-card__img-dot--active' : ''}`} onClick={(e) => { e.stopPropagation(); setCurrentImage(i); }} />
+                      <span
+                        key={i}
+                        className={`product-card__img-dot${i === currentImage ? ' product-card__img-dot--active' : ''}`}
+                        onClick={(e) => { e.stopPropagation(); scrollToImage(i); }}
+                      />
                     ))}
                   </div>
                 </>
