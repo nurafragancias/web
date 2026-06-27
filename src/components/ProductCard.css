@@ -271,13 +271,17 @@
   transition: left 0.4s ease;
 }
 
-.product-card__add-btn:hover::before {
-  left: 100%;
-}
-
-.product-card__add-btn:hover {
-  transform: translateY(-2px);
-  box-shadow: var(--shadow-gold);
+/* :hover sólo en dispositivos con cursor real. En touch, el primer tap no
+   debe activar el estado hover — eso causaba que en mobile haya que tocar
+   dos veces el boton "Agregar" para que efectivamente agregue al carrito. */
+@media (hover: hover) {
+  .product-card__add-btn:hover::before {
+    left: 100%;
+  }
+  .product-card__add-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-gold);
+  }
 }
 
 .product-card__add-btn--added {
