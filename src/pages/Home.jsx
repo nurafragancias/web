@@ -1,22 +1,38 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { X } from 'lucide-react';
 import Hero from '../components/Hero';
 import ProductCard from '../components/ProductCard';
 import CategoryFilter from '../components/CategoryFilter';
 import BrandsCarousel from '../components/BrandsCarousel';
+import ProductDetailModal from '../components/ProductDetailModal';
 import { useCatalog } from '../context/CatalogContext';
+import { findProductBySlug } from '../lib/productSlug';
 import './Home.css';
 
 const VALID_CATEGORIES = ['todos', 'masculino', 'femenino', 'unisex', 'combos'];
 
 const Home = () => {
-  const { getFilteredProducts } = useCatalog();
+  const { getFilteredProducts, publicProducts } = useCatalog();
   const [searchParams, setSearchParams] = useSearchParams();
   const activeBrand = searchParams.get('marca') || null;
   const categoryFromUrl = searchParams.get('categoria');
+  const productSlugFromUrl = searchParams.get('p');
   const initialCategory = VALID_CATEGORIES.includes(categoryFromUrl) ? categoryFromUrl : 'todos';
   const [activeCategory, setActiveCategory] = useState(initialCategory);
+
+  // Deep-link a un producto: /?p=lattafa-khamrah-edp-100ml abre el modal del
+  // perfume directo (para usar como link en historias de Instagram, etc).
+  const deepLinkedProduct = useMemo(
+    () => findProductBySlug(publicProducts, productSlugFromUrl),
+    [publicProducts, productSlugFromUrl]
+  );
+
+  const closeDeepLink = () => {
+    const next = new URLSearchParams(searchParams);
+    next.delete('p');
+    setSearchParams(next, { replace: true });
+  };
 
   // Si el cliente entra con ?categoria=combos (ej. desde el navbar),
   // sincronizamos el filtro y hacemos scroll al catálogo.
@@ -103,6 +119,13 @@ const Home = () => {
           </div>
         </div>
       </section>
+
+      {deepLinkedProduct && (
+        <ProductDetailModal
+          product={deepLinkedProduct}
+          onClose={closeDeepLink}
+        />
+      )}
     </>
   );
 };

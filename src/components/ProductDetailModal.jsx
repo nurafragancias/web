@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import { X, ShoppingBag, Check } from 'lucide-react';
+import { X, ShoppingBag, Check, Link2 } from 'lucide-react';
 import { useCart } from '../context/CartContext';
 import { isOnPromo, discountedPrice } from '../lib/price';
+import { productShareUrl } from '../lib/productSlug';
 import './ProductDetailModal.css';
 
 // Parse Fragrantica-style description to extract perfume notes
@@ -32,6 +33,20 @@ const ProductDetailModal = ({ product, onClose }) => {
   const [imageError, setImageError] = useState(false);
   const [activeTab, setActiveTab] = useState('descripcion');
   const [isAdding, setIsAdding] = useState(false);
+  const [linkCopied, setLinkCopied] = useState(false);
+
+  const handleShareLink = async () => {
+    const url = productShareUrl(product);
+    if (!url) return;
+    try {
+      await navigator.clipboard.writeText(url);
+      setLinkCopied(true);
+      setTimeout(() => setLinkCopied(false), 1800);
+    } catch {
+      // Fallback para navegadores sin Clipboard API: mostrar prompt para copiar
+      window.prompt('Copiá el link:', url);
+    }
+  };
 
   useEffect(() => {
     document.body.style.overflow = 'hidden';
@@ -149,6 +164,19 @@ const ProductDetailModal = ({ product, onClose }) => {
                 <><Check size={18} /> Agregado al carrito</>
               ) : (
                 <><ShoppingBag size={18} /> Agregar a la bolsa</>
+              )}
+            </button>
+
+            <button
+              type="button"
+              className={`product-modal__share-btn${linkCopied ? ' product-modal__share-btn--copied' : ''}`}
+              onClick={handleShareLink}
+              title="Copiar link directo a este perfume"
+            >
+              {linkCopied ? (
+                <><Check size={14} /> Link copiado</>
+              ) : (
+                <><Link2 size={14} /> Copiar link del perfume</>
               )}
             </button>
           </div>

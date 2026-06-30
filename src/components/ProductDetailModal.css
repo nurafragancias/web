@@ -309,6 +309,38 @@
   pointer-events: none;
 }
 
+/* Boton secundario para copiar el link directo del producto — pensado para
+   compartir el perfume por Instagram, WhatsApp, etc. */
+.product-modal__share-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+  margin-top: 0.75rem;
+  padding: 0.55rem 1rem;
+  background: transparent;
+  color: var(--text-secondary);
+  font-size: 0.72rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  transition: all 0.25s var(--ease-out);
+}
+
+@media (hover: hover) {
+  .product-modal__share-btn:hover {
+    color: var(--gold-primary);
+    border-color: var(--gold-primary);
+  }
+}
+
+.product-modal__share-btn--copied {
+  color: #2d8c4e;
+  border-color: #2d8c4e;
+}
+
 /* Tabs */
 .product-modal__tabs {
   display: flex;
