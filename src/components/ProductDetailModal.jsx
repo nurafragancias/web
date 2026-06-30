@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { X, ShoppingBag, Check, Link2 } from 'lucide-react';
+import { X, ShoppingBag, Check, Share2 } from 'lucide-react';
 import { useCart } from '../context/CartContext';
 import { isOnPromo, discountedPrice } from '../lib/price';
 import { productShareUrl } from '../lib/productSlug';
@@ -38,12 +38,29 @@ const ProductDetailModal = ({ product, onClose }) => {
   const handleShareLink = async () => {
     const url = productShareUrl(product);
     if (!url) return;
+    const shareData = {
+      title: `${product.brand} — ${product.name}`,
+      text: `Mirá este perfume en Nura Fragancias: ${product.brand} ${product.name}`,
+      url
+    };
+    // 1) Web Share API: en mobile abre el sheet nativo (WhatsApp, Instagram,
+    //    Telegram, Mail, Copiar, etc). En desktop suele no estar disponible.
+    if (typeof navigator.share === 'function') {
+      try {
+        await navigator.share(shareData);
+        return;
+      } catch (err) {
+        // El usuario cancelo el share — no es un error
+        if (err?.name === 'AbortError') return;
+        // Otro error: caemos al fallback de clipboard
+      }
+    }
+    // 2) Fallback: copiar al portapapeles (desktop)
     try {
       await navigator.clipboard.writeText(url);
       setLinkCopied(true);
       setTimeout(() => setLinkCopied(false), 1800);
     } catch {
-      // Fallback para navegadores sin Clipboard API: mostrar prompt para copiar
       window.prompt('Copiá el link:', url);
     }
   };
@@ -171,12 +188,12 @@ const ProductDetailModal = ({ product, onClose }) => {
               type="button"
               className={`product-modal__share-btn${linkCopied ? ' product-modal__share-btn--copied' : ''}`}
               onClick={handleShareLink}
-              title="Copiar link directo a este perfume"
+              title="Compartir link directo a este perfume"
             >
               {linkCopied ? (
                 <><Check size={14} /> Link copiado</>
               ) : (
-                <><Link2 size={14} /> Copiar link del perfume</>
+                <><Share2 size={14} /> Compartir link del perfume</>
               )}
             </button>
           </div>
