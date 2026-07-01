@@ -13,3 +13,17 @@ export const variantAffectsStock = (variant) =>
   typeof variant?.affectsStock === 'boolean'
     ? variant.affectsStock
     : parseMl(variant?.size) >= 30;
+
+// Devuelve las variantes que el catálogo PÚBLICO debe mostrar. Excluye:
+// - variantes marcadas como inactivas (v.active === false)
+// - variantes "frasco" (affectsStock) cuando el stock del producto es 0
+// El segundo filtro cubre productos con stock 0 histórico que aún tienen
+// v.active === true en DB — sin él seguirían apareciendo con opción 100ml.
+export const visibleVariants = (product) => {
+  const stock = product?.stock ?? 0;
+  return (product?.variants || []).filter(v => {
+    if (v?.active === false) return false;
+    if (variantAffectsStock(v) && stock <= 0) return false;
+    return true;
+  });
+};
