@@ -8,6 +8,7 @@
     "prebuild": "node scripts/snapshot-catalog.mjs",
     "build": "vite build",
     "lint": "eslint .",
+    "test": "vitest run",
     "preview": "vite preview",
     "optimize-images": "node scripts/optimize-images.mjs"
   },
@@ -29,6 +30,7 @@
     "eslint-plugin-react-refresh": "^0.5.2",
     "globals": "^17.5.0",
     "sharp": "^0.35.1",
-    "vite": "^8.0.10"
+    "vite": "^8.0.10",
+    "vitest": "^4.1.9"
   }
 }

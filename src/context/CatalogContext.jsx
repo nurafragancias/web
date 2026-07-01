@@ -1,5 +1,6 @@
 import React, { createContext, useState, useEffect, useContext, useRef, useCallback } from 'react';
 import { supabase, isSupabaseConfigured, PRODUCT_IMAGES_BUCKET } from '../lib/supabase';
+import { visibleVariants } from '../lib/stock';
 
 const CatalogContext = createContext();
 
@@ -1786,19 +1787,8 @@ export const CatalogProvider = ({ children }) => {
     active: p.active === false ? false : true
   });
 
-  // Filtra variantes disponibles al público. Una variante NO se muestra si:
-  // - el admin la marcó como inactiva (v.active === false), o
-  // - es una variante "frasco" (affectsStock) y el stock del producto es 0.
-  // Esto último cubre productos que ya estaban con stock 0 en la DB y nunca
-  // tuvieron una venta posterior que disparara la auto-desactivación.
-  const visibleVariants = (product) => {
-    const stock = product?.stock ?? 0;
-    return (product?.variants || []).filter(v => {
-      if (v?.active === false) return false;
-      if (v?.affectsStock && stock <= 0) return false;
-      return true;
-    });
-  };
+  // visibleVariants vive en lib/stock.js — usa variantAffectsStock por debajo
+  // para inferir "frasco" en variantes viejas sin flag explícito.
   const isProductPublicVisible = (p) => p?.active !== false && visibleVariants(p).length > 0;
   // Lista filtrada para el publico (oculta inactivos y los que no tienen
   // ninguna variante disponible). El admin sigue viendo `products` completo.
