@@ -91,7 +91,9 @@
   cursor: pointer;
   padding: 0.25rem;
 }
-.admin-tx__delete:hover { color: #e74c3c; }
+@media (hover: hover) {
+  .admin-tx__delete:hover { color: #e74c3c; }
+}
 
 .admin-tx__confirm { display: flex; gap: 0.3rem; }
 .admin-tx__confirm-yes,

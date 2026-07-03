@@ -1,4 +1,4 @@
-import React, { Suspense, lazy } from 'react';
+import React, { Suspense, lazy, useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
 import { CatalogProvider } from './context/CatalogContext';
 import { SalesProvider } from './context/SalesContext';
@@ -30,6 +30,19 @@ const FloatingWhatsApp = () => {
   return <WhatsAppFAB />;
 };
 
+// Al cambiar de PÁGINA (pathname) arrancamos desde arriba. Los cambios de
+// query dentro del Home (?marca, ?categoria) no pasan por acá, así que el
+// scroll al catálogo que maneja Home sigue funcionando igual. Si hay un
+// ancla (#catalogo) dejamos que el navegador/Home hagan su scroll.
+const ScrollToTop = () => {
+  const { pathname, hash } = useLocation();
+  useEffect(() => {
+    if (hash) return;
+    window.scrollTo(0, 0);
+  }, [pathname, hash]);
+  return null;
+};
+
 const App = () => {
   return (
     <SettingsProvider>
@@ -37,6 +50,7 @@ const App = () => {
       <SalesProvider>
       <CartProvider>
         <Router>
+          <ScrollToTop />
           <div className="app">
             <Navbar />
             <CartDrawer />

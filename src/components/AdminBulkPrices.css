@@ -60,7 +60,9 @@
 }
 
 .bulk-prices__btn:disabled { opacity: 0.5; cursor: not-allowed; }
-.bulk-prices__btn:hover:not(:disabled) { filter: brightness(1.08); }
+@media (hover: hover) {
+  .bulk-prices__btn:hover:not(:disabled) { filter: brightness(1.08); }
+}
 
 .bulk-prices__btn--outline {
   background: transparent;

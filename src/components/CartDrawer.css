@@ -46,9 +46,11 @@
   transition: all 0.25s ease;
 }
 
-.cart-drawer__close:hover {
+@media (hover: hover) {
+  .cart-drawer__close:hover {
   color: var(--text-primary);
   background: rgba(255, 255, 255, 0.05);
+}
 }
 
 /* Items */
@@ -170,9 +172,11 @@
   transition: all 0.2s ease;
 }
 
-.cart-item__remove:hover {
+@media (hover: hover) {
+  .cart-item__remove:hover {
   color: #e74c3c;
   background: rgba(231, 76, 60, 0.1);
+}
 }
 
 .cart-item__bottom {
@@ -196,8 +200,10 @@
   transition: color 0.2s ease;
 }
 
-.cart-item__qty-btn:hover {
+@media (hover: hover) {
+  .cart-item__qty-btn:hover {
   color: var(--gold-primary);
+}
 }
 
 .cart-item__qty-num {
@@ -331,7 +337,9 @@
   text-decoration: underline;
 }
 
-.cart-coupon__remove:hover { color: #f0a39c; }
+@media (hover: hover) {
+  .cart-coupon__remove:hover { color: #f0a39c; }
+}
 
 .cart-coupon__error {
   display: block;
@@ -391,9 +399,11 @@
   margin-bottom: 0.75rem;
 }
 
-.cart-drawer__checkout:hover {
+@media (hover: hover) {
+  .cart-drawer__checkout:hover {
   transform: translateY(-2px);
   box-shadow: 0 4px 20px rgba(37, 211, 102, 0.3);
+}
 }
 
 .cart-drawer__clear {
@@ -407,6 +417,8 @@
   text-align: center;
 }
 
-.cart-drawer__clear:hover {
+@media (hover: hover) {
+  .cart-drawer__clear:hover {
   color: #e74c3c;
+}
 }

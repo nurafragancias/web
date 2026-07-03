@@ -95,12 +95,16 @@
   transition: width 0.3s var(--ease-out);
 }
 
-.navbar__link:hover {
+@media (hover: hover) {
+  .navbar__link:hover {
   color: var(--gold-primary);
 }
+}
 
-.navbar__link:hover::after {
+@media (hover: hover) {
+  .navbar__link:hover::after {
   width: 100%;
+}
 }
 
 /* Brands dropdown */
@@ -177,9 +181,11 @@
   text-overflow: ellipsis;
 }
 
-.navbar__brands-item:hover {
+@media (hover: hover) {
+  .navbar__brands-item:hover {
   background: var(--gold-muted, rgba(200, 169, 96, 0.1));
   color: var(--gold-primary);
+}
 }
 
 .navbar__brands-item--all {
@@ -211,9 +217,11 @@
   transition: all 0.3s ease;
 }
 
-.navbar__cart-btn:hover {
+@media (hover: hover) {
+  .navbar__cart-btn:hover {
   color: var(--gold-primary);
   background: var(--gold-muted);
+}
 }
 
 .navbar__cart-badge {

@@ -130,7 +130,9 @@
   font-size: 0.75rem;
   cursor: pointer;
 }
-.admin-debtor__pay-btn:hover { background: var(--gold-primary); color: var(--bg-primary); }
+@media (hover: hover) {
+  .admin-debtor__pay-btn:hover { background: var(--gold-primary); color: var(--bg-primary); }
+}
 
 .admin-debtor__payform {
   display: flex;

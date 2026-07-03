@@ -272,8 +272,12 @@
   display: inline-flex;
 }
 
-.admin-coupons__icon-btn:hover { border-color: var(--gold-primary); color: var(--gold-primary); }
-.admin-coupons__icon-btn--del:hover { border-color: #e74c3c; color: #e74c3c; }
+@media (hover: hover) {
+  .admin-coupons__icon-btn:hover { border-color: var(--gold-primary); color: var(--gold-primary); }
+}
+@media (hover: hover) {
+  .admin-coupons__icon-btn--del:hover { border-color: #e74c3c; color: #e74c3c; }
+}
 
 .admin-coupons__confirm {
   display: flex;

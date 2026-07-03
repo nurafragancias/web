@@ -76,9 +76,11 @@
   transition: all 0.2s ease;
 }
 
-.catalog__brand-chip:hover {
+@media (hover: hover) {
+  .catalog__brand-chip:hover {
   background: var(--gold-primary);
   color: var(--bg-primary);
+}
 }
 
 .catalog__grid {

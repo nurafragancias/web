@@ -143,11 +143,13 @@
   transition: all 0.3s ease;
 }
 
-.footer__social-link:hover {
+@media (hover: hover) {
+  .footer__social-link:hover {
   border-color: var(--gold-primary);
   color: var(--gold-primary);
   background: var(--gold-muted);
   transform: translateY(-2px);
+}
 }
 
 .footer__divider {
