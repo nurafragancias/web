@@ -36,8 +36,10 @@
   animation: brandsScroll 45s linear infinite;
 }
 
-.brands-carousel:hover .brands-carousel__track {
+@media (hover: hover) {
+  .brands-carousel:hover .brands-carousel__track {
   animation-play-state: paused;
+}
 }
 
 .brands-carousel__item {

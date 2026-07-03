@@ -52,7 +52,9 @@
   font-size: 0.75rem;
   cursor: pointer;
 }
-.admin-stats__presets button:hover { border-color: var(--gold-primary); color: var(--gold-primary); }
+@media (hover: hover) {
+  .admin-stats__presets button:hover { border-color: var(--gold-primary); color: var(--gold-primary); }
+}
 
 .admin-stats__loading { text-align: center; color: var(--text-muted); padding: 2rem; }
 

@@ -28,6 +28,13 @@ const CartDrawer = () => {
     if (!couponState.code) setCodeInput('');
   }, [couponState.code]);
 
+  // Con el carrito abierto, el catálogo de fondo no debe scrollear.
+  useEffect(() => {
+    if (!isCartOpen) return;
+    document.body.style.overflow = 'hidden';
+    return () => { document.body.style.overflow = ''; };
+  }, [isCartOpen]);
+
   if (!isCartOpen) return null;
 
   const handleApplyCoupon = (e) => {

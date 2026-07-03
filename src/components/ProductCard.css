@@ -15,10 +15,12 @@
   outline-offset: 2px;
 }
 
-.product-card:hover {
+@media (hover: hover) {
+  .product-card:hover {
   transform: translateY(-6px);
   border-color: var(--border-gold);
   box-shadow: var(--shadow-gold);
+}
 }
 
 /* Image */
@@ -175,9 +177,11 @@
   transition: opacity 0.2s ease;
 }
 
-.product-card__desc-toggle:hover {
+@media (hover: hover) {
+  .product-card__desc-toggle:hover {
   opacity: 0.8;
   text-decoration: underline;
+}
 }
 
 /* Variants */
@@ -197,9 +201,11 @@
   transition: all 0.25s ease;
 }
 
-.product-card__variant:hover {
+@media (hover: hover) {
+  .product-card__variant:hover {
   border-color: var(--border-gold);
   color: var(--text-primary);
+}
 }
 
 .product-card__variant--active {
@@ -346,8 +352,10 @@
   right: 8px;
 }
 
-.product-card__img-nav:hover {
+@media (hover: hover) {
+  .product-card__img-nav:hover {
   background: rgba(0, 0, 0, 0.75);
+}
 }
 
 .product-card__img-dots {

@@ -66,9 +66,11 @@
   transition: all 0.15s ease;
 }
 
-.reports__preset:hover {
+@media (hover: hover) {
+  .reports__preset:hover {
   border-color: var(--gold-primary);
   color: var(--gold-primary);
+}
 }
 
 .reports__date-fields {
@@ -145,8 +147,10 @@
   transition: border-color 0.2s ease;
 }
 
-.report-card:hover {
+@media (hover: hover) {
+  .report-card:hover {
   border-color: var(--border-gold, rgba(200, 169, 96, 0.4));
+}
 }
 
 .report-card__head h4 {
@@ -187,8 +191,10 @@
   margin-top: auto;
 }
 
-.report-card__btn:hover {
+@media (hover: hover) {
+  .report-card__btn:hover {
   filter: brightness(1.1);
+}
 }
 
 .report-card__btn:active {

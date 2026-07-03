@@ -25,9 +25,11 @@
   transition: all 0.2s ease;
 }
 
-.admin-form__close:hover {
+@media (hover: hover) {
+  .admin-form__close:hover {
   color: var(--text-primary);
   background: rgba(255, 255, 255, 0.05);
+}
 }
 
 /* Image Gallery */
@@ -75,8 +77,10 @@
   cursor: grabbing;
 }
 
-.admin-form__image-preview:hover {
+@media (hover: hover) {
+  .admin-form__image-preview:hover {
   border-color: var(--border-gold);
+}
 }
 
 .admin-form__image-preview--dragging {
@@ -110,13 +114,17 @@
   border: none;
 }
 
-.admin-form__image-preview:hover .admin-form__image-remove {
+@media (hover: hover) {
+  .admin-form__image-preview:hover .admin-form__image-remove {
   opacity: 1;
 }
+}
 
-.admin-form__image-remove:hover {
+@media (hover: hover) {
+  .admin-form__image-remove:hover {
   background: rgba(231, 76, 60, 0.4);
   transform: scale(1.1);
+}
 }
 
 .admin-form__image-index {
@@ -150,8 +158,19 @@
   justify-content: center;
 }
 
-.admin-form__image-preview:hover .admin-form__image-drag {
+@media (hover: hover) {
+  .admin-form__image-preview:hover .admin-form__image-drag {
   opacity: 1;
+}
+}
+
+/* En touch no hay hover: el boton de eliminar y el handle de arrastre deben
+   estar siempre visibles, si no serian inaccesibles desde el celular. */
+@media (hover: none) {
+  .admin-form__image-remove,
+  .admin-form__image-drag {
+    opacity: 1;
+  }
 }
 
 .admin-form__image-upload {
@@ -170,10 +189,12 @@
   flex-shrink: 0;
 }
 
-.admin-form__image-upload:hover {
+@media (hover: hover) {
+  .admin-form__image-upload:hover {
   border-color: var(--gold-primary);
   background: var(--gold-muted);
   color: var(--gold-primary);
+}
 }
 
 .admin-form__image-upload span {
@@ -276,8 +297,10 @@
   transition: opacity 0.2s ease;
 }
 
-.admin-form__add-variant:hover {
+@media (hover: hover) {
+  .admin-form__add-variant:hover {
   opacity: 0.8;
+}
 }
 
 .admin-form__variant-row {
@@ -482,9 +505,11 @@
   transition: all 0.2s ease;
 }
 
-.admin-form__remove-variant:hover {
+@media (hover: hover) {
+  .admin-form__remove-variant:hover {
   color: #e74c3c;
   background: rgba(231, 76, 60, 0.1);
+}
 }
 
 /* Actions */

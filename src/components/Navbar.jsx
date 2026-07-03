@@ -51,6 +51,13 @@ const Navbar = () => {
     setBrandsOpen(false);
   }, [location]);
 
+  // Con el menú mobile abierto (pantalla completa), el fondo no debe scrollear.
+  useEffect(() => {
+    if (!mobileOpen) return;
+    document.body.style.overflow = 'hidden';
+    return () => { document.body.style.overflow = ''; };
+  }, [mobileOpen]);
+
   // Close brands dropdown on outside click / Escape
   useEffect(() => {
     if (!brandsOpen) return;

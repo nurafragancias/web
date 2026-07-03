@@ -109,9 +109,11 @@
   color: var(--text-muted);
 }
 
-.tx-form__add-line--other:hover {
+@media (hover: hover) {
+  .tx-form__add-line--other:hover {
   border-color: var(--gold-primary);
   color: var(--gold-primary);
+}
 }
 
 .tx-form__line--other {
@@ -179,7 +181,9 @@
   flex-shrink: 0;
 }
 
-.tx-form__line-remove:hover:not(:disabled) { color: #e74c3c; }
+@media (hover: hover) {
+  .tx-form__line-remove:hover:not(:disabled) { color: #e74c3c; }
+}
 .tx-form__line-remove:disabled { opacity: 0.3; cursor: default; }
 
 /* Totals */
