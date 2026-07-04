@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import { ShoppingBag, Check } from 'lucide-react';
 import { useCart } from '../context/CartContext';
 import { isOnPromo, discountedPrice } from '../lib/price';
@@ -11,18 +11,54 @@ const ProductCard = ({ product, index = 0 }) => {
   const [isAdding, setIsAdding] = useState(false);
   const [imageError, setImageError] = useState(false);
   const [currentImage, setCurrentImage] = useState(0);
+  const [slideDir, setSlideDir] = useState(null);
   const [showDetail, setShowDetail] = useState(false);
 
   const hasMultipleImages = product.images && product.images.length > 1;
 
   // En la tarjeta se muestra UNA sola imagen a la vez (la que apunta
-  // currentImage) y se cambia con las flechas/dots. Antes se renderizaban
-  // TODAS las imágenes del producto en un track para swipear, pero eso metía
-  // hasta 3 imágenes por tarjeta en el DOM (140+ en total); en iPhone, con
-  // fotos grandes, Safari se quedaba sin memoria y recargaba la página. La
-  // galería completa con swipe sigue estando en el modal del producto.
-  const showImage = (i) =>
+  // currentImage). Se puede DESLIZAR sobre ella (mobile) o usar flechas/dots
+  // (desktop). A propósito NO renderizamos todas las imágenes en un track:
+  // eso metía hasta 3 imágenes por tarjeta en el DOM (140+ en total) y, con
+  // fotos grandes, Safari en iPhone se quedaba sin memoria y recargaba la
+  // página. Al deslizar sólo cambiamos el src de la única imagen, así la
+  // memoria queda acotada. La galería completa sigue en el modal del producto.
+  const go = (dir) => {
+    const len = product.images.length;
+    setSlideDir(dir > 0 ? 'next' : 'prev');
+    setCurrentImage(c => ((c + dir) % len + len) % len);
+  };
+  const showImage = (i) => {
+    setSlideDir(i > currentImage ? 'next' : 'prev');
     setCurrentImage(((i % product.images.length) + product.images.length) % product.images.length);
+  };
+
+  // Swipe táctil: detectamos un deslizamiento horizontal sobre la imagen.
+  // No hacemos preventDefault, así el scroll vertical de la página sigue
+  // funcionando normal. swipedRef evita que el "tap" que sigue al swipe
+  // abra el modal.
+  const touchRef = useRef({ x: 0, y: 0 });
+  const swipedRef = useRef(false);
+  const onTouchStart = (e) => {
+    const t = e.touches[0];
+    touchRef.current = { x: t.clientX, y: t.clientY };
+  };
+  const onTouchEnd = (e) => {
+    if (!hasMultipleImages) return;
+    const t = e.changedTouches[0];
+    const dx = t.clientX - touchRef.current.x;
+    const dy = t.clientY - touchRef.current.y;
+    if (Math.abs(dx) > 40 && Math.abs(dx) > Math.abs(dy)) {
+      swipedRef.current = true;
+      go(dx < 0 ? 1 : -1);
+      setTimeout(() => { swipedRef.current = false; }, 350);
+    }
+  };
+
+  const openDetail = () => {
+    if (swipedRef.current) { swipedRef.current = false; return; }
+    setShowDetail(true);
+  };
 
   const variant = product.variants[selectedVariant];
 
@@ -54,18 +90,23 @@ const ProductCard = ({ product, index = 0 }) => {
         // que al scrollear hacia el medio "aparecian" tarde y parecia que la
         // web se recargaba. Con tope 0.5s, ya estan todas visibles al llegar.
         style={{ animationDelay: `${Math.min(index, 10) * 0.05}s` }}
-        onClick={() => setShowDetail(true)}
+        onClick={openDetail}
         role="button"
         tabIndex={0}
         onKeyDown={(e) => { if (e.key === 'Enter') setShowDetail(true); }}
       >
-        <div className="product-card__image-wrap">
+        <div
+          className="product-card__image-wrap"
+          onTouchStart={hasMultipleImages ? onTouchStart : undefined}
+          onTouchEnd={hasMultipleImages ? onTouchEnd : undefined}
+        >
           {product.images && product.images.length > 0 && !imageError ? (
             <>
               <img
+                key={currentImage}
                 src={product.images[currentImage]}
                 alt={product.name}
-                className="product-card__image"
+                className={`product-card__image${slideDir ? ' product-card__image--' + slideDir : ''}`}
                 loading="lazy"
                 decoding="async"
                 onError={() => setImageError(true)}
@@ -75,12 +116,12 @@ const ProductCard = ({ product, index = 0 }) => {
                 <>
                   <button
                     className="product-card__img-nav product-card__img-nav--prev"
-                    onClick={(e) => { e.stopPropagation(); showImage(currentImage - 1); }}
+                    onClick={(e) => { e.stopPropagation(); go(-1); }}
                     aria-label="Imagen anterior"
                   >&#8249;</button>
                   <button
                     className="product-card__img-nav product-card__img-nav--next"
-                    onClick={(e) => { e.stopPropagation(); showImage(currentImage + 1); }}
+                    onClick={(e) => { e.stopPropagation(); go(1); }}
                     aria-label="Imagen siguiente"
                   >&#8250;</button>
                   <div className="product-card__img-dots">
