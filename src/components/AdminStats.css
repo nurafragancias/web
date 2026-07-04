@@ -52,7 +52,7 @@
   font-size: 0.75rem;
   cursor: pointer;
 }
-@media (hover: hover) {
+@media (hover: hover) and (pointer: fine) {
   .admin-stats__presets button:hover { border-color: var(--gold-primary); color: var(--gold-primary); }
 }
 

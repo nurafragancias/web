@@ -99,7 +99,7 @@
   margin-bottom: -1px;
 }
 
-@media (hover: hover) {
+@media (hover: hover) and (pointer: fine) {
   .admin-tab:hover { color: var(--text-primary); }
 }
 
@@ -158,7 +158,7 @@
   margin-bottom: 2rem;
 }
 
-@media (hover: hover) {
+@media (hover: hover) and (pointer: fine) {
   .admin-add-btn:hover {
   background: var(--gold-muted);
   border-color: var(--gold-primary);
@@ -231,7 +231,7 @@
   transition: border-color 0.25s ease;
 }
 
-@media (hover: hover) {
+@media (hover: hover) and (pointer: fine) {
   .admin-product-item:hover {
   border-color: var(--border-gold);
 }
@@ -359,14 +359,14 @@
   transition: all 0.2s ease;
 }
 
-@media (hover: hover) {
+@media (hover: hover) and (pointer: fine) {
   .admin-product-item__edit:hover {
   color: var(--gold-primary);
   background: var(--gold-muted);
 }
 }
 
-@media (hover: hover) {
+@media (hover: hover) and (pointer: fine) {
   .admin-product-item__delete:hover {
   color: #e74c3c;
   background: rgba(231, 76, 60, 0.1);
@@ -391,7 +391,7 @@
   color: #e74c3c;
 }
 
-@media (hover: hover) {
+@media (hover: hover) and (pointer: fine) {
   .admin-product-item__confirm-yes:hover {
   background: rgba(231, 76, 60, 0.3);
 }

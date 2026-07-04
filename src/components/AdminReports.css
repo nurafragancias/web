@@ -66,7 +66,7 @@
   transition: all 0.15s ease;
 }
 
-@media (hover: hover) {
+@media (hover: hover) and (pointer: fine) {
   .reports__preset:hover {
   border-color: var(--gold-primary);
   color: var(--gold-primary);
@@ -147,7 +147,7 @@
   transition: border-color 0.2s ease;
 }
 
-@media (hover: hover) {
+@media (hover: hover) and (pointer: fine) {
   .report-card:hover {
   border-color: var(--border-gold, rgba(200, 169, 96, 0.4));
 }
@@ -191,7 +191,7 @@
   margin-top: auto;
 }
 
-@media (hover: hover) {
+@media (hover: hover) and (pointer: fine) {
   .report-card__btn:hover {
   filter: brightness(1.1);
 }

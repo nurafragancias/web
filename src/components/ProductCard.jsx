@@ -69,7 +69,12 @@ const ProductCard = ({ product, index = 0 }) => {
     <>
       <div
         className="product-card"
-        style={{ animationDelay: `${index * 0.1}s` }}
+        // Escalonamos SOLO las primeras tarjetas (entrada linda del primer
+        // pantallazo) y con un tope bajo. Antes era index*0.1s: la tarjeta 40
+        // (la mitad del catalogo) quedaba invisible 4s y la 80 hasta 8s, asi
+        // que al scrollear hacia el medio "aparecian" tarde y parecia que la
+        // web se recargaba. Con tope 0.5s, ya estan todas visibles al llegar.
+        style={{ animationDelay: `${Math.min(index, 10) * 0.05}s` }}
         onClick={() => setShowDetail(true)}
         role="button"
         tabIndex={0}

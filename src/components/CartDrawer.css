@@ -46,7 +46,7 @@
   transition: all 0.25s ease;
 }
 
-@media (hover: hover) {
+@media (hover: hover) and (pointer: fine) {
   .cart-drawer__close:hover {
   color: var(--text-primary);
   background: rgba(255, 255, 255, 0.05);
@@ -172,7 +172,7 @@
   transition: all 0.2s ease;
 }
 
-@media (hover: hover) {
+@media (hover: hover) and (pointer: fine) {
   .cart-item__remove:hover {
   color: #e74c3c;
   background: rgba(231, 76, 60, 0.1);
@@ -200,7 +200,7 @@
   transition: color 0.2s ease;
 }
 
-@media (hover: hover) {
+@media (hover: hover) and (pointer: fine) {
   .cart-item__qty-btn:hover {
   color: var(--gold-primary);
 }
@@ -337,7 +337,7 @@
   text-decoration: underline;
 }
 
-@media (hover: hover) {
+@media (hover: hover) and (pointer: fine) {
   .cart-coupon__remove:hover { color: #f0a39c; }
 }
 
@@ -399,7 +399,7 @@
   margin-bottom: 0.75rem;
 }
 
-@media (hover: hover) {
+@media (hover: hover) and (pointer: fine) {
   .cart-drawer__checkout:hover {
   transform: translateY(-2px);
   box-shadow: 0 4px 20px rgba(37, 211, 102, 0.3);
@@ -417,7 +417,7 @@
   text-align: center;
 }
 
-@media (hover: hover) {
+@media (hover: hover) and (pointer: fine) {
   .cart-drawer__clear:hover {
   color: #e74c3c;
 }

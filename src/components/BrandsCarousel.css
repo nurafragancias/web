@@ -36,7 +36,7 @@
   animation: brandsScroll 45s linear infinite;
 }
 
-@media (hover: hover) {
+@media (hover: hover) and (pointer: fine) {
   .brands-carousel:hover .brands-carousel__track {
   animation-play-state: paused;
 }
@@ -67,7 +67,7 @@
   mix-blend-mode: multiply;
 }
 
-@media (hover: hover) {
+@media (hover: hover) and (pointer: fine) {
   .brands-carousel__item:hover {
     opacity: 1;
     transform: scale(1.06);

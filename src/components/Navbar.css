@@ -95,13 +95,13 @@
   transition: width 0.3s var(--ease-out);
 }
 
-@media (hover: hover) {
+@media (hover: hover) and (pointer: fine) {
   .navbar__link:hover {
   color: var(--gold-primary);
 }
 }
 
-@media (hover: hover) {
+@media (hover: hover) and (pointer: fine) {
   .navbar__link:hover::after {
   width: 100%;
 }
@@ -181,7 +181,7 @@
   text-overflow: ellipsis;
 }
 
-@media (hover: hover) {
+@media (hover: hover) and (pointer: fine) {
   .navbar__brands-item:hover {
   background: var(--gold-muted, rgba(200, 169, 96, 0.1));
   color: var(--gold-primary);
@@ -217,7 +217,7 @@
   transition: all 0.3s ease;
 }
 
-@media (hover: hover) {
+@media (hover: hover) and (pointer: fine) {
   .navbar__cart-btn:hover {
   color: var(--gold-primary);
   background: var(--gold-muted);
