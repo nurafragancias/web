@@ -272,10 +272,10 @@
   display: inline-flex;
 }
 
-@media (hover: hover) {
+@media (hover: hover) and (pointer: fine) {
   .admin-coupons__icon-btn:hover { border-color: var(--gold-primary); color: var(--gold-primary); }
 }
-@media (hover: hover) {
+@media (hover: hover) and (pointer: fine) {
   .admin-coupons__icon-btn--del:hover { border-color: #e74c3c; color: #e74c3c; }
 }
 

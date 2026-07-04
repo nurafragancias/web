@@ -91,7 +91,7 @@
   cursor: pointer;
   padding: 0.25rem;
 }
-@media (hover: hover) {
+@media (hover: hover) and (pointer: fine) {
   .admin-tx__delete:hover { color: #e74c3c; }
 }
 

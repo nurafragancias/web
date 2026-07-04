@@ -130,7 +130,7 @@
   font-size: 0.75rem;
   cursor: pointer;
 }
-@media (hover: hover) {
+@media (hover: hover) and (pointer: fine) {
   .admin-debtor__pay-btn:hover { background: var(--gold-primary); color: var(--bg-primary); }
 }
 

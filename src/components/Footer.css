@@ -86,7 +86,7 @@
   gap: 0.25rem;
 }
 
-@media (hover: hover) {
+@media (hover: hover) and (pointer: fine) {
   .footer__nav-link:hover {
     color: var(--gold-primary);
   }
@@ -143,7 +143,7 @@
   transition: all 0.3s ease;
 }
 
-@media (hover: hover) {
+@media (hover: hover) and (pointer: fine) {
   .footer__social-link:hover {
   border-color: var(--gold-primary);
   color: var(--gold-primary);

@@ -76,7 +76,7 @@
   transition: all 0.2s ease;
 }
 
-@media (hover: hover) {
+@media (hover: hover) and (pointer: fine) {
   .catalog__brand-chip:hover {
   background: var(--gold-primary);
   color: var(--bg-primary);

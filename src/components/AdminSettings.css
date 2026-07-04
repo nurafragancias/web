@@ -111,7 +111,7 @@
   width: fit-content;
 }
 
-@media (hover: hover) {
+@media (hover: hover) and (pointer: fine) {
   .admin-settings__preview:hover {
   text-decoration: underline;
 }

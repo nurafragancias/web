@@ -65,6 +65,11 @@ html {
   scroll-behavior: smooth;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  /* Evita que el gesto de scroll dispare el "pull-to-refresh" del navegador
+     mobile (que recarga toda la página). En un catálogo largo, si el scroll
+     se reajusta y el dedo sigue el gesto, el navegador podía recargar sola la
+     web. "contain" mantiene el scroll normal pero corta esa recarga. */
+  overscroll-behavior-y: contain;
 }
 
 body {
@@ -120,7 +125,7 @@ ul, ol {
   background: var(--gold-dark);
   border-radius: 3px;
 }
-@media (hover: hover) {
+@media (hover: hover) and (pointer: fine) {
   ::-webkit-scrollbar-thumb:hover {
   background: var(--gold-primary);
 }
@@ -298,30 +303,30 @@ ul, ol {
   transition: left 0.5s ease;
 }
 
-@media (hover: hover) {
+@media (hover: hover) and (pointer: fine) {
   .btn-gold:hover::before {
   left: 100%;
 }
 }
 
-@media (hover: hover) {
+@media (hover: hover) and (pointer: fine) {
   .btn-gold:hover {
   transform: translateY(-2px);
   box-shadow: var(--shadow-gold-lg);
 }
 }
 
-.btn-gold:active {
-  transform: translateY(0) scale(0.97);
-}
-
+.btn-gold:active,
 .btn-outline-gold:active {
-  transform: scale(0.97);
+  filter: brightness(0.92);
+  transition-duration: 0.05s;
 }
 
 /* ═══ Feedback tactil ═══
-   Al tocar un boton se comprime apenas: en el celular (donde no hay hover)
-   es la señal visual de que el toque registro. */
+   Al tocar un boton se oscurece apenas: es la señal visual de que el toque
+   registro. Usamos filter (no transform) a proposito — cambiar la geometria
+   del boton en :active puede mover el area tactil y hacer que el "click" no
+   dispare (obligaba a tocar dos veces). filter no afecta el hit-test. */
 .product-card__add-btn:active,
 .product-modal__add-btn:active,
 .product-modal__share-btn:active,
@@ -331,11 +336,7 @@ ul, ol {
 .cart-drawer__checkout:active,
 .brands-carousel__item:active,
 .search-result:active,
-.footer__nav-link:active {
-  transform: scale(0.96);
-  transition-duration: 0.1s;
-}
-
+.footer__nav-link:active,
 .cart-item__qty-btn:active,
 .navbar__cart-btn:active,
 .navbar__search-btn:active,
@@ -343,8 +344,8 @@ ul, ol {
 .cart-item__remove:active,
 .product-modal__close:active,
 .cart-drawer__close:active {
-  transform: scale(0.88);
-  transition-duration: 0.1s;
+  filter: brightness(0.9);
+  transition-duration: 0.05s;
 }
 
 /* ═══ Menos movimiento para quien lo prefiere ═══ */
@@ -378,7 +379,7 @@ ul, ol {
   transition: all 0.3s var(--ease-out);
 }
 
-@media (hover: hover) {
+@media (hover: hover) and (pointer: fine) {
   .btn-outline-gold:hover {
   background: var(--gold-muted);
   border-color: var(--gold-primary);
