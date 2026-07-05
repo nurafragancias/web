@@ -84,6 +84,9 @@
   color: #e67e22;
 }
 
+.admin-tx__actions { display: flex; gap: 0.15rem; }
+
+.admin-tx__edit,
 .admin-tx__delete {
   background: none;
   border: none;
@@ -92,6 +95,7 @@
   padding: 0.25rem;
 }
 @media (hover: hover) and (pointer: fine) {
+  .admin-tx__edit:hover { color: var(--gold-primary); }
   .admin-tx__delete:hover { color: #e74c3c; }
 }
 
