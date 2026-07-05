@@ -16,14 +16,31 @@ const PAYMENT_METHODS = [
 const emptyLine = () => ({ kind: 'product', productId: '', size: '', qty: 1, price: 0, otherName: '' });
 const emptyOtherLine = () => ({ kind: 'other', productId: '', size: '', qty: 1, price: 0, otherName: '' });
 
-const TransactionForm = ({ mode, products, onSubmit, onCancel, submitting }) => {
+// Reconstruye las "líneas" del formulario a partir de los ítems guardados
+// (para editar una venta/compra ya registrada).
+const linesFromInitial = (initial, isSale) => {
+  const items = initial?.items || [];
+  if (!items.length) return [emptyLine()];
+  const priceKey = isSale ? 'unit_price' : 'unit_cost';
+  return items.map(it => ({
+    kind: it.product_id ? 'product' : 'other',
+    productId: it.product_id || '',
+    size: it.size || '',
+    qty: Number(it.qty) || 1,
+    price: Number(it[priceKey]) || 0,
+    otherName: it.product_id ? '' : (it.product_name || '')
+  }));
+};
+
+const TransactionForm = ({ mode, products, onSubmit, onCancel, submitting, initial }) => {
   const isSale = mode === 'venta';
-  const [date, setDate] = useState(today());
-  const [person, setPerson] = useState('');
-  const [lines, setLines] = useState([emptyLine()]);
-  const [paymentMethod, setPaymentMethod] = useState('efectivo');
-  const [paidInput, setPaidInput] = useState(0);
-  const [note, setNote] = useState('');
+  const isEdit = Boolean(initial);
+  const [date, setDate] = useState(initial?.date ? String(initial.date).slice(0, 10) : today());
+  const [person, setPerson] = useState(initial?.contact_name || '');
+  const [lines, setLines] = useState(() => linesFromInitial(initial, isSale));
+  const [paymentMethod, setPaymentMethod] = useState(initial?.payment_method || 'efectivo');
+  const [paidInput, setPaidInput] = useState(initial?.paid ?? 0);
+  const [note, setNote] = useState(initial?.note || '');
   const [error, setError] = useState('');
 
   const sortedProducts = useMemo(
@@ -115,7 +132,7 @@ const TransactionForm = ({ mode, products, onSubmit, onCancel, submitting }) => 
   return (
     <form className="tx-form" onSubmit={handleSubmit}>
       <div className="tx-form__header">
-        <h3>{isSale ? 'Nueva Venta' : 'Nueva Compra'}</h3>
+        <h3>{isEdit ? (isSale ? 'Editar Venta' : 'Editar Compra') : (isSale ? 'Nueva Venta' : 'Nueva Compra')}</h3>
         <button type="button" className="tx-form__close" onClick={onCancel}><X size={18} /></button>
       </div>
 
@@ -273,7 +290,7 @@ const TransactionForm = ({ mode, products, onSubmit, onCancel, submitting }) => 
         <button type="button" className="btn-outline-gold" onClick={onCancel}>Cancelar</button>
         <button type="submit" className="btn-gold" disabled={submitting}>
           <Save size={16} />
-          {submitting ? 'Guardando…' : (isSale ? 'Registrar venta' : 'Registrar compra')}
+          {submitting ? 'Guardando…' : (isEdit ? 'Guardar cambios' : (isSale ? 'Registrar venta' : 'Registrar compra'))}
         </button>
       </div>
     </form>

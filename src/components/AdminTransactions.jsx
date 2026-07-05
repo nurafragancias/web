@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Plus, Trash2 } from 'lucide-react';
+import { Plus, Trash2, Edit3 } from 'lucide-react';
 import { useCatalog } from '../context/CatalogContext';
 import { useSales } from '../context/SalesContext';
 import TransactionForm from './TransactionForm';
@@ -22,10 +22,11 @@ const AdminTransactions = ({ mode }) => {
   const { products, adjustStock } = useCatalog();
   const {
     sales, purchases, loadAll, loaded, loading,
-    createSale, createPurchase, deleteSale, deletePurchase
+    createSale, createPurchase, updateSale, updatePurchase, deleteSale, deletePurchase
   } = useSales();
 
   const [showForm, setShowForm] = useState(false);
+  const [editing, setEditing] = useState(null); // tx en edición
   const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState('');
   const [confirmDelete, setConfirmDelete] = useState(null);
@@ -61,6 +62,47 @@ const AdminTransactions = ({ mode }) => {
     }
   };
 
+  // Guarda la edición de una venta/compra reconciliando el stock: revierte
+  // el efecto de los ítems viejos y aplica el de los nuevos.
+  const handleUpdate = async ({ header, items }) => {
+    if (!editing) return;
+    setSubmitting(true);
+    setError('');
+    try {
+      const oldItems = editing[itemsKey] || [];
+      for (const it of oldItems) {
+        if (it.affects_stock) await adjustStock(it.product_id, isSale ? it.qty : -it.qty); // revertir
+      }
+      if (isSale) await updateSale(editing.id, { header, items });
+      else await updatePurchase(editing.id, { header, items });
+      for (const it of items) {
+        if (it.affects_stock) await adjustStock(it.product_id, isSale ? -it.qty : it.qty); // aplicar
+      }
+      setEditing(null);
+    } catch (err) {
+      setError('No se pudo guardar: ' + (err?.message || 'error'));
+    } finally {
+      setSubmitting(false);
+    }
+  };
+
+  const startEdit = (tx) => {
+    setShowForm(false);
+    setConfirmDelete(null);
+    setError('');
+    setEditing(tx);
+    setTimeout(() => window.scrollTo({ top: 0, behavior: 'smooth' }), 0);
+  };
+
+  const editInitial = editing ? {
+    date: editing.date,
+    contact_name: editing.contact_name,
+    payment_method: editing.payment_method,
+    paid: editing.paid,
+    note: editing.note,
+    items: editing[itemsKey] || []
+  } : null;
+
   const handleDelete = async (tx) => {
     setError('');
     try {
@@ -81,18 +123,29 @@ const AdminTransactions = ({ mode }) => {
     <div className="admin-tx">
       {error && <div className="admin-error-banner">{error}</div>}
 
-      {!showForm && (
+      {!showForm && !editing && (
         <button className="admin-add-btn" onClick={() => setShowForm(true)}>
           <Plus size={20} /> {isSale ? 'Registrar venta' : 'Registrar compra'}
         </button>
       )}
 
-      {showForm && (
+      {showForm && !editing && (
         <TransactionForm
           mode={mode}
           products={products}
           onSubmit={handleSubmit}
           onCancel={() => setShowForm(false)}
+          submitting={submitting}
+        />
+      )}
+
+      {editing && (
+        <TransactionForm
+          mode={mode}
+          products={products}
+          initial={editInitial}
+          onSubmit={handleUpdate}
+          onCancel={() => setEditing(null)}
           submitting={submitting}
         />
       )}
@@ -140,9 +193,14 @@ const AdminTransactions = ({ mode }) => {
                       <button className="admin-tx__confirm-no" onClick={() => setConfirmDelete(null)}>No</button>
                     </div>
                   ) : (
-                    <button className="admin-tx__delete" onClick={() => setConfirmDelete(tx.id)} title="Eliminar">
-                      <Trash2 size={15} />
-                    </button>
+                    <div className="admin-tx__actions">
+                      <button className="admin-tx__edit" onClick={() => startEdit(tx)} title="Editar">
+                        <Edit3 size={15} />
+                      </button>
+                      <button className="admin-tx__delete" onClick={() => setConfirmDelete(tx.id)} title="Eliminar">
+                        <Trash2 size={15} />
+                      </button>
+                    </div>
                   )}
                 </div>
               </div>
