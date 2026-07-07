@@ -239,6 +239,9 @@ const AdminReports = () => {
     const map = {};
     for (const s of sales) {
       if (!inRange(s.date)) continue;
+      // Las ventas históricas del Excel tienen productos de texto libre poco
+      // confiables; no las contamos en el ranking de productos.
+      if (String(s.note || '').startsWith('Histórico (Excel)')) continue;
       for (const it of (s.sale_items || [])) {
         const key = it.product_id || it.product_name;
         if (!map[key]) {
