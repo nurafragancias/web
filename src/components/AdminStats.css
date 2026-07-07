@@ -140,7 +140,7 @@
 .admin-stats__cat-val { font-size: 0.75rem; color: var(--text-muted); white-space: nowrap; }
 
 /* Top productos */
-.admin-stats__top { list-style: none; display: flex; flex-direction: column; gap: 0.5rem; }
+.admin-stats__top { list-style: none; display: flex; flex-direction: column; gap: 0.6rem; }
 .admin-stats__top li { display: flex; align-items: center; gap: 0.7rem; font-size: 0.85rem; }
 .admin-stats__top-rank {
   width: 22px; height: 22px; flex-shrink: 0;
@@ -148,9 +148,18 @@
   background: var(--gold-muted, rgba(200,169,96,0.12)); color: var(--gold-primary);
   border-radius: 50%; font-size: 0.72rem; font-weight: 700;
 }
-.admin-stats__top-name { flex: 1; color: var(--text-primary); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-.admin-stats__top-qty { font-size: 0.75rem; color: var(--text-muted); }
-.admin-stats__top strong { color: var(--gold-primary); }
+.admin-stats__top-info { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 2px; }
+.admin-stats__top-name { color: var(--text-primary); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.admin-stats__top-sizes { display: flex; flex-wrap: wrap; gap: 0.1rem 0.4rem; }
+.admin-stats__top-size {
+  font-size: 0.68rem;
+  color: var(--text-secondary);
+  background: rgba(255,255,255,0.05);
+  border-radius: 4px;
+  padding: 0.05rem 0.4rem;
+}
+.admin-stats__top-qty { font-size: 0.75rem; color: var(--text-muted); flex-shrink: 0; }
+.admin-stats__top strong { color: var(--gold-primary); flex-shrink: 0; }
 
 @media (max-width: 760px) {
   .admin-stats__cards { grid-template-columns: 1fr 1fr; }

@@ -98,12 +98,24 @@ const AdminStats = () => {
         const cat = catById[it.product_id] || 'otros';
         byCategory[cat] = (byCategory[cat] || 0) + imp;
         const key = it.product_name || it.product_id;
-        if (!byProduct[key]) byProduct[key] = { name: key, qty: 0, importe: 0 };
-        byProduct[key].qty += Number(it.qty || 0);
+        if (!byProduct[key]) byProduct[key] = { name: key, qty: 0, importe: 0, bySize: {} };
+        const q = Number(it.qty || 0);
+        byProduct[key].qty += q;
         byProduct[key].importe += imp;
+        // Desglose por variante (5ml, 100ml, etc)
+        const size = it.size || 'un.';
+        byProduct[key].bySize[size] = (byProduct[key].bySize[size] || 0) + q;
       }
     }
-    const topProducts = Object.values(byProduct).sort((a, b) => b.importe - a.importe).slice(0, 5);
+    // Ordenamos el desglose de cada producto por tamaño (ml de menor a mayor).
+    const mlOf = (s) => { const m = String(s).match(/(\d+)/); return m ? Number(m[1]) : 9999; };
+    const topProducts = Object.values(byProduct)
+      .sort((a, b) => b.importe - a.importe)
+      .slice(0, 5)
+      .map(p => ({
+        ...p,
+        sizes: Object.entries(p.bySize).sort((a, b) => mlOf(a[0]) - mlOf(b[0]))
+      }));
 
     return {
       ingresos, egresos, resultado: ingresos - egresos, cobrado, porCobrar,
@@ -257,7 +269,14 @@ const AdminStats = () => {
                 {stats.topProducts.map((p, i) => (
                   <li key={p.name}>
                     <span className="admin-stats__top-rank">{i + 1}</span>
-                    <span className="admin-stats__top-name">{p.name}</span>
+                    <div className="admin-stats__top-info">
+                      <span className="admin-stats__top-name">{p.name}</span>
+                      <div className="admin-stats__top-sizes">
+                        {p.sizes.map(([size, qty]) => (
+                          <span key={size} className="admin-stats__top-size">{size}: {qty} u.</span>
+                        ))}
+                      </div>
+                    </div>
                     <span className="admin-stats__top-qty">{p.qty} u.</span>
                     <strong>${money(p.importe)}</strong>
                   </li>
