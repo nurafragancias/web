@@ -1,14 +1,35 @@
 import React, { useState } from 'react';
-import { MessageCircle, Camera, Mail, ChevronDown } from 'lucide-react';
+import { Phone, Mail, ChevronDown } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { useSettings } from '../context/SettingsContext';
 import './Footer.css';
+
+// Logo de Instagram (lucide 1.x no lo trae). Trazo, hereda color y tamaño.
+const InstagramIcon = ({ size = 18 }) => (
+  <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor"
+    strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+    <rect x="2" y="2" width="20" height="20" rx="5" ry="5" />
+    <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" />
+    <line x1="17.5" y1="6.5" x2="17.51" y2="6.5" />
+  </svg>
+);
+
+// Normaliza lo que cargue el dueño en Ajustes a una URL de Instagram válida:
+// acepta URL completa, "@usuario" o "usuario".
+const instagramUrl = (val) => {
+  const s = String(val || '').trim();
+  if (!s) return '';
+  if (/^https?:\/\//i.test(s)) return s;
+  return `https://instagram.com/${s.replace(/^@/, '')}`;
+};
 
 const Footer = () => {
   const { getSetting } = useSettings();
   const [nosotrosOpen, setNosotrosOpen] = useState(false);
   const year = new Date().getFullYear();
   const whatsappNumber = (getSetting('whatsapp_number', '543562447897') || '543562447897').replace(/\D/g, '');
+  const instagram = instagramUrl(getSetting('instagram_url', ''));
+  const email = String(getSetting('email', '') || '').trim();
 
   return (
     <footer className="footer">
@@ -52,29 +73,40 @@ const Footer = () => {
           )}
 
           <div className="footer__social">
-            <a
-              href={`https://wa.me/${whatsappNumber}`}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="footer__social-link"
-              aria-label="WhatsApp"
-            >
-              <MessageCircle size={18} />
-            </a>
-            <a
-              href="#"
-              className="footer__social-link"
-              aria-label="Instagram"
-            >
-              <Camera size={18} />
-            </a>
-            <a
-              href="#"
-              className="footer__social-link"
-              aria-label="Email"
-            >
-              <Mail size={18} />
-            </a>
+            {whatsappNumber && (
+              <a
+                href={`https://wa.me/${whatsappNumber}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="footer__social-link"
+                aria-label="WhatsApp"
+                title="Escribinos por WhatsApp"
+              >
+                <Phone size={18} />
+              </a>
+            )}
+            {instagram && (
+              <a
+                href={instagram}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="footer__social-link"
+                aria-label="Instagram"
+                title="Seguinos en Instagram"
+              >
+                <InstagramIcon size={18} />
+              </a>
+            )}
+            {email && (
+              <a
+                href={`mailto:${email}`}
+                className="footer__social-link"
+                aria-label="Email"
+                title="Escribinos un correo"
+              >
+                <Mail size={18} />
+              </a>
+            )}
           </div>
         </div>
 
