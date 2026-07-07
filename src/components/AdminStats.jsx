@@ -89,10 +89,16 @@ const AdminStats = () => {
     const byMethod = {};
     for (const v of fSales) byMethod[v.payment_method] = (byMethod[v.payment_method] || 0) + Number(v.total || 0);
 
-    // Por categoría y top productos (a nivel ítem)
+    // Por categoría y top productos (a nivel ítem).
+    // Excluimos las ventas HISTÓRICAS importadas del Excel (nota que empieza
+    // con "Histórico (Excel)"): sus productos son texto libre sin variante ni
+    // categoría confiable, así que ensuciarían estos dos gráficos. Igual SÍ
+    // cuentan en ingresos, por mes y por método (arriba).
+    const isHistorical = (v) => String(v.note || '').startsWith('Histórico (Excel)');
     const byCategory = {};
     const byProduct = {};
     for (const v of fSales) {
+      if (isHistorical(v)) continue;
       for (const it of (v.sale_items || [])) {
         const imp = Number(it.qty || 0) * Number(it.unit_price || 0);
         const cat = catById[it.product_id] || 'otros';
