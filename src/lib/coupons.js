@@ -126,11 +126,11 @@ export const computeCoupon = (coupon, items) => {
       const freePerGroup = n - m;
       const units = expandUnits(items, coupon).sort((a, b) => a - b); // asc
       if (units.length < n) return fail(`Necesitás al menos ${n} unidades que apliquen.`);
-      // Por cada bloque de N (ordenado asc), las primeras (N-M) son las más
-      // baratas y van gratis.
-      for (let i = 0; i < units.length; i++) {
-        if (i % n < freePerGroup) discount += units[i];
-      }
+      // Sólo cuentan grupos COMPLETOS de N: con 4 unidades en un 3x2 se regala
+      // 1 (no 2); recién con 6 se regalan 2. Las unidades regaladas son siempre
+      // las más baratas de todo el carrito (units está ordenado asc).
+      const freeUnits = Math.floor(units.length / n) * freePerGroup;
+      for (let i = 0; i < freeUnits; i++) discount += units[i];
       break;
     }
 
