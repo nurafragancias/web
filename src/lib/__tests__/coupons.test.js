@@ -120,6 +120,25 @@ describe('nxm — promo NxM (ej 3x2, 4x3)', () => {
     const r = computeCoupon({ type: 'nxm', buyQty: 3, payQty: 2 }, items);
     expect(r.discount).toBe(2000); // 2 regaladas × 1000
   });
+  it('3x2 con 4 unidades regala sólo 1 (la 4ª no completa otro grupo)', () => {
+    const items = [
+      item({ price: 9000, quantity: 1 }),
+      item({ price: 10000, quantity: 1 }),
+      item({ price: 9200, quantity: 1 }),
+      item({ price: 11100, quantity: 1 })
+    ];
+    const r = computeCoupon({ type: 'nxm', buyQty: 3, payQty: 2 }, items);
+    expect(r.discount).toBe(9000); // sólo la más barata
+  });
+  it('3x2 con 5 unidades sigue regalando 1', () => {
+    const r = computeCoupon({ type: 'nxm', buyQty: 3, payQty: 2 }, [item({ price: 1000, quantity: 5 })]);
+    expect(r.discount).toBe(1000);
+  });
+  it('3x2 con 6 unidades de precios distintos regala las 2 más baratas', () => {
+    const items = [1000, 6000, 2000, 5000, 3000, 4000].map(price => item({ price, quantity: 1 }));
+    const r = computeCoupon({ type: 'nxm', buyQty: 3, payQty: 2 }, items);
+    expect(r.discount).toBe(3000); // 1000 + 2000
+  });
 });
 
 describe('regresión — bugs históricos que ya arreglamos', () => {
